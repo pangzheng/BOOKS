@@ -200,4 +200,7 @@ Cassandra 使用 gossip 协议维持其一致性。Gossip 协议是一种无中�
 
 - 节点多效率低
 - 一致性较差问题
-- 只传输一遍，如果丢失也不会再传		
+- 只传输一遍，如果丢失也不会再传
+
+## 参考
+- [Cassandra内部原理和底层实现](https://www.youtube.com/watch?v=BUjcS4q86jQ)
