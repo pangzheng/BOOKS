@@ -586,6 +586,22 @@ IPFS 用户可以使用 Git 版本控制工具的全部功能。 尽管对象模
 
 MerkleDAG 不可变的内容寻址对象，以及指向 MerkleDAG 的可变指针，实例化了许多成功的分布式系统中的二分法。包括 Git 版本控制系统，其不可变对象和可变引用；和 Plan9，UNIX 分布式继承者，具有可变的 Fossil 和不可变的 Venti 文件系统。LBFS 也适用可变索引和不可变块。
 
+#### IPNS 实现原理
+IPNS 本质是一个 KV 存储，当我们知道 Key 的时候，能够在 IPFS 网络中快速查询到对应的 Value，要实现这一步， IPFS 网络中就要存储这个 KV 映射信息
+
+![](./pic/ipns-1.png)
+
+- 通过 ipfs name publish 发布内容时候，IPFS 节点会先将 KV 数据存储到本地的 LevelDB 中，其中 Key 的格式类似 ipns/Qmxxx，默认存储时间为 24h。可以通过两个办法来解决 key 过期问题
+	- 通过 -t 参数来设置过期时间
+	- 通过定时 publish 操作来设置
+- 在本地 DHT Table 中寻找特定数量的相邻节点，寻找的过程为首先通过 Key 与 Peer 节点 ID 进行 XOR 计算，找到对应桶中的节点。
+	- 这里找到的桶节点是多个，所以可以相对保证一些桶节点的在线。
+	- 如果因桶节点下线没有更新到新的key 数据，那么重新上线会导致提供的数据是旧的。
+- 相邻节点收到发布的内容后，会做签名验证验证，然后存储到本地的 LevelDB 中，这步与 1 相同。
+- 当其它节点拿到 IPNS 的 Key 的时候，可以获取与 Key 相邻的节点，与第2步的相邻节点相似，然后向它们请求该 Key 的内容。
+- 相邻节点单收到 Key 查询请求的时候，会检查本地 LevelDB 是否包含该 Key，如果包含，返回其内容，否则返回空。
+- 根据解析到的 Key 对应的具体内容ID来进行内容交换。
+
 ### 自我认证名称
 使用 SFS 的命名方案为我们提供了一种和加密分配的全局命名空间中构造自变的自认证名称的方法。IPFS 的 scheme 如下
 
@@ -683,7 +699,15 @@ IPFS实现目标
 - 命令行工具直接操作对象
 - 挂载的文件系统，使用FUSE或者作为内核模块
 
+## ipfs 数据永生
+- IPFS 网络中的内容永生不等于永久能访问
+- 使用 `ipfs dht findprovs` 命令查询到某个 CID 存在的节点，并不一定能够提供该文件的完整内容，它很有可能只是记录了该文件的元信息，真实的数据块（叶子节点）已经损坏或丢失。
+- 想要使内容在 IPFS 网络中“永生”，一定永远至少存在一个能够提供该文件完整内容的节点。
+
+[京东云边缘存储](https://docs.jdcloud.com/cn/object-storage-service/edgestorage)做了类似的功能
 
 ## 参考
-[IPFS - Content Addressed, Versioned, P2P File System
-(DRAFT 3)](https://ipfs.io/ipfs/QmV9tSDx9UiPeWExXEeH6aoDvmihvx6jD5eLb4jbTaKGps)	
+- [IPFS - Content Addressed, Versioned, P2P File System
+(DRAFT 3)](https://ipfs.io/ipfs/QmV9tSDx9UiPeWExXEeH6aoDvmihvx6jD5eLb4jbTaKGps)
+- [IPNS从入门到精通](http://www.songjiayang.com/posts/ipfsming-ming-xi-tong-shen-ru-jie-xi)
+- [IPFS 内容永生的理解](http://www.songjiayang.com/posts/ipfs-nei-rong-yong-sheng-de-li-jie)	
