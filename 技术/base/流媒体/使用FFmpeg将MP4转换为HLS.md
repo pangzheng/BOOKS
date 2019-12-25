@@ -132,7 +132,6 @@ FFmpeg 是一个多媒体框架，能解码、编码、转码、mux、demux、�
 	This formula contains only the "eng", "osd", and "snum" language data files.
 	If you need all the other supported languages, `brew install tesseract-lang`.
 	
-	
 ## 未加密转换
 ### 准备
 - 准备一个目录为 `normal`
@@ -373,20 +372,29 @@ FFmpeg 是一个多媒体框架，能解码、编码、转码、mux、demux、�
 			./configure  --enable-static --enable-strip --disable-cli --enable-shared
 			make && make install 
 	- 安装 ffmpeg
-		- 安装 freetype
+		- 安装 `pkg-config`
+
+				apt install pkg-config 
+		- 安装 freetype(`ERROR: freetype2 not found using pkg-config`)
 		
-				yum install freetype*
+				wget https://sourceforge.net/projects/freetype/files/freetype2/2.8.1/freetype-2.8.1.tar.gz
+				tar xzvf freetype-2.8.1.tar.gz && cd freetype-2.8.1
+				./configure
+				make && sudo make install
+		- 安装 libomxil-bellagio(`ERROR: OMX_Core.h not found`) 
+				
+				apt-get install libomxil-bellagio-dev
+		- 安装 image2(`Requested output format 'image2' is not a suitable output format`)
+
+				编译增加 --enable-muxer=image2
+		- 安装 ffmpeg
+	
 				cd /usr/src
 				wget  http://ffmpeg.org/releases/ffmpeg-4.2.tar.gz
 				tar xzvf ffmpeg-4.2.tar.gz && cd ffmpeg-4.2
-				./configure --enable-gpl --enable-version3 --enable-nonfree --enable-static --disable-shared --disable-opencl --disable-thumb --disable-pic --disable-stripping --enable-small --enable-ffmpeg --enable-ffplay --enable-ffprobe --disable-doc --disable-htmlpages --disable-podpages --disable-txtpages --disable-manpages --disable-everything --enable-libx264 --enable-encoder=libx264 --enable-decoder=h264 --enable-encoder=aac --enable-decoder=aac --enable-encoder=ac3 --enable-decoder=ac3 --enable-encoder=rawvideo --enable-decoder=rawvideo --enable-encoder=mjpeg --enable-decoder=mjpeg --enable-demuxer=concat --enable-muxer=flv --enable-demuxer=flv --enable-demuxer=live_flv --enable-muxer=hls --enable-muxer=segment --enable-muxer=stream_segment --enable-muxer=mov --enable-demuxer=mov --enable-muxer=mp4 --enable-muxer=mpegts --enable-demuxer=mpegts --enable-demuxer=mpegvideo --enable-muxer=matroska --enable-demuxer=matroska --enable-muxer=wav --enable-demuxer=wav --enable-muxer=pcm* --enable-demuxer=pcm* --enable-muxer=rawvideo --enable-demuxer=rawvideo --enable-muxer=rtsp --enable-demuxer=rtsp --enable-muxer=rtsp --enable-demuxer=sdp --enable-muxer=fifo --enable-muxer=tee --enable-parser=h264 --enable-parser=aac --enable-protocol=file --enable-protocol=tcp --enable-protocol=rtmp --enable-protocol=cache --enable-protocol=pipe --enable-filter=aresample --enable-filter=allyuv --enable-filter=scale --enable-libfreetype --enable-indev=v4l2 --enable-indev=alsa --enable-omx --enable-omx-rpi --enable-encoder=h264_omx --enable-hwaccel=h264_mmal --enable-decoder=h264_mmal --enable-mmal --enable-ffserver
-				make -j4
-				make install
-			
-	- 报错
-		- Unknown option "--enable-ffserver".
-		- ERROR: mmal not found
-		- ERROR: OMX_Core.h not found	
+				./configure --enable-gpl --enable-version3 --enable-nonfree --enable-static --disable-shared --disable-opencl --disable-thumb --disable-pic --disable-stripping --enable-small --enable-ffmpeg --enable-ffplay --enable-ffprobe --disable-doc --disable-htmlpages --disable-podpages --disable-txtpages --disable-manpages --disable-everything --enable-libx264 --enable-encoder=libx264 --enable-decoder=h264 --enable-encoder=aac --enable-decoder=aac --enable-encoder=ac3 --enable-decoder=ac3 --enable-encoder=rawvideo --enable-decoder=rawvideo --enable-encoder=mjpeg --enable-decoder=mjpeg --enable-demuxer=concat --enable-muxer=flv --enable-demuxer=flv --enable-demuxer=live_flv --enable-muxer=hls --enable-muxer=segment --enable-muxer=stream_segment --enable-muxer=mov --enable-demuxer=mov --enable-muxer=mp4 --enable-muxer=mpegts --enable-demuxer=mpegts --enable-demuxer=mpegvideo --enable-muxer=matroska --enable-demuxer=matroska --enable-muxer=wav --enable-demuxer=wav --enable-muxer=pcm* --enable-demuxer=pcm* --enable-muxer=rawvideo --enable-demuxer=rawvideo --enable-muxer=rtsp --enable-demuxer=rtsp --enable-muxer=rtsp --enable-demuxer=sdp --enable-muxer=fifo --enable-muxer=tee --enable-parser=h264 --enable-parser=aac --enable-protocol=file --enable-protocol=tcp --enable-protocol=rtmp --enable-protocol=cache --enable-protocol=pipe --enable-filter=aresample --enable-filter=allyuv --enable-filter=scale --enable-libfreetype --enable-indev=v4l2 --enable-indev=alsa --enable-omx --enable-omx-rpi --enable-encoder=h264_omx --enable-hwaccel=h264_mmal --enable-decoder=h264_mmal --enable-mmal  --enable-muxer=image2
+				make -j4 && make install
+	
 	- 检测 ffmpeg
 
 			ffmpeg -version
@@ -406,8 +414,15 @@ FFmpeg 是一个多媒体框架，能解码、编码、转码、mux、demux、�
 			crw-rw----. 1 root video 81, 1 1月   1 08:00 /dev/video11
 			crw-rw----. 1 root video 81, 2 1月   1 08:00 /dev/video12
 - 录制
+	- 不用硬件加速
 
-		ffmpeg -f v4l2 -r 10 -s 640x480 -i /dev/video0 -b:v 300k -c:v h264_omx -an -f segment -segment_time 5 -segment_wrap 3 -segment_list_size 3 -segment_list "/data/m3u8/stream.m3u8" "/data/m3u8/stream%03d.ts"
+			/usr/src/ffmpeg-4.2/ffmpeg -f v4l2 -r 10 -s 640x480 -i /dev/video0 -b:v 300k -c:v libx264 -an -f segment -segment_time 5 -segment_wrap 3 -segment_list_size 3 -segment_list "/data/m3u8/stream.m3u8" "/data/m3u8/stream%03d.ts"
+	- 用硬件加速(仅在树莓派系统跑通)
+		
+			/usr/src/ffmpeg-4.2/ffmpeg -f v4l2 -r 10 -s 640x480 -i /dev/video0 -b:v 300k -c:v h264_omx -an -f segment -segment_time 5 -segment_wrap 3 -segment_list_size 3 -segment_list "/data/m3u8/stream.m3u8" "/data/m3u8/stream%03d.ts"
+- 截图
+
+		/usr/src/ffmpeg-4.2/ffmpeg -i stream000.ts -r 2 -q:v 2 -f image2 img-%3d.jpeg
 				
 ## MAC 接摄像头直播(m3u8)
 - 查询摄像头位置
