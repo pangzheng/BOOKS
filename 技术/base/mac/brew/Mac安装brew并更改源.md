@@ -34,12 +34,18 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 	brew services list                  # 列出当前的状态
 
 ## 更换源
-- 进入目录
+- 修改中科大源
 
-		cd "$(brew --repo)"
-- 修改 git 为中科大源
+		# cd "$(brew --repo)"
+		# git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+		# cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+		# git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+		# brew update
+		# brew doctor
+		# brew config
 
 
 			
 ## 参考
-[官网](https://brew.sh/)
+- [官网](https://brew.sh/)
+- [Mac HomeBrew国内镜像安装方法](https://juejin.im/post/5c738bacf265da2deb6aaf97)

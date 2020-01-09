@@ -362,6 +362,7 @@ FFmpeg 是一个多媒体框架，能解码、编码、转码、mux、demux、�
 
 		ffplay -protocol_whitelist file,http,https,tcp,tls,crypto EN-F14.m3u8
 
+## [树莓派安装](https://github.com/pangzheng/BOOKS/blob/master/%E6%8A%80%E6%9C%AF/%E6%A0%91%E8%8E%93%E6%B4%BE/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E7%B3%BB%E7%BB%9F.md)
 ## 树莓派摄像头直播(m3u8)
 - 首先安装 ffmpeg-支持树莓派硬件
 	- 安装 264
