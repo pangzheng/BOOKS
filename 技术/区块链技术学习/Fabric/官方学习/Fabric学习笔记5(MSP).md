@@ -1,10 +1,18 @@
-# Fabric 学习笔记 5 (MSP)
+# Fabric 学习笔记 5 (操作指南)
 ## 成员服务提供者 （MSP-Membership service provider）
 成员服务提供者（MSP）是一个提供抽象化成员操作框架的组件。
 
 特别地，MSP 将颁发与校验证书，以及用户认证背后的所有密码学机制与协议都抽象了出来。一个 MSP 可以自己定义身份，以及身份的管理（身份验证）与认证（生成与验证签名）规则。
 
 一个 Hyperledger Fabric 区块链网络可以被一个或多个 MSP 管理。这提供了模块化的成员操作，以及兼容不同成员标准与架构的互操作性。
+### MSP 包含什么说明
+![](./pic/msp.png)
+
+![](./pic/msp1.jpg)
+### MSP 如何工作
+![](./pic/msp2.png)
+![](./pic/msp3.png)
+![](./pic/msp4.jpg)
 
 ### MSP 配置
 要想初始化一个 MSP 实例，每一个 peer 节点和 orderer 节点都需要在本地指定其配置，并在 channel 上启用 peer 节点、orderer 节点及 client 的身份的验证与各自的签名验证。注意 channel 上的全体成员均参与此过程。
@@ -128,7 +136,11 @@ Hyperledger Fabric CA 也可用于生成配置 MSP 所需的密钥及证书。
 	在目前的 MSP 只支持上述的第一个方法，因为它更加简单，且并不需要把早就不用考虑的中间CA列入黑名单。	
 6. CA 和 TLS CA
 
-	MSP 身份的根 CA 及 MSP TLS 证书的根 CA（以及相关的中间 CA）需要在不同的文件夹中声明。这是为了避免混淆不同等级的证书。且 MSP 身份与 TLS 证书都允许重用相同的 CA，不过我们建议最好在实际中避免这样做。	
+	MSP 身份的根 CA 及 MSP TLS 证书的根 CA（以及相关的中间 CA）需要在不同的文件夹中声明。这是为了避免混淆不同等级的证书。且 MSP 身份与 TLS 证书都允许重用相同的 CA，不过我们建议最好在实际中避免这样做。
+	
+## 参考
+- [成员服务提供者 （MSP）](https://hyperledgercn.github.io/hyperledgerDocs/msp_zh/)
+- [Hyperledger系列（十五）MSP图解](https://blog.csdn.net/maixia24/article/details/79932820)		
 		
 	
 
