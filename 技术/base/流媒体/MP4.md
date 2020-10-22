@@ -45,8 +45,12 @@ or
 		
 	在用于流播的 Fragment MP4 场景下（例如 Smooth Streaming 应用中），媒体数据不是全部放在同一个 mdat Box 中，而是按 Fragment 分成多个 mdat Box 保存。会包含新的 Box。
 	
-	- moof 在每个 Fragment 中都会存在，类似于 moov，但保存的仅为当前分片的元数据
-	- mfra Movie Fragment Random Access，可以认为是分片索引
+	- moof 
+
+		在每个 Fragment 中都会存在，类似于 moov，但保存的仅为当前分片的元数据
+	- mfra 
+
+		Movie Fragment Random Access，可以认为是分片索引
 
 ## Box 自身概念
 - MP4 文件由许多个 Box 与 FullBox 组成。
@@ -112,7 +116,7 @@ MP4常用参考标准 Box [排列方式](https://github.com/renhui/Thinking-in-A
 	包含视频数据，mdat 中的帧依次存放，每个帧的位置、时间、长度都由 moov 中的信息指定。 mdat Box 基本上占据了视频大小的 95%以上，得益于边下载边播放，只要游览器获取到部分 mdat Box 就可以播放
 		
 ## 流媒体问题
-最近做一个项目需要 web 支持 mp4 流媒体播放，但发现有的 mp4 视频可以支持流媒体播放(边下边看)，有的 mp4 视频必须要全部下完才可以播放。根据上面的资料发现，mp4 文件中包含moov 的元数据(数据长度、时间、编码等信息)位置差异，如果 moov 被放到了真实数据前，那么就可以支持流播放，如果放到了数据后，那么就必须全部下完才可以播放。(当然播放器可以做双读支持)
+最近做一个项目需要 web 支持 mp4 流媒体播放，但发现有的 mp4 视频可以支持流媒体播放(边下边看)，有的 mp4 视频必须要全部下完才可以播放。根据上面的资料发现，mp4 文件中包含 moov 的元数据(数据长度、时间、编码等信息)位置差异，如果 moov 被放到了真实数据前，那么就可以支持流播放，如果放到了数据后，那么就必须全部下完才可以播放。(当然播放器可以做双读支持)
 
 - 支持流播放视频
 
@@ -121,8 +125,7 @@ MP4常用参考标准 Box [排列方式](https://github.com/renhui/Thinking-in-A
 
 	![](./pic/mp4info-2.png)
 
-## 支持 seek
-`moov box` 在 `mdat box` 前边的 MP4 类型做网络点播，支持拖拽 seek 的话，需要把 `moov box` 挪到 `mdat box` 之前
+解决 `moov box` 在 `mdat box` 前边的 MP4 类型做网络点播，支持拖拽 seek 的话，需要把 `moov box` 挪到 `mdat box` 之前
 
 ## MP4 支持流播放后使用 HLS 的意义
 1. HTML5 直接支持 m3u8 协议
