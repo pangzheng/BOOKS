@@ -10,7 +10,7 @@
 	- HMAC-SHA256
 	- 等等
 
-	![](../pic/MAC.png)
+	![](./pic/MAC.png)
 - 另一种是分组密码的实现基于 AES,比如 CBC-MAC
 
 ## 实现过程
@@ -32,7 +32,7 @@ CBC-MAC 是最为广泛使用的消息认证算法之一，同时它也是一个
 
 当取 AES 作为加密的分组密码时，称为基于 AES 的 CBC-MAC，若需要产生认证码的消息为 x，加密的 AES 密钥为 k，则生成 MAC 的过程如下图所示
 
-![](../PIC/CBC-MAC.png)
+![](./PIC/CBC-MAC.png)
 
 - 填充和分组
 
@@ -50,7 +50,7 @@ OMAC(One-key CBC-MAC)，是从 CBC-MAC 改进而来，克服了 CBC-MAC 的一�
 
 OMAC 算法的核心是 CBC-MAC 的一种变种，是基于一种叫 xcbc 的算法改进的。xcbc 算法有效的解决了cbc-mac 的一些安全方面的缺陷，但是需要三个密钥。有人在此基础上，改进了 xcbc 算法，并把它命名为 one-key cbc-mac(omac). 之后提交了 omac1，在 omac 的基础了做了精简，并做了一些安全性分析。
 
-![](../pic/omac1.jpg)
+![](./pic/omac1.jpg)
 	
 ## 参考
 - [CBC-MAC](https://blog.csdn.net/weixin_38664664/article/details/78016243)
