@@ -4,11 +4,11 @@
 #### 智能合约的构建
 由 CryptoKitties 率先开发的 ERC721 是不可替代代币的最新标准。要在 OpenSea 上列出，最好是您的商品遵循最新的 Open Zeppelin 实现 ERC721。
 
-*如果您正在开发ERC1155合同，请查看我们的ERC1155教程。解释:
+如果您正在开发 ERC1155 合约，请查看我们的 ERC1155 教程。解释:
 	
 	智能合约有很多种，但是现在普遍支持的标准是 ERC721 和 ERC 1155
 
-- OpenSea 样本合同
+- OpenSea 样本合约
 
 	我们创建了一个非常简单的示例存储库来帮助您入门。该示例的完整代码可以在 [Github](https://github.com/ProjectOpenSea/opensea-creatures) 上找到。
 
@@ -33,24 +33,26 @@
 			  }
 			}
 		
-		如您所见，合同本身非常简单。它仅继承自 Tradeable ERC721Token，而后者又继承自 OpenZeppelin ERC721 合同（该合同实现了所有必要的 ERC721 方法）。您可能会在游戏中拥有更多的逻辑，但是对于 OpenSea 来说，重要的是 tokenURI 方法，它使我们能够 tokenId 将Creature 合约中的映射到该合约的链下元数据。我们将在下一节中详细了解这一点。
+		合约本身非常简单。它仅继承自 Tradeable ERC721Token，而后者又继承自 OpenZeppelin ERC721 合约（该合约实现了所有必要的 ERC721 方法）。您可能会在游戏中拥有更多的逻辑，但是对于 OpenSea 来说，重要的是 tokenURI 方法，它使我们能够 tokenId 将 Creature 合约中的映射到该合约的链下元数据。
 
 	- OpenSea 白名单（可选）
 
-		此外，ERC721 Tradable 和 ERC1155 Tradable 合同将 OpenSea 用户的代理帐户列入白名单，以便他们能够自动在 OpenSea 上交易任何商品（无需支付额外的批准费用）。在 OpenSea 上，每个用户都有一个他们控制的 “代理” 帐户，最终由交换合同调用以交易其项目。
+		此外，ERC721 Tradable 和 ERC1155 Tradable 合约将 OpenSea 用户的代理帐户列入白名单，以便他们能够自动在 OpenSea 上交易任何商品（无需支付额外的批准费用）。在 OpenSea 上，每个用户都有一个他们控制的 “代理” 帐户，最终由交换合约调用以交易其项目。
 
-		请注意，此添加并不意味着 OpenSea 本身就可以访问这些项目，只是意味着用户可以根据需要更轻松地列出它们。它是完全可选的，但是可以大大减少用户的摩擦。您可以在重写的 `isApprovedForAll `方法以及工厂 `mint` 方法中找到此代码。
+		请注意，此添加并不意味着 OpenSea 本身就可以访问这些项目，只是意味着用户可以根据需要更轻松地列出它们。它是完全可选的，但是可以大大减少用户的摩擦。您可以在重写的 `isApprovedForAll ` 方法以及工厂 `mint` 方法中找到此代码。
 
 		接下来，我们将学习如何构造该元数据，以便 OpenSea 可以选择它。
 	- 部署合约
-
-		部署 Creature 合同，只需获取[仓库代码](https://github.com/ProjectOpenSea/opensea-creatures)，获得免费的 [Alchemy API 密钥](https://dashboard.alchemyapi.io/signup?referral=affiliate:e535c3c3-9bc4-428f-8e27-4b70aa2e8ca5)，然后使用 Truffle 进行部署
+		- 部署 Creature 合约，只需获取[仓库代码](https://github.com/ProjectOpenSea/opensea-creatures)
+		- 获得免费的 [Alchemy API 密钥](https://dashboard.alchemyapi.io/signup?referral=affiliate:e535c3c3-9bc4-428f-8e27-4b70aa2e8ca5)
+		- 然后使用 Truffle 进行部署
 		
-			yarn install
-			export ALCHEMY_KEY="<your_alchemy_project_id>"
-			export MNEMONIC="<metamask>"
-			export NETWORK="rinkeby"
-			truffle deploy --network rinkeby	
+				yarn install
+				export ALCHEMY_KEY="<your_alchemy_project_id>"
+				export MNEMONIC="<metamask>"
+				export NETWORK="rinkeby"
+				truffle deploy --network rinkeby	
+		
 		如果您已经在使用 Infura API，则也可以使用 `INFURA_KEY` 环境变量代替 `ALCHEMY_KEY`
 		
 		建议
@@ -60,13 +62,13 @@
 		请注意，为了使用 Truffle 和 Infura 进行部署，您将需要来自以 Ether 资助的 MetaMask 帐户中的“种子短语”。为了使 Ether 进入您的 Rinkeby MetaMask 帐户，您可以使用 [Rinkeby Ether 龙头](https://faucet.rinkeby.io/)。您需要在其中一个社交资料中发布一条消息，然后将链接粘贴到您的帖子中，并将其粘贴到测试水龙头中。为了从 Metamask 获得“种子短语”，请单击“设置”，然后单击“显示种子词”。确保不与任何包含Mainnet令牌的帐户共享您的种子短语！
 	- 铸造
 
-		接下来，我们要为新部署的 ERC721 合同添加新资产！我们会将这些资产放入我们控制的帐户中，以便我们可以测试商品的OpenSea拍卖流程。
+		接下来，我们要为新部署的 ERC721 合约添加新资产！我们会将这些资产放入我们控制的帐户中，以便我们可以测试商品的OpenSea拍卖流程。
 
-		部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合同，该合同将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。您可以在 Deployment 命令的输出中找到已部署合同的地址，并通过点击URL：在 Etherscan 上找到它
+		部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合约，该合约将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。您可以在 Deployment 命令的输出中找到已部署合约的地址，并通过点击URL：在 Etherscan 上找到它
 			
 			https://rinkeby.etherscan.io/address/<contract_address>。
 
-		例如，这是[最近部署的合同](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。运行铸造脚本时，应将此合同地址和 MetaMask 帐户的地址设置为环境变量：
+		例如，这是[最近部署的合约](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。运行铸造脚本时，应将此合约地址和 MetaMask 帐户的地址设置为环境变量：
 		
 			export OWNER_ADDRESS="<my_address>"
 			export NFT_CONTRACT_ADDRESS="<deployed_contract_address>"
@@ -78,7 +80,7 @@
 		这些生物的默认元数据由提供 `https://opensea-creatures-api.herokuapp.com/api/creature/{token_id}`，在此处设置。接下来，您需要创建自定义元数据API。
 
 #### 添加元数据
-部署合同后，您将需要一种方法来使每个单独的项目正确显示在 OpenSea（以及支持不可替代令牌的其他网站）上。这是链外元数据发挥作用的地方！ERC721 合同中的每个令牌标识符都将具有对应的元数据 URI，该元数据 URI 返回有关项目的其他重要信息，例如项目的名称，图像，描述等。要找到此 URI，请使用 `tokenURI` ERC721 中的 uri 方法和 ERC1155 中的方法。此元数据的一个简单示例是：
+部署合约后，您将需要一种方法来使每个单独的项目正确显示在 OpenSea（以及支持不可替代令牌的其他网站）上。这是链外元数据发挥作用的地方！ERC721 合约中的每个令牌标识符都将具有对应的元数据 URI，该元数据 URI 返回有关项目的其他重要信息，例如项目的名称，图像，描述等。要找到此 URI，请使用 `tokenURI` ERC721 中的 uri 方法和 ERC1155 中的方法。此元数据的一个简单示例是：
 
 	{
 	  "name": "Herbie Starbelly",
@@ -92,22 +94,22 @@
 元数据可以做很多事情-包括添加排名，提升，动画，日期等等！我们认为您肯定希望对其进行完整的探索，因此请参阅本教程的专用
 
 #### 在 opensea 上查看自己的项目
-现在，假设您已经在 Rinkeby 测试网络上部署了合同。作为一个具体示例，我们在 Rinkeby 上将 OpenSea Creature 合同部署到了以下地址： [0x7dca125b1e805dc88814aed7ccc810f677d3e1db](https://rinkeby.etherscan.io/address/0x7dca125b1e805dc88814aed7ccc810f677d3e1db)。
+现在，假设您已经在 Rinkeby 测试网络上部署了合约。作为一个具体示例，我们在 Rinkeby 上将 OpenSea Creature 合约部署到了以下地址： [0x7dca125b1e805dc88814aed7ccc810f677d3e1db](https://rinkeby.etherscan.io/address/0x7dca125b1e805dc88814aed7ccc810f677d3e1db)。
 
-我们还为该合同铸造了 25 个新项目，因此当前项目的总供应量为 25。在 [Etherscan](https://rinkeby.etherscan.io/address/0xccd0f00bce2836f72c85b0dd3af93a365ec32411#readContract) 上，我们可以检查其中 `tokenURI` 的一个项目，以查看它是否指向 OpenSea Creature API 端点。
+我们还为该合约铸造了 25 个新项目，因此当前项目的总供应量为 25。在 [Etherscan](https://rinkeby.etherscan.io/address/0xccd0f00bce2836f72c85b0dd3af93a365ec32411#readContract) 上，我们可以检查其中 `tokenURI` 的一个项目，以查看它是否指向 OpenSea Creature API 端点。
 
 ![](./pic/opensea1.png)
 
 OpenSea 具有 Rinkeby 环境，允许开发人员测试其与 OpenSea 的集成。可以在 [testnets.opensea.io](https://testnets.opensea.io/) 上找到。通过点击正确的 URL，我们应该能够立即在 OpenSea 上查看我们的一项。可以通过以下方式构造URL：
 
 	https://testnets.opensea.io/assets/<asset_contract_address>/<token_id>
-`asset_contract_address` 我们合同的地址在哪里，并且 `token_id` 是我们商品的令牌ID之一。例如，对于 OpenSea Creature 合同，这是 OpenSea Creature＃12
+`asset_contract_address` 我们合约的地址在哪里，并且 `token_id` 是我们商品的令牌ID之一。例如，对于 OpenSea Creature 合约，这是 OpenSea Creature＃12
 
 [https://testnets.opensea.io/assets/0x7dca125b1e805dc88814aed7ccc810f677d3e1db/12](https://testnets.opensea.io/assets/0x7dca125b1e805dc88814aed7ccc810f677d3e1db/12)
 
 ![](./pic/opensea2.png)
 
-通过使用您自己的合同地址和令牌 ID，您也可以查看您的物品，并仔细检查所有内容是否都按预期显示。请注意，我们包含在令牌元数据中的属性显示为该项目的“属性”和“状态”。只要您将它们作为字符串或整数包含在元数据的属性部分中，就会自动发生。要测试集成，只需导航至：
+通过使用您自己的合约地址和令牌 ID，您也可以查看您的物品，并仔细检查所有内容是否都按预期显示。请注意，我们包含在令牌元数据中的属性显示为该项目的“属性”和“状态”。只要您将它们作为字符串或整数包含在元数据的属性部分中，就会自动发生。要测试集成，只需导航至：
 
 	https://testnets.opensea.io/assets/<your_contract_address>/<token_id>
 默认情况下，OpenSea 将为您的资产缓存数据。需要强制更新您的商品吗？只需使用 `force_update` 参数访问API ：
@@ -123,7 +125,7 @@ OpenSea 具有 Rinkeby 环境，允许开发人员测试其与 OpenSea 的集成
 	或
 	
 		https://api.opensea.io/asset/<your_contract_address>/<your_token_id>/validate/
-	只需使用您的合同地址和令牌 ID 来访问此URL，以查看您的元数据 URL 是否存在任何错误。如果您需要其他帮助，请随时通过我们的 Discord 频道与我们联系。	
+	只需使用您的合约地址和令牌 ID 来访问此URL，以查看您的元数据 URL 是否存在任何错误。如果您需要其他帮助，请随时通过我们的 Discord 频道与我们联系。	
 #### 创建商店
 既然我们已经测试了与您的一些商品的集成，那么现在该在 OpenSea 上创建自己的自定义店面了。
 
@@ -170,7 +172,7 @@ OpenSea店面创建者
 #### 在主网上启动
 在 Rinkeby 上完成测试并准备在主网上启动您的资产的过程大致相同，只是环境变量有所更改
 
-部署合同并铸造商品后，请单击[此处](https://opensea.io/get-listed)转到主网的店面创建者。这将引导您完成将所有项目显示在 mainnet OpenSea 平台上的过程。
+部署合约并铸造商品后，请单击[此处](https://opensea.io/get-listed)转到主网的店面创建者。这将引导您完成将所有项目显示在 mainnet OpenSea 平台上的过程。
 #### 主网部署说明
 在主网上运行铸造脚本时，需要将环境变量设置为 `mainnet not live`。环境变量会影响铸造脚本中的节点URL，而不影响松露。
 
@@ -197,9 +199,9 @@ OpenSea店面创建者
 
 	用这种方式在 OpenSea 上进行商品销售实际上非常简单。只需将您的物品放入您选择的帐户中，然后使用标准拍卖流程将其出售即可。它们将立即在您专用的 OpenSea 类别页面和全球 OpenSea feed 中显示出来出售，可供广大 OpenSea 用户基础找到。	
 	![](./pic/opensea10.png)
-- 选项2：自订销售合同
+- 选项2：自订销售合约
 
-	或可以使用我们的项目工厂合同立即插入我们的预售基础架构。在[此处](https://docs.opensea.io/docs/opensea-initial-item-sale-tutorial)查看我们的教程
+	或可以使用我们的项目工厂合约立即插入我们的预售基础架构。在[此处](https://docs.opensea.io/docs/opensea-initial-item-sale-tutorial)查看我们的教程
 
 #### 设定二次销售费用
 每次在 OpenSea 上出售商品时均可赚取加密货币
@@ -244,7 +246,7 @@ OpenSea店面创建者
 ### ERC1155
 部署可即时交易的ERC1155合约
 
-完整的ERC1155教程即将推出。同时，请查看我们的示例存储库，以获取有关如何部署ERC1155合同的示例 [https://github.com/ProjectOpenSea/opensea-erc1155](https://github.com/ProjectOpenSea/opensea-erc1155)
+完整的ERC1155教程即将推出。同时，请查看我们的示例存储库，以获取有关如何部署ERC1155合约的示例 [https://github.com/ProjectOpenSea/opensea-erc1155](https://github.com/ProjectOpenSea/opensea-erc1155)
 ### OpenSea 众筹销售教程
 在OpenSea上为您的商品进行众筹的简单教程
 
@@ -252,7 +254,7 @@ OpenSea店面创建者
 	建议您在完成初始商品销售教程之前，先完成《OpenSea Developer教程》！
 既然您已经利用 OpenSea 为用户建立了点对点市场来交易您的商品，那么下一个问题是如何向用户发行初始商品。您是否要向用户出售商品包？向用户提供 Airdop 物品作为奖励？或者也许有可以由用户购买甚至交易的战利品箱？
 
-好消息：以上所有内容都可以使用 OpenSea 的平台完成！在本教程中，我们将学习在 OpenSea 上进行初始商品销售的各种选择。到最后，我们将拥有自己的定制销售合同，用于销售 OpenSea Creatures。此定制销售合同将支持：
+好消息：以上所有内容都可以使用 OpenSea 的平台完成！在本教程中，我们将学习在 OpenSea 上进行初始商品销售的各种选择。到最后，我们将拥有自己的定制销售合约，用于销售 OpenSea Creatures。此定制销售合约将支持：
 
 - 购买一个 OpenSea 生物
 - 购买四种（随机）OpenSea 生物
@@ -270,10 +272,10 @@ OpenSea店面创建者
 此外，请查看 [ChainBreakers](https://chainbreakers.io/)，该公司通过简单地出售成捆的预先铸造的物品就完成了大部分销售额。
 
 ![](./pic/opensea16.png)
-#### 定制销售合同—简介
-简单物品销售的缺点是，您需要预先铸造要出售的物品（而不是在购买时即时铸造它们）。这可能会使向广泛的用户群销售许多商品变得困难。此外，使用简单的商品销售方法，很难为商品销售创建自定义逻辑（例如，随机商品包，铸造商品的随机统计信息等）。如果您需要这些功能中的任何一个，`Factory` 合同就是您的最佳选择！
+#### 定制销售合约—简介
+简单物品销售的缺点是，您需要预先铸造要出售的物品（而不是在购买时即时铸造它们）。这可能会使向广泛的用户群销售许多商品变得困难。此外，使用简单的商品销售方法，很难为商品销售创建自定义逻辑（例如，随机商品包，铸造商品的随机统计信息等）。如果您需要这些功能中的任何一个，`Factory` 合约就是您的最佳选择！
 
-为了仅在购买时铸造商品，OpenSea 提供了一个 `Factory` 界面,可以使用该界面定义如何铸造商品。然后可以使用 OpenSea 创建调用铸造功能的自定义“订单”。这是合同的主要 `mint` 方法 `Factory`。
+为了仅在购买时铸造商品，OpenSea 提供了一个 `Factory` 界面,可以使用该界面定义如何铸造商品。然后可以使用 OpenSea 创建调用铸造功能的自定义“订单”。这是合约的主要 `mint` 方法 `Factory`。
 
 	interface Factory {
 	
@@ -318,12 +320,12 @@ OpenSea店面创建者
 	  }
 这意味着当您呼叫时 `mint(0, <destination_address>)`，目标地址将接收一个新的 OpenSea 生物，当您呼叫时 `mint(1, <destination_address>)`，目标地址将接收四个新的 OpenSea 生物，依此类推。
 
-如果您想自己部署 OpenSea Creature 示例合同，只需 [OpenSea Creatures Github](https://github.com/ProjectOpenSea/opensea-creatures) 存储库并取消注释其中的行 `migrations/deploy_contracts.js`（您也要注释掉其上方的行，因为新注释的代码也将被部署生物 NFT）。
+如果您想自己部署 OpenSea Creature 示例合约，只需 [OpenSea Creatures Github](https://github.com/ProjectOpenSea/opensea-creatures) 存储库并取消注释其中的行 `migrations/deploy_contracts.js`（您也要注释掉其上方的行，因为新注释的代码也将被部署生物 NFT）。
 
 正如我们将在下一节中学习的那样，每个选项在 OpenSea 上都有一个专用页面，并且（可以令人兴奋地）可以通过在 OpenSea 上出售常规商品的多种方式中的任何一种来出售！
 
-#### 自定义销售合同-查看您的选择
-部署 `Factory` 合同后，下一步就是查看 OpenSea 上的每个选项。好消息是，让您的 `Factory` 选择显示在 OpenSea 上与您的 ERC721 项目相同。简单地实现该 tokenURI 方法，并使其以与 [ERC721](https://docs.opensea.io/docs/3-viewing-your-items-on-opensea) 项相同的格式返回元数据。
+#### 自定义销售合约-查看您的选择
+部署 `Factory` 合约后，下一步就是查看 OpenSea 上的每个选项。好消息是，让您的 `Factory` 选择显示在 OpenSea 上与您的 ERC721 项目相同。简单地实现该 tokenURI 方法，并使其以与 [ERC721](https://docs.opensea.io/docs/3-viewing-your-items-on-opensea) 项相同的格式返回元数据。
 
 	interface Factory {
 	
@@ -348,12 +350,12 @@ OpenSea店面创建者
 
 自己查看以下 [https://testnets.opensea.io/assets/0x381748c76f2b8871afbbe4578781cd24df34ae0d/0](https://testnets.opensea.io/assets/0x381748c76f2b8871afbbe4578781cd24df34ae0d/0)
 
-#### 定制销售合同-出售您的期权
-此时，您应该在 OpenSea 上显示您的选项。期权类似于常规项目，因为它们可以在 OpenSea 上浏览，但是它们始终由 `Factory` 合同所有者拥有。
+#### 定制销售合约-出售您的期权
+此时，您应该在 OpenSea 上显示您的选项。期权类似于常规项目，因为它们可以在 OpenSea 上浏览，但是它们始终由 `Factory` 合约所有者拥有。
 
 最重要的是，`Factory` 所有者可以“出售”期权。但是，当出售期权时，不是将其转移给买方，而是调用 `mint` 了该特定方法 `optionId`。
 
-例如，将 `_optionId` 其中 `CreatureFactory` 一份合同出售给 `0xab23d`，`mint(1, '0xab23d')` 则会被致电。由于这样做的逻辑 `optionId` 是铸造4个 OpenSea 生物，因此 `0xab23d` 将获得4个全新生物。
+例如，将 `_optionId` 其中 `CreatureFactory` 一份合约出售给 `0xab23d`，`mint(1, '0xab23d')` 则会被致电。由于这样做的逻辑 `optionId` 是铸造4个 OpenSea 生物，因此 `0xab23d` 将获得4个全新生物。
 
 当您的 `Factory` 项目首次出现在 OpenSea 上时，它们将显示为“已售完”。您需要通过以下方式列出要出售的商品：
 
@@ -391,7 +393,7 @@ OpenSea店面创建者
 	
 		例如，游戏可能想要发行一堆随机生成特定能力等级的物品的物品或者发行具有获得“神话”或“传奇”卡片的几率的一组卡片。
 	
-	为此，您可以创建符合 ERC721 的 `LootBox` 合同。您可以 `LootBox` 像正常使用 ERC721 NFT 一样铸造它们，这意味着它们可以立即在 OpenSea 上列出。这些 NFT 将简单地实现该 `unpack` 方法，该方法将刻录 `LootBox` 并铸造该项目的新 NFT。
+	为此，您可以创建符合 ERC721 的 `LootBox` 合约。您可以 `LootBox` 像正常使用 ERC721 NFT 一样铸造它们，这意味着它们可以立即在 OpenSea 上列出。这些 NFT 将简单地实现该 `unpack` 方法，该方法将刻录 `LootBox` 并铸造该项目的新 NFT。
 	
 	例如，如果要实施 CryptoPuff 预售，我们可以创建一个 `CryptoPuffPreSaleItem` 继承自的 `ERC721Token`。在该 `unpack` 方法中，它将根据某些伪随机逻辑创建新的 CryptoPuff,详细代码在 [github](https://github.com/ProjectOpenSea/opensea-creatures)
 	
@@ -428,11 +430,11 @@ OpenSea店面创建者
 	如果您希望自己的预售包装本身是可交易的，则不需要任何额外的配置。您可以在 OpenSea 上（使用固定价格，荷兰式拍卖，英语拍卖，甚至捆绑销售）或通过我们的 [SDK](https://github.com/ProjectOpenSea/opensea-js) 出售预售包。您只需要一种让用户在您的网站上打开包装的方法即可。
 	
 ### OpenSea 基本整合
-该页面专为已经编写了 ERC721 合同并希望将其与 OpenSea 集成的开发人员而设计。但是，如果您是[新手](https://docs.opensea.io/docs/getting-started)，我们建议您遵循官方的 [OpenSea Developer Tutorial](https://docs.opensea.io/docs/getting-started)。
+该页面专为已经编写了 ERC721 合约并希望将其与 OpenSea 集成的开发人员而设计。但是，如果您是[新手](https://docs.opensea.io/docs/getting-started)，我们建议您遵循官方的 [OpenSea Developer Tutorial](https://docs.opensea.io/docs/getting-started)。
 #### 在OpenSea上查看现有项目
 好消息！如果您已经在以太坊主网上部署了 ERC721 合约，那么您的商品就已经可以在 OpenSea 上进行交易了。只需转到我们的列表流程即可查看您的店面。
 
-点击[提交合同](https://opensea.io/get-listed/step-two)
+点击[提交合约](https://opensea.io/get-listed/step-two)
 #### 元数据 API
 如果您未遵守 ERC721 元数据标准，则您的商品可能不会按预期显示在 OpenSea 上：它们可能缺少
 
@@ -449,7 +451,7 @@ OpenSea店面创建者
 	  "name": "Dave Starbelly",
 	  "attributes": [ ... ], 
 	}
-通常，OpenSea 使用 ERC721 中的 tokenURI 方法查找项目的元数据API（您可以[在此处](https://docs.opensea.io/docs/2-adding-metadata)确切了解其工作方式）。但是，如果您已经部署了合同并且未实现此方法，则可以将符合元数据标准并具有以下格式的API URL发送到support@opensea.io：
+通常，OpenSea 使用 ERC721 中的 tokenURI 方法查找项目的元数据API（您可以[在此处](https://docs.opensea.io/docs/2-adding-metadata)确切了解其工作方式）。但是，如果您已经部署了合约并且未实现此方法，则可以将符合元数据标准并具有以下格式的API URL发送到support@opensea.io：
 
 	<your-api.com/any_path>/{token_id}
 尽管您的 API 可以具有任何 URL，但重要的是，它需要一个 Token ID 并以[此处](https://docs.opensea.io/docs/2-adding-metadata)所述的格式返回数据。
@@ -457,30 +459,30 @@ OpenSea店面创建者
 ### 常见问题
 - 如何使用 OpenSea 为商品建立市场？
 
-	如果您只是开始您的项目，并且您的合同符合 ERC721 或 ERC1155，则该过程相当快捷、容易。只需转到我们的[开发人员教程](https://docs.opensea.io/docs)并按照说明进行操作即可。
+	如果您只是开始您的项目，并且您的合约符合 ERC721 或 ERC1155，则该过程相当快捷、容易。只需转到我们的[开发人员教程](https://docs.opensea.io/docs)并按照说明进行操作即可。
 - 我已经建立了我的项目，但是它不符合元数据标准。我还能列出来吗？
 
-	是的！根据您的智能合约的结构，我们也许可以进行自定义集成。特别是，如果您的合同符合 ERC721 或 ERC1155 标准，则可以为我们提供您的商品的元数据 URL，该 URL 应该相对易于集成。
+	是的！根据您的智能合约的结构，我们也许可以进行自定义集成。特别是，如果您的合约符合 ERC721 或 ERC1155 标准，则可以为我们提供您的商品的元数据 URL，该 URL 应该相对易于集成。
 
 	只需发送电子邮件至contact@opensea.io给我们，我们将与您联系以进行下一步。
 - 我才刚开始。我如何确保我的物品将在 OpenSea 上可用？
 
-	全新的开始真是太好了。我们强烈建议您遵循[《OpenSea Developer教程》](https://docs.opensea.io/docs/getting-started)，以学习如何正确构造合同和元数据以实现完全的 OpenSea 兼容性。入门非常快，而且实际上很有趣！我们甚至有[一个视频教程](https://www.youtube.com/watch?v=lbXcvRx0o3Y)。
+	全新的开始真是太好了。我们强烈建议您遵循[《OpenSea Developer教程》](https://docs.opensea.io/docs/getting-started)，以学习如何正确构造合约和元数据以实现完全的 OpenSea 兼容性。入门非常快，而且实际上很有趣！我们甚至有[一个视频教程](https://www.youtube.com/watch?v=lbXcvRx0o3Y)。
 - 构建商品时如何获得支持？
 
 	很高兴你问。我们很乐意在[Discord](https://discord.gg/ga8EJbv)上与您聊天，并帮助进行集成。我们还建议注册我们的[邮件列表](https://www.getdrip.com/forms/674668683/submissions/new)，以获取有关 OpenSea 的所有最新更新。
 - 这仅适用于游戏吗？
 
 	不！我们将支持任何资产类型，只要它在区块链上即可。[查看Dottabot软件许可项目](https://opensea.io/assets/dottabot-license)以及 [Crypto Stamps](https://opensea.io/assets/crypto-stamp-edition-1)的非游戏项目的几个示例。
-- 我重新部署了我的合同。我该如何更新旧版本？
+- 我重新部署了我的合约。我该如何更新旧版本？
 
-	当您添加与先前合同同名的新合同时，它将自动拥有一个新店面，店面名称后带有“ V2”（或“ V3”，“ V4”等）。
+	当您添加与先前合约同名的新合约时，它将自动拥有一个新店面，店面名称后带有“ V2”（或“ V3”，“ V4”等）。
 	
-		例如，如果我们部署了另一个 CryptoPuffs 合同，则该合同的名称为 “ CryptoPuffs V2”，并且可以在 https://opensea.io/category/cryptopuffsv2 上获得。
+		例如，如果我们部署了另一个 CryptoPuffs 合约，则该合约的名称为 “ CryptoPuffs V2”，并且可以在 https://opensea.io/category/cryptopuffsv2 上获得。
 
 	要更新您的智能合约，只需将旧合约重命名为 CryptoPuffsOld，然后通过[店面定制程序将](https://docs.opensea.io/docs/7-customizing-your-storefront)新合约重命名为 CryptoPuffs 。
 
-	更新合同后，您可能希望摆脱旧的合同。我们没有删除旧智能合约的界面，因此您需要通过 [Discord](https://discord.gg/G95kyQd) 与我们联系。我们一定会尽快上线！
+	更新合约后，您可能希望摆脱旧的合约。我们没有删除旧智能合约的界面，因此您需要通过 [Discord](https://discord.gg/G95kyQd) 与我们联系。我们一定会尽快上线！
 - OpenSea 为我的 Dapp 提供了什么？
 
 	OpenSea 为您的 Dapp 提供了一个强大的市场，使您可以轻松快捷地买卖商品。它经过 NFT 领域最活跃的社区的考验，并屡屡出现。OpenSea 使您可以专注于设计、内容和用户，同时仍具有项目数字资产的功能齐全的市场。另外，您可以为辅助销售设置费用，以便您在首次销售商品后就能长期赚钱。
@@ -496,10 +498,10 @@ OpenSea店面创建者
 		除了点对点交易外，OpenSea 还可以用作初始销售游戏物品的工具。查看我们有关进行[初始商品销售](https://docs.opensea.io/docs/8-running-an-initial-item-sale)的部分，以了解如何做到这一点。
 - 这仅适用于 ERC721 资产吗？
 
-	我们的自助式店面创建仅适用于 ERC721 和 ERC1155 合同。但是，我们有时能够与其他数字资产进行自定义集成。如果您不使用受支持的标准，则集成可能会花费更长的时间。
-- 这对我的 ERC1155 合同有效吗？
+	我们的自助式店面创建仅适用于 ERC721 和 ERC1155 合约。但是，我们有时能够与其他数字资产进行自定义集成。如果您不使用受支持的标准，则集成可能会花费更长的时间。
+- 这对我的 ERC1155 合约有效吗？
 
-	是的！您可以使用[获取清单](https://opensea.io/get-listed/step-two)的流程将您的合同添加到 OpenSea。就像添加 ERC721 合同一样。
+	是的！您可以使用[获取清单](https://opensea.io/get-listed/step-two)的流程将您的合约添加到 OpenSea。就像添加 ERC721 合约一样。
 - 费用如何运作？我还能从商品的二次销售中受益吗？
 
 	是的！我们让您决定要对商品收取的任何费用-这意味着，每售出一件商品，您（项目的开发人员）将获得一定比例的销售折扣。
@@ -541,7 +543,7 @@ OpenSea店面创建者
 
 提供资产元数据可以使像 OpenSea 这样的应用程序获取丰富的数字资产数据，并轻松地在应用程序中显示它们。给定智能合约上的数字资产通常仅由唯一标识符（例如， ERC721 中的 `token_id` ）表示，因此元数据允许这些资产具有其他属性，例如名称、描述、图像。
 #### 实现令牌URI
-为了让 OpenSea 提取 ERC721 和 ERC1155 资产的链下元数据，您的合同将需要返回一个 URI，我们可以在其中找到元数据。要查找此 URI，请使用  ERC721 中的 `tokenURI` uri 方法和 ERC1155 中的方法。
+为了让 OpenSea 提取 ERC721 和 ERC1155 资产的链下元数据，您的合约将需要返回一个 URI，我们可以在其中找到元数据。要查找此 URI，请使用  ERC721 中的 `tokenURI` uri 方法和 ERC1155 中的方法。
 
 首先，让我们仔细看看 `tokenURI` Creature合约中的方法。
 
@@ -554,7 +556,7 @@ OpenSea店面创建者
 	        Strings.uint2str(_tokenId)
 	    );
 	  }					
-在 ERC721 功能的  `tokenURI`  或 uri 在你的 ERC1155 合同函数返回一个 HTTP 或 IPFS URL，如 `https://opensea-creatures-api.herokuapp.com/api/creature/3`。当被查询时，该 URL 应该反过来返回一个 JSON blob 数据以及您的令牌的元数据。您可以在[此处](https://github.com/ProjectOpenSea/opensea-creatures/tree/master/metadata-api)看到一个简单的 Python 服务器示例，该服务器用于在OpenSea生物存储库中提供元数据。
+在 ERC721 功能的  `tokenURI`  或 uri 在你的 ERC1155 合约函数返回一个 HTTP 或 IPFS URL，如 `https://opensea-creatures-api.herokuapp.com/api/creature/3`。当被查询时，该 URL 应该反过来返回一个 JSON blob 数据以及您的令牌的元数据。您可以在[此处](https://github.com/ProjectOpenSea/opensea-creatures/tree/master/metadata-api)看到一个简单的 Python 服务器示例，该服务器用于在OpenSea生物存储库中提供元数据。
 
 如果您使用IPFS托管元数据，则URL的格式应为 `ipfs://<hash>`。例如，`ipfs://QmTy8w65yBXgyfG2ZBg5TrfB2hPjrDQH3RCQFJGkARStJb`。
 
@@ -675,7 +677,7 @@ OpenSea 支持根据[官方 ERC721 元数据标准](https://github.com/ethereum/
 
 如果您输入 `value` 的是数字而未设置 `display_type`，则该特征将显示在 “排名” 部分中（在上图中的右上方）。
 
-添加可选选项可 `max_value` 为数字特征的可能值设置上限。它默认为 OpenSea 迄今为止在合同资产上看到的最大数量。如果设置为一个  `max_value`，请确保不要传递更高的值 `value`。
+添加可选选项可 `max_value` 为数字特征的可能值设置上限。它默认为 OpenSea 迄今为止在合约资产上看到的最大数量。如果设置为一个  `max_value`，请确保不要传递更高的值 `value`。
 
 #### Date Traits(日期特征)
 OpenSea 还支持 `date` `display_type`。此类型的特征将显示在“排名”和“统计”附近的右列中。传递 unix 时间戳作为值。
@@ -719,8 +721,8 @@ OpenSea 还支持 `date` `display_type`。此类型的特征将显示在“排�
 我们将很快创建一个教程，介绍如何将元数据服务器构建和部署到 Heroku！同时，查看 [Heroku](https://devcenter.heroku.com/articles/git) 关于该主题的资源
 #### 在IPFS上存储
 如果您打算在 IPFS 上存储，我们建议使用 [Pinata](https://pinata.cloud/) 轻松将数据存储在 IPFS 中
-### 合同级元数据(自定义智能合约的元数据)
-您可以将 `contractURI` 方法添加到 `ERC721` 或 `ERC1155` 合同中，该方法返回合同店面级元数据的 URL
+### 合约级元数据(自定义智能合约的元数据)
+您可以将 `contractURI` 方法添加到 `ERC721` 或 `ERC1155` 合约中，该方法返回合约店面级元数据的 URL
 
 	contract MyCollectible is ERC721 {
 	    function contractURI() public view returns (string memory) {
@@ -740,11 +742,11 @@ OpenSea 还支持 `date` `display_type`。此类型的特征将显示在“排�
 ### 其他区块链
 OpenSea 从其他基于 EVM 的链开始，正在积极致力于支持其他区块链。如果您正在开发另一条链，我们建议您执行以下操作：
 #### 克莱顿区块链
-如果您在 Klaytn 上进行开发，请按照[此处](https://docs.klaytn.com/smart-contract/sample-contracts/erc-721)的文档创建 ERC721 合同。
+如果您在 Klaytn 上进行开发，请按照[此处](https://docs.klaytn.com/smart-contract/sample-contracts/erc-721)的文档创建 ERC721 合约。
 ### Matic区块链
 如果您使用 Matic 进行开发，请确保以下几点：
 
-- 在 `isApprovedForAll` 方法中，您将 `0x` ERC721 或 ERC1155 代理合同列入白名单，具体取决于您的合同是 ERC721 还是 1155：
+- 在 `isApprovedForAll` 方法中，您将 `0x` ERC721 或 ERC1155 代理合约列入白名单，具体取决于您的合约是 ERC721 还是 1155：
 
 		/**
 		   * Override isApprovedForAll to whitelist proxy accounts
@@ -895,7 +897,7 @@ OpenSea 由 [Wyvern 协议](https://github.com/ProjectWyvern)提供支持，Wyve
 #### 店面
 通过可定制的OpenSea集成立即启动并运行
 
-利用 OpenSea 的最简单方法是通过 OpenSea 店面功能。只要您的合同符合 ERC721 或 ERC1155，此选项即刻生效。只需按照 [OpenSea 开发人员教程](https://docs.opensea.io/docs/getting-started)来设置商品并获得商品的即时交易市场即可。开发人员称此过程“神奇”。
+利用 OpenSea 的最简单方法是通过 OpenSea 店面功能。只要您的合约符合 ERC721 或 ERC1155，此选项即刻生效。只需按照 [OpenSea 开发人员教程](https://docs.opensea.io/docs/getting-started)来设置商品并获得商品的即时交易市场即可。开发人员称此过程“神奇”。
 
 ![](./pic/opensea35.png)
 
@@ -955,7 +957,7 @@ OpenSea 由 [Wyvern 协议](https://github.com/ProjectWyvern)提供支持，Wyve
 
 - 案例研究1：硬币和钢铁
 
-	[Coins＆Steel](https://coinsandsteel.com/) 利用 OpenSea 平台进行众筹，在交易的前几周进行了价值 187 ETH 的交易。该团队没有实施自定义合同，而是通过利用 OpenSea 交换合同以及用于搜索和分类预售物品的用户界面节省了开发时间。
+	[Coins＆Steel](https://coinsandsteel.com/) 利用 OpenSea 平台进行众筹，在交易的前几周进行了价值 187 ETH 的交易。该团队没有实施自定义合约，而是通过利用 OpenSea 交换合约以及用于搜索和分类预售物品的用户界面节省了开发时间。
 	
 	![](./pic/opensea41.png)
 - 案例研究2：断链者
