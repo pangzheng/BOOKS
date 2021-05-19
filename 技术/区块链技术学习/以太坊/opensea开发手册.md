@@ -52,7 +52,6 @@
 				export MNEMONIC="<metamask>"
 				export NETWORK="rinkeby"
 				truffle deploy --network rinkeby	
-		
 		如果您已经在使用 Infura API，则也可以使用 `INFURA_KEY` 环境变量代替 `ALCHEMY_KEY`
 		
 		建议
@@ -62,13 +61,15 @@
 		请注意，为了使用 Truffle 和 Infura 进行部署，您将需要来自以 Ether 资助的 MetaMask 帐户中的“种子短语”。为了使 Ether 进入您的 Rinkeby MetaMask 帐户，您可以使用 [Rinkeby Ether 龙头](https://faucet.rinkeby.io/)。您需要在其中一个社交资料中发布一条消息，然后将链接粘贴到您的帖子中，并将其粘贴到测试水龙头中。为了从 Metamask 获得“种子短语”，请单击“设置”，然后单击“显示种子词”。确保不与任何包含Mainnet令牌的帐户共享您的种子短语！
 	- 铸造
 
-		接下来，我们要为新部署的 ERC721 合约添加新资产！我们会将这些资产放入我们控制的帐户中，以便我们可以测试商品的OpenSea拍卖流程。
+		接下来，我们要为新部署的 ERC721 合约添加新资产！我们会将这些资产放入我们控制的帐户中，以便我们可以测试商品的 OpenSea 拍卖流程。
 
-		部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合约，该合约将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。您可以在 Deployment 命令的输出中找到已部署合约的地址，并通过点击URL：在 Etherscan 上找到它
+		部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合约，该合约将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。可以在 Deployment 命令的输出中找到已部署合约的地址，并通过点击URL：在 Etherscan 上找到它
 			
 			https://rinkeby.etherscan.io/address/<contract_address>。
 
-		例如，这是[最近部署的合约](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。运行铸造脚本时，应将此合约地址和 MetaMask 帐户的地址设置为环境变量：
+		例如，这是[最近部署的合约](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。
+		
+		运行铸造脚本时，应将此合约地址和 MetaMask 帐户的地址设置为环境变量：
 		
 			export OWNER_ADDRESS="<my_address>"
 			export NFT_CONTRACT_ADDRESS="<deployed_contract_address>"
@@ -668,7 +669,7 @@ OpenSea 支持根据[官方 ERC721 元数据标准](https://github.com/ethereum/
 	}
 这 `trait_type` 是特征的名称，是特征 `value` 的值，并且 `display_type` 是一个字段，指示您希望如何显示它。对于 `string` 特质，您不必担心 `display_type`
 
-#### Numeric Traits(数字特征)
+#### Numeric Traits(display_type 数字特征)
 对于数字特征，OpenSea 当前支持三个不同的选项，
 
 - `number`（在下图中的右下方）

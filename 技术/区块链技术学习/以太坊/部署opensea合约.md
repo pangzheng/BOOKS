@@ -1,12 +1,12 @@
 # 部署 opensea 合约
 opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最新的 [readme 文档](https://github.com/ProjectOpenSea/opensea-creatures)
-## OpenSea生物：初学者 ERC721，ERC1155 和工厂合同
-### ERC721 / ERC1155合同样本
+## OpenSea生物：初学者 ERC721，ERC1155 和工厂合约
+### ERC721 / ERC1155合约样本
 其中包括一个非常简单的示例 ERC721/ERC1155，目的是演示与 OpenSea 市场的集成。我们包括用于铸造物品的脚本。
 
-此外，该合同将 OpenSea 用户的代理帐户列入白名单，以便他们能够自动在 OpenSea 上交易 ERC721 项目（无需支付额外的批准费用）。在 OpenSea 上每个用户都有一个他们控制的 “代理” 帐户，最终由交换合同调用以交易其项目。（请注意，此添加并不意味着 OpenSea 本身就可以访问这些项目，只是让用户可以根据需要更轻松地列出它们）
-### 工厂合同
-除了这些模板 721/1155 合同之外，我们还提供样本工厂合同，用于进行尚未铸造的物品的免 gas 预售。有关更多信息，请参见 https://docs.opensea.io/docs/opensea-initial-item-sale-tutorial。
+此外，该合约将 OpenSea 用户的代理帐户列入白名单，以便他们能够自动在 OpenSea 上交易 ERC721 项目（无需支付额外的批准费用）。在 OpenSea 上每个用户都有一个他们控制的 “代理” 帐户，最终由交换合约调用以交易其项目。（请注意，此添加并不意味着 OpenSea 本身就可以访问这些项目，只是让用户可以根据需要更轻松地列出它们）
+### 工厂合约
+除了这些模板 721/1155 合约之外，我们还提供样本工厂合约，用于进行尚未铸造的物品的免 gas 预售。有关更多信息，请参见 https://docs.opensea.io/docs/opensea-initial-item-sale-tutorial。
 ### 要求
 - 节点版本
 
@@ -35,9 +35,9 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 			DEPLOY_CREATURES_SALE=1 yarn truffle deploy --network rinkeby
 		
 ### 铸造令牌
-部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合同，该合同将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。例如，这是[最近部署的合同](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。
+部署到 Rinkeby 网络后，将在 Rinkeby 上签订一份合约，该合约将在 [Rinkeby Etherscan](https://rinkeby.etherscan.io/) 上可见。例如，这是[最近部署的合约](https://rinkeby.etherscan.io/address/0xeba05c5521a3b81e23d15ae9b2d07524bc453561)。
 
-运行铸造脚本时，应将此合同地址和 Metamask 帐户的地址设置为环境变量。如果[部署了CreatureFactory](https://github.com/ProjectOpenSea/opensea-creatures/blob/master/migrations/2_deploy_contracts.js#L38)，如上面的示例部署步骤所述，则您需要在下面指定其地址，因为它是 NFT 合同的所有者，并且只有它具有 `mint `(薄荷糖)权限。在这种情况下，您将不需要`NFT_CONTRACT_ADDRESS`，因为我们所需要的只是这里带有 `mint`(薄荷)权限的合同。
+运行铸造脚本时，应将此合约地址和 Metamask 帐户的地址设置为环境变量。如果[部署了CreatureFactory](https://github.com/ProjectOpenSea/opensea-creatures/blob/master/migrations/2_deploy_contracts.js#L38)，如上面的示例部署步骤所述，则您需要在下面指定其地址，因为它是 NFT 合约的所有者，并且只有它具有 `mint `(薄荷糖)权限。在这种情况下，您将不需要`NFT_CONTRACT_ADDRESS`，因为我们所需要的只是这里带有 `mint`(薄荷)权限的合约。
 
 	export OWNER_ADDRESS="<my_address>"
 	export NFT_CONTRACT_ADDRESS="<deployed_contract_address>"
@@ -57,14 +57,14 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 - 您运行的节点版本是否符合中的 `engines` 要求 `package.json`？如果没有，请尝试 `nvm use; rm -rf node_modules; yarn`
 
 ## 关于 OpenSea 生物配件
-这是一份 ERC-1155 合同样本，目的是演示与 OpenSea 加密收藏品市场的集成。我们还包括：
+这是一份 ERC-1155 合约样本，目的是演示与 OpenSea 加密收藏品市场的集成。我们还包括：
 
-- 一份工厂合同，用于制作未铸造物品的销售订单（允许免费 gas和免费 `mint`(薄荷) 的预售）。
-- 可配置的战利品合同，用于出售 ERC-1155 项目的随机集合。
+- 一份工厂合约，用于制作未铸造物品的销售订单（允许免费 gas和免费 `mint`(薄荷) 的预售）。
+- 可配置的战利品合约，用于出售 ERC-1155 项目的随机集合。
 
-除了上述 OpenSea ERC721 样本合同的功能之外，ERC1155
+除了上述 OpenSea ERC721 样本合约的功能之外，ERC1155
 
-- 每个合同支持多个创建者，其中只有创建者才能创建更多副本
+- 每个合约支持多个创建者，其中只有创建者才能创建更多副本
 - 支持战利品箱中预先铸造的物品供您选择
 
 ## 配置战利品箱
@@ -79,7 +79,7 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 - 然后按照以下说明进行部署！购买后将自动打开该框。如果您想使用户可以交易战利品（无需购买即可自动打开），请通过 contact@opensea.io（或更好的是Discord）与我们联系。
 
 ## 为什么某些标准方法会被覆盖？
-该合同优先 `isApprovedForAll` 于将 OpenSea 用户的代理帐户列入白名单的方法。这意味着他们可以自动在 OpenSea 上交易您的 ERC-1155 项目（无需支付额外的批准费用）。在 OpenSea 上，每个用户都有一个他们控制的“代理”帐户，最终由交换合同调用以交易其项目。
+该合约优先 `isApprovedForAll` 于将 OpenSea 用户的代理帐户列入白名单的方法。这意味着他们可以自动在 OpenSea 上交易您的 ERC-1155 项目（无需支付额外的批准费用）。在 OpenSea 上，每个用户都有一个他们控制的“代理”帐户，最终由交换合约调用以交易其项目。
 
 请注意，这种添加并不意味着 OpenSea 本身就可以访问这些项目，只是让用户可以根据需要更轻松地列出它们！
 
@@ -108,10 +108,10 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 	确保您的钱包中至少有几美元的以太币。然后运行
 	
 		yarn truffle migrate --network live		
-	在日志中查找您新部署的合同地址！
+	在日志中查找您新部署的合约地址！
 - 在OpenSea上查看您的物品
 
-	OpenSea 将自动收取您合同上的转账。您可以通过访问来访问资产 `https://opensea.io/assets/CONTRACT_ADDRESS/TOKEN_ID`。
+	OpenSea 将自动收取您合约上的转账。您可以通过访问来访问资产 `https://opensea.io/assets/CONTRACT_ADDRESS/TOKEN_ID`。
 	
 	要一次将所有元数据加载到商品上
 	
@@ -133,7 +133,7 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 	这通常是由于 `truffle-hdwallet` 提供程序无法连接。转到 [Alchemy仪表板](https://dashboard.alchemyapi.io/signup?referral=affiliate:e535c3c3-9bc4-428f-8e27-4b70aa2e8ca5)（或infura.io）并创建一个新项目。使用“项目ID”作为新的项目 `ALCHEMY_KEY`，并确保您导出上面的命令行变量。
 
 ### ERC1155 实施
-为了实施 ERC1155 标准，这些合同使用 [Horizo​​n Games](https://horizongames.net/)的《多令牌标准》，该协议可在[npm](https://www.npmjs.com/package/multi-token-standard)和[github](https://github.com/arcadeum/multi-token-standard) 上获得，并获得MIT许可证。	
+为了实施 ERC1155 标准，这些合约使用 [Horizo​​n Games](https://horizongames.net/)的《多令牌标准》，该协议可在[npm](https://www.npmjs.com/package/multi-token-standard)和[github](https://github.com/arcadeum/multi-token-standard) 上获得，并获得MIT许可证。	
 ## 运行本地测试
 在一个终端窗口中，运行：
 
@@ -141,7 +141,6 @@ opensea 文档说的合约，最新版本已经更新了,下面是2021年5月最
 Ganache启动后，请在另一个终端窗口中运行以下命令
 
 	yarn run test	
-	
 
-
-
+## 参考
+[ProjectOpenSea/opensea-creatures](https://github.com/ProjectOpenSea/opensea-creatures/blob/master/README.md)	

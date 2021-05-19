@@ -367,5 +367,70 @@ OpenSea 是目前以太坊網路上規模最大的 NFT（非同質化代幣）�
 	- 有限片段分享
 	- 评论
 	- m3u8 播放器
-	- 付费，收费方式，传统和加密都支持 
+	- 付费，收费方式，传统和加密都支持
+
+## 币安 NFT 项目
+- https://www.bakeryswap.org/#/home
+	- 主营业务
+		- 代币交换
+		- nft 超级市场
+			- 4w个作品
+			- 交易次数 14w
+			- 交易额 27W
+			- 新加音乐和视频板块 
+	- NFT+DEFI 衍生业务
+		- 质押 NFT 挖代币
+		- 反过来
+	- 允许用户铸造 NFT  
+- https://pancakeswap.finance/
+	- 和上面的差不多
+
+- [seascape](https://www.seascape.network/)
+	- 游戏，发布NFT + DeFI
+		- 抽奖(盲盒？)
+		-  挖矿
+		-  等
+	- DeFi 链支持
+		- 以太坊
+		- 波卡
+		- 币安智能
+	- 自己也有代币 crowns
+- [myneighboralice](https://www.myneighboralice.com/)  
+	- 社区卖地游戏
+		- 小游戏集合
+		- 平台代币
+		- 发行限量版 NFT 
+		- 可以做质押
+		- 投票
+- [https://realy.pro/](https://realy.pro/)  
+	- 潮流单品鉴定和交易的平台，记录信息同步上链，还可以实现高效交易，合作厂商合作，用芯片加商品的模式
+		- 迪斯尼限量
+		- nike限量
+		- 阿迪达斯限量
+		- 胶囊系列限量
+		- 乔丹限量
+		 
+	
+	 			       
+## NFT 知名链
+- [flow](https://zh.onflow.org/)
+
+	包含 NFT 产品，主要是游戏和商业的
+	
+	- 加密猫
+	- nba top show
+	- [animocabrands](https://www.animocabrands.com/)
+		- REVV TOKEN
+		- F1® DELTA TIME
+		- THE SANDBOX
+		- SAND TOKEN
+		- 等等
+
+## 交易所
+https://coinmarketcap.com/zh/
+
+
+## 参考
+- [币安智能链BSC上的NFT、DeFi项目及未来前景 | Crypto Uncle 加密叔](https://www.youtube.com/watch?v=y_y7zA4cOXs)
+    
 	
