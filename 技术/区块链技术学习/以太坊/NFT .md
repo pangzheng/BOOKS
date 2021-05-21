@@ -403,13 +403,16 @@ OpenSea 是目前以太坊網路上規模最大的 NFT（非同質化代幣）�
 		- 可以做质押
 		- 投票
 - [https://realy.pro/](https://realy.pro/)  
-	- 潮流单品鉴定和交易的平台，记录信息同步上链，还可以实现高效交易，合作厂商合作，用芯片加商品的模式
+	- 潮流实物单品鉴定和交易的平台，记录信息同步上链，还可以实现高效交易，合作厂商合作，用芯片加商品的模式
 		- 迪斯尼限量
 		- nike限量
 		- 阿迪达斯限量
 		- 胶囊系列限量
 		- 乔丹限量
-		 
+- [https://rocki.app/](https://rocki.app/)
+	- erc 721 锚定音乐人，投资人，也会获得回报
+	- erc 1155 类似批量的交易版本，独家或限量发行
+		- 只发行1000张，交易这个nft  		 
 	
 	 			       
 ## NFT 知名链
@@ -426,9 +429,25 @@ OpenSea 是目前以太坊網路上規模最大的 NFT（非同質化代幣）�
 		- SAND TOKEN
 		- 等等
 
-## 交易所
+## 交易所和统计
 https://coinmarketcap.com/zh/
 
+## Defi
+- https://pancakeswap.finance
+	- 币安的
+	- Defi 解决 Uniswap 链上高手续费
+	- 功能
+		- 币之间相互切换
+		- 提供流动性挖矿？
+			- 质押代币给糖果池矿池，比如 cakepool，不参与挖矿
+			- farms 
+				- 无常损失就是因为货币价格损失波动导致损失 
+				- 可以在 [这里查看](https://coinmarketcap.com/zh/yield-farming/)无常损失等级
+
+				![](./pic/yieldframing.png)
+		- 可以先质押 farm ，得到的 cake 再质押糖果池		
+- 预言机
+	- 给程序提供价格的   
 
 ## 参考
 - [币安智能链BSC上的NFT、DeFi项目及未来前景 | Crypto Uncle 加密叔](https://www.youtube.com/watch?v=y_y7zA4cOXs)

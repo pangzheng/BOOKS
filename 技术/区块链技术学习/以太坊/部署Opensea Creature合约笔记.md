@@ -888,6 +888,7 @@
 	需要查看合约代码
 - 钱包如何调用	 
 
-
 ## 参考
-[How to create NFTs and sell them on OpenSea](https://www.youtube.com/watch?v=lbXcvRx0o3Y)	
+- [How to create NFTs and sell them on OpenSea](https://www.youtube.com/watch?v=lbXcvRx0o3Y)
+- [opensea开发手册.md](https://github.com/pangzheng/BOOKS/blob/master/%E6%8A%80%E6%9C%AF/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/%E4%BB%A5%E5%A4%AA%E5%9D%8A/opensea%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C.md)
+- [部署opensea合约.md](https://github.com/pangzheng/BOOKS/blob/master/%E6%8A%80%E6%9C%AF/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/%E4%BB%A5%E5%A4%AA%E5%9D%8A/%E9%83%A8%E7%BD%B2opensea%E5%90%88%E7%BA%A6.md)	
