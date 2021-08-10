@@ -449,6 +449,15 @@ https://coinmarketcap.com/zh/
 - 预言机
 	- 给程序提供价格的   
 
+
+## 高级使用
+### ERC72
+一种跟踪数字资产所有权的方法
+### 惰性铸币(lazy-minting)
+
+- [workshop-recap-building-an-nft-merkle-drop](https://blog.openzeppelin.com/workshop-recap-building-an-nft-merkle-drop/)
+- [Building an NFT Merkle-Drop](https://www.youtube.com/watch?v=SF-XOwWIwRo)
+
 ## 参考
 - [币安智能链BSC上的NFT、DeFi项目及未来前景 | Crypto Uncle 加密叔](https://www.youtube.com/watch?v=y_y7zA4cOXs)
     
