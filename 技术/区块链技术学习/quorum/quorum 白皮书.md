@@ -215,6 +215,7 @@ Quorum 测试表明，根据系统配置，每秒可处理数十到数百个事�
 
 ## 翻译
 - [Quorum Whitepaper v0.2.pdf](https://github.com/ConsenSys/quorum/blob/master/docs/Quorum%20Whitepaper%20v0.2.pdf)
+- [goquorum 手册](https://docs.goquorum.consensys.net/en/stable/)
 - [代码仓库](https://github.com/ConsenSys/quorum)
 	- 仓库 readme
 	- 简介
