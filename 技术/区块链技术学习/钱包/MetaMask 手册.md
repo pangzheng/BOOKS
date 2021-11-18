@@ -1320,6 +1320,7 @@ MetaMask 通过 [EIP-2255](https://eips.ethereum.org/EIPS/eip-2255)引入了 Web
 			      }
 			    });
 			}
+			
 ### 其他RPC方法
 - `eth_decrypt`
 
@@ -1645,16 +1646,21 @@ MetaMask 当前有六种签名方法，您可能想知道这些方法的历史�
 			  const msgParams = JSON.stringify({
 			    domain: {
 			      // Defining the chain aka Rinkeby testnet or Ethereum Main Net
+			      // 定义链别名 Rinkeby 测试网或以太坊主网
 			      chainId: 1,
 			      // Give a user friendly name to the specific contract you are signing for.
+			      // 为您正在签署的特定合同提供一个用户友好的名称。
 			      name: 'Ether Mail',
 			      // If name isn't enough add verifying contract to make sure you are establishing contracts with the proper entity
+			      // 如果名称不够，请添加验证合同以确保您正在与适当的实体建立合同
 			      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
 			      // Just let's you know the latest version. Definitely make sure the field name is correct.
+			      // 让我们知道最新版本。一定要确保字段名称正确。
 			      version: '1',
 			    },
 			
 			    // Defining the message signing data content.
+			    // 定义消息签名数据内容。
 			    message: {
 			      /*
 			       - Anything you want. Just a JSON Blob that encodes the data you want to send
@@ -1662,6 +1668,13 @@ MetaMask 当前有六种签名方法，您可能想知道这些方法的历史�
 			       - This is DApp Specific
 			       - Be as explicit as possible when building out the message schema.
 			      */
+			      /*
+			       - 任何你想要的。只是一个 JSON Blob，用于对您要发送的数据进行编码
+			       - 没有必填字段
+			       - 这是 DApp 特定的
+			       - 在构建消息模式时尽可能明确。
+			      */
+			      
 			      contents: 'Hello, Bob!',
 			      attachedMoneyInEth: 4.2,
 			      from: {
@@ -1683,9 +1696,11 @@ MetaMask 当前有六种签名方法，您可能想知道这些方法的历史�
 			      ],
 			    },
 			    // Refers to the keys of the *types* object below.
+			    // 指的是下面的 *types* 对象的键。
 			    primaryType: 'Mail',
 			    types: {
 			      // TODO: Clarify if EIP712Domain refers to the domain the contract is hosted on
+			      // TODO：澄清 EIP712 Domain 是否指代托管合约的域
 			      EIP712Domain: [
 			        { name: 'name', type: 'string' },
 			        { name: 'version', type: 'string' },
@@ -1693,17 +1708,20 @@ MetaMask 当前有六种签名方法，您可能想知道这些方法的历史�
 			        { name: 'verifyingContract', type: 'address' },
 			      ],
 			      // Not an EIP712Domain definition
+			      // 不是 EIP712 Domain 定义
 			      Group: [
 			        { name: 'name', type: 'string' },
 			        { name: 'members', type: 'Person[]' },
 			      ],
 			      // Refer to PrimaryType
+			      // 参考PrimaryType
 			      Mail: [
 			        { name: 'from', type: 'Person' },
 			        { name: 'to', type: 'Person[]' },
 			        { name: 'contents', type: 'string' },
 			      ],
 			      // Not an EIP712Domain definition
+			      // 不是 EIP712Domain 定义
 			      Person: [
 			        { name: 'name', type: 'string' },
 			        { name: 'wallets', type: 'address[]' },
@@ -1748,7 +1766,7 @@ MetaMask 当前有六种签名方法，您可能想知道这些方法的历史�
 			  );
 			});
 			
-## 最佳事件
+## 最佳实践
 ### 注册合约的方法名称
 MetaMask 使用功能签名的奇偶校验链上注册表在确认屏幕上显示方法名称。对于许多通用方法名称，例如令牌方法，这使 MetaMask 可以通过其[签名成功方法](https://solidity.readthedocs.io/en/v0.4.21/abi-spec.html)查找名称方法 。但是，有时您使用的方法不在该链上注册表中，因此  MetaMask 只会 `Contract Interaction` 向用户显示。
 
@@ -1785,8 +1803,10 @@ MetaMask 使用功能签名的奇偶校验链上注册表在确认屏幕上显�
 	- 请注意 `eth-method-registry`，无论用户的网络是什么，MetaMask 都将从 Mainnet 端点读取。
 有关更多详细信息，请参见此 [StackExchange](https://ethereum.stackexchange.com/questions/59678/metamask-shows-unknown-function-when-calling-method-send-function)答案 
 
-### 向用户注册令牌
-当用户打开其 MetaMask 时，会向他们显示各种资产，包括令牌。默认情况下，MetaMask 自动检测一些主要的流行令牌并自动显示它们，但是对于大多数令牌，用户将需要自己添加令牌。
+### 用户注册 Token
+当用户打开其 MetaMask 时，会向他们显示各种资产，包括 Token。
+
+默认情况下，MetaMask 自动检测一些主要的流行 Token 并自动显示它们，但是对于大多数Token ，用户将需要自己添加 Token 。
 
 尽管使用带有 `Add Token` 按钮的 UI 可以做到这一点，但该过程可能很麻烦且涉及用户与合约地址进行交互，并且很容易出错。
 
@@ -1809,15 +1829,16 @@ MetaMask 使用功能签名的奇偶校验链上注册表在确认屏幕上显�
 	
 	try {
 	  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+	  // wasAdded 是一个布尔值。 与任何 RPC 方法一样，可能会抛出错误。
 	  const wasAdded = await ethereum.request({
 	    method: 'wallet_watchAsset',
 	    params: {
-	      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+	      type: 'ERC20', // Initially only supports ERC20, but eventually more! // 最初只支持 ERC20，但最终支持更多！
 	      options: {
-	        address: tokenAddress, // The address that the token is at.
-	        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-	        decimals: tokenDecimals, // The number of decimals in the token
-	        image: tokenImage, // A string url of the token logo
+	        address: tokenAddress, // The address that the token is at. // 令牌所在的地址。
+	        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars. // 股票代码或速记，最多 5 个字符。
+	        decimals: tokenDecimals, // The number of decimals in the token // 令牌中的小数位数
+	        image: tokenImage, // A string url of the token logo // 令牌标识的字符串url
 	      },
 	    },
 	  });
@@ -1999,8 +2020,10 @@ MetaMask 现在提供了 [metamask-onboarding library](https://github.com/MetaMa
 		    </script>
 		  </body>
 		</html>
-### onboarding流程图
-这是onboarding库，转发器和扩展之间的交互图：
+		
+		
+### onboarding 流程图
+这是 onboarding 库，转发器和扩展之间的交互图：
 
 ![](./pic/wallet6.png)
 ### MetaMask 扩展提供程序
@@ -2049,7 +2072,7 @@ MetaMask 现在提供了 [metamask-onboarding library](https://github.com/MetaMa
 #### 当前限制
 为了确定何时出现问题（例如未连接 MetaMask），必须在 [metamask-inpage-provider](https://github.com/MetaMask/metamask-inpage-provider) 中添加某种适当的错误处理 将错误暴露给提供商的使用者。也许使它成为一个事件发射器，所以它可以发出错误，而不仅仅是记录它们。
 
-## 移动
+## 移动端
 ### 介绍
 #### 为什么您和您的用户应使用 MetaMask Mobile
 - 在几秒钟内为您的用户服务-无论他们已经是钱包用户还是全新用户，我们都会引导他们开始使用！
