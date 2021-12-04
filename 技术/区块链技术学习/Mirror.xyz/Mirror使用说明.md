@@ -226,6 +226,10 @@ Mirror 支持使用储备拍卖方式来拍卖 NFT。保留拍卖方式配置有
 部署后该嵌入拍卖(`Embed auction`) 部分将显示一段代码。将其复制并粘贴到参赛作品中。它应该类似于下面的示例，但带有您的专用拍卖地址和 `tokenID`. 例如，此代码在本指南的顶部嵌入了拍卖。
 
 	[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
+下面代码将测试在 mirror 显示
+
+[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
+
 ## 拆分(Splits)
 拆分是一种自动与多个实体共享您产生的价值的方法。拆分是一种可支付的智能合约，可将价值路由到以太坊上的多个地址。
 
@@ -289,7 +293,11 @@ Mirror 上的限量版本配置有四个参数
 
 例如，此代码在本指南的顶部嵌入了版本。
 
-	[Dirty S1 Pea Green](edition://0x3725CA6034bcDBc3c9aDa649d49Df68527661175?editionId=2)	
+	[Dirty S1 Pea Green](edition://0x3725CA6034bcDBc3c9aDa649d49Df68527661175?editionId=2)
+
+下面代码将测试在 mirror 显示
+
+[Dirty S1 Pea Green](edition://0x3725CA6034bcDBc3c9aDa649d49Df68527661175?editionId=2)	
 ## 代币竞赛(Token Race)
 Mirror 支持创建代币竞赛，这是我们自己的 [$WRITE Race](https://mirror.xyz/race) 的衍生产品。Token Race 是一个简单的基于持续时间的治理工具，允许上传提案并允许社区根据他们在某个时间点持有的特定 ERC20 代币或 ERC721 代币 (NFT) 对提案进行投票。
 ### 代币竞赛如何运作?
@@ -409,6 +417,10 @@ Mirror 上的媒体嵌入和经济块通过简单的格式约定进行识别：�
 	
 ![](./pic/mirror3.png)	
 
+下面代码将测试在 mirror 显示
+
+[Powers of Ten](https://www.youtube.com/watch?v=0fKBhvDjuy0)
+
 ### NFT
 Mirror 上的参赛作品可以铸造为 NFT。要将您的参赛作品创建为 NFT，请选中参赛作品编辑器右上角的 NFT 复选框。为您的参赛作品上传封面图片，以便它可以在不同的 NFT 平台上呈现。一旦您的 NFT 在链上铸造，您将在参赛作品的署名行中看到确认。
 ### 众筹
@@ -418,6 +430,10 @@ Mirror 上的参赛作品可以铸造为 NFT。要将您的参赛作品创建为
 
 	[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
 ![](./pic/mirror6.png)
+
+下面代码将测试在 mirror 显示
+
+[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
 
 ### 图片
 可以通过拖放到编辑器中、在块菜单中选择图像或手动创建降价图像标签来嵌入图像。通过定义 width 和 height 查询参数可以在加载之前保留图像的空间，这些参数在将图像上传到 Mirror 时自动设置。
@@ -430,17 +446,27 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 	[Mirror](https://mirror.xyz)	
 ![](./pic/mirror7.png)
 
+下面代码将测试在 mirror 显示
+
+[Mirror](https://mirror.xyz)
+
 ### 推特
 通过插入指向任何 Twitter URL 的链接来嵌入单个推文或整个推文主题。
 
 	[Mirror’s first tweet](https://twitter.com/viamirror/status/1325856116748726273)
 ![](./pic/mirror8.png)	
 
+下面代码将测试在 mirror 显示
+
+[Mirror’s first tweet](https://twitter.com/viamirror/status/1325856116748726273)
 ### youtube
 
 	[Powers of Ten](https://www.youtube.com/watch?v=0fKBhvDjuy0)
 ![](./pic/mirror9.png)
 
+下面代码将测试在 mirror 显示
+
+[Powers of Ten](https://www.youtube.com/watch?v=0fKBhvDjuy0)
 
 ### 视频嵌入
 .mp4 通过插入指向外部托管视频文件的链接来嵌入视频。也可以设置 `autoplay`，`muted`，`loop` 并 `controls` 通过设置相关的查询参数。确保您手动定义 `width` 和 `height` 参数以保留视频的垂直空间。
@@ -448,12 +474,19 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 	[Powers of Ten](https://jkm-library.s3.amazonaws.com/blocks/powers-of-10.mp4?height=480&width=640&autoplay=true&loop=true&muted=true)
 ![](./pic/mirror10.png)
 
+下面代码将测试在 mirror 显示
+
+[Powers of Ten](https://jkm-library.s3.amazonaws.com/blocks/powers-of-10.mp4?height=480&width=640&autoplay=true&loop=true&muted=true)
+
 ### 框架
 可以通过创建 iFrame 块来嵌入任何页面。例如，这在嵌入交互式 WebGL 内容时很有用。只需设置display=iframe为查询参数。
 
 	[ThreeJS Demo](https://threejs.org/examples/webgl_water_flowmap.html?display=iframe)
 ![](./pic/mirror11.png)
-		
+
+下面代码将测试在 mirror 显示
+
+[ThreeJS Demo](https://threejs.org/examples/webgl_water_flowmap.html?display=iframe)		
 ### 版面尺寸
 如果您希望为您的参赛作品创建更具编辑性的布局，请考虑为某些媒体块设置自定义布局大小。支持的块类型包括图像、视频、Youtube 和 iFrame。
 
