@@ -428,13 +428,14 @@ Mirror 上的参赛作品可以铸造为 NFT。要将您的参赛作品创建为
 ### 拍卖
 [创建拍卖](https://mirror.xyz/dashboard/auctions)并部署它。部署后，该嵌入拍卖部分将显示一段代码。将其复制并粘贴到参赛作品中。它应该类似于下面的示例，但带有您的专用拍卖地址和tokenID.
 
-	[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
-	
+	[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
+		
 ![](./pic/mirror6.png)
 
 下面代码将测试在 mirror 显示
 
-[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
+[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
+
 ### 图片
 可以通过拖放到编辑器中、在块菜单中选择图像或手动创建降价图像标签来嵌入图像。通过定义 width 和 height 查询参数可以在加载之前保留图像的空间，这些参数在将图像上传到 Mirror 时自动设置。
 
@@ -495,5 +496,4 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 	![](https://images.mirror-media.xyz/publication-images/da461938-5ccf-4397-aa6d-d082cbba2128.jpeg?height=1533&width=2300&size=large)	
 ![](https://images.mirror-media.xyz/publication-images/da461938-5ccf-4397-aa6d-d082cbba2128.jpeg?height=1533&width=2300&size=large)	
 ### 未来的增强
-Mirror 是一个新项目，我们的编辑有意识地专注于我们快速行动以创建新的经济工具来资助伟大的写作。随着时间的推移，我们计划引入一个新的编辑器，它支持就地编辑，无需在编辑和预览模式之间切换。在此之前，我们感谢您的耐心等待，并欢迎任何反馈。	
-
+Mirror 是一个新项目，我们的编辑有意识地专注于我们快速行动以创建新的经济工具来资助伟大的写作。随着时间的推移，我们计划引入一个新的编辑器，它支持就地编辑，无需在编辑和预览模式之间切换。在此之前，我们感谢您的耐心等待，并欢迎任何反馈。
