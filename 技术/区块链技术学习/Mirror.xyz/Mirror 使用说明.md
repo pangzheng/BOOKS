@@ -429,7 +429,6 @@ Mirror 上的参赛作品可以铸造为 NFT。要将您的参赛作品创建为
 [创建拍卖](https://mirror.xyz/dashboard/auctions)并部署它。部署后，该嵌入拍卖部分将显示一段代码。将其复制并粘贴到参赛作品中。它应该类似于下面的示例，但带有您的专用拍卖地址和tokenID.
 
 	[Token #1522](auction://0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7?network=mainnet&tokenId=1522)
-		
 ![](./pic/mirror6.png)
 
 下面代码将测试在 mirror 显示
@@ -445,23 +444,25 @@ Mirror 上的参赛作品可以铸造为 NFT。要将您的参赛作品创建为
 Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强预览。
 
 	[Mirror](https://mirror.xyz)	
-![](./pic/mirror7.png)
+![](./pic/mirror7.png)
 
 下面代码将测试在 mirror 显示
 
 [Mirror](https://mirror.xyz)
+
 ### 推特
 通过插入指向任何 Twitter URL 的链接来嵌入单个推文或整个推文主题。
 
 	[Mirror’s first tweet](https://twitter.com/viamirror/status/1325856116748726273)
-![](./pic/mirror8.png)	
+![](./pic/mirror8.png)	
 
 下面代码将测试在 mirror 显示
 
 [Mirror’s first tweet](https://twitter.com/viamirror/status/1325856116748726273)
 ### youtube
+
 	[Powers of Ten](https://www.youtube.com/watch?v=0fKBhvDjuy0)
-![](./pic/mirror9.png)
+![](./pic/mirror9.png)
 
 下面代码将测试在 mirror 显示
 
@@ -470,8 +471,8 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 ### 视频嵌入
 .mp4 通过插入指向外部托管视频文件的链接来嵌入视频。也可以设置 `autoplay`，`muted`，`loop` 并 `controls` 通过设置相关的查询参数。确保您手动定义 `width` 和 `height` 参数以保留视频的垂直空间。
 
-	[Powers of Ten](https://jkm-library.s3.amazonaws.com/blocks/powers-of-10.mp4?height=480&width=640&autoplay=true&loop=true&muted=true)	
-![](./pic/mirror10.png)
+	[Powers of Ten](https://jkm-library.s3.amazonaws.com/blocks/powers-of-10.mp4?height=480&width=640&autoplay=true&loop=true&muted=true)
+![](./pic/mirror10.png)
 
 下面代码将测试在 mirror 显示
 
@@ -481,7 +482,7 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 可以通过创建 iFrame 块来嵌入任何页面。例如，这在嵌入交互式 WebGL 内容时很有用。只需设置display=iframe为查询参数。
 
 	[ThreeJS Demo](https://threejs.org/examples/webgl_water_flowmap.html?display=iframe)
-![](./pic/mirror11.png)
+![](./pic/mirror11.png)
 
 下面代码将测试在 mirror 显示
 
@@ -491,9 +492,9 @@ Mirror 显示基于 OpenGraph 标签通用标准的所有链接的渐进增强�
 
 块大小通过查询参数设置，可以从medium和 中进行选择large。例如，下面是一个large延伸到页面边缘的图像。
 
-![](./pic/mirror12.png)		
+![](./pic/mirror12.png)	
 
-	![](https://images.mirror-media.xyz/publication-images/da461938-5ccf-4397-aa6d-d082cbba2128.jpeg?height=1533&width=2300&size=large)	
+	![](https://images.mirror-media.xyz/publication-images/da461938-5ccf-4397-aa6d-d082cbba2128.jpeg?height=1533&width=2300&size=large)
 ![](https://images.mirror-media.xyz/publication-images/da461938-5ccf-4397-aa6d-d082cbba2128.jpeg?height=1533&width=2300&size=large)	
 ### 未来的增强
 Mirror 是一个新项目，我们的编辑有意识地专注于我们快速行动以创建新的经济工具来资助伟大的写作。随着时间的推移，我们计划引入一个新的编辑器，它支持就地编辑，无需在编辑和预览模式之间切换。在此之前，我们感谢您的耐心等待，并欢迎任何反馈。
