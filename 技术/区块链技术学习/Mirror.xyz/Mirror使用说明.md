@@ -298,7 +298,7 @@ Mirror 上的限量版本配置有四个参数
 下面代码将测试在 mirror 显示
 
 [Dirty S1 Pea Green](edition://0x3725CA6034bcDBc3c9aDa649d49Df68527661175?editionId=2)	
-## 代币竞赛(Token Race)
+## 代币竞赛块(Token Race)
 Mirror 支持创建代币竞赛，这是我们自己的 [$WRITE Race](https://mirror.xyz/race) 的衍生产品。Token Race 是一个简单的基于持续时间的治理工具，允许上传提案并允许社区根据他们在某个时间点持有的特定 ERC20 代币或 ERC721 代币 (NFT) 对提案进行投票。
 ### 代币竞赛如何运作?
 ![](./pic/mirror18.png)
@@ -391,7 +391,7 @@ Mirror 支持创建代币竞赛，这是我们自己的 [$WRITE Race](https://mi
 	![](./pic/mirror25.png)
 - 几秒钟后，模态将关闭，页面将更新以反映您所投的票。您还会注意到分配选票后您的投票权有所下降
 
-## 编辑
+## 编辑工具讲解
 Mirror 编辑器允许使用媒体块（例如图像和视频）以及加密经济块（例如众筹和拍卖）来撰写参赛作品。它使用纯文本和 Markdown 以及一些格式约定。
 ### 模式
 合成发生在 `Edit` 模式中。要预览您的参赛作品，请进入 `Preview` 模式,因为它将出现在您的出版物中。您可以使用工具栏中的相关按钮在它们之间切换。
