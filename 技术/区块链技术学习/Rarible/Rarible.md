@@ -246,7 +246,7 @@ Rarible 为所有人设计的 NFT 协议，由社区拥有和管理。在这方�
 	3. 在插件元素字段“环境”中选择网络
 
 	使用此插件构建的 NFT 市场：- [one2all](https://one2all.io/)
-- 设置外部收藏的版税
+- 区块链设置收藏的版税
 	1. 在新选项卡中打开版税[合约](https://etherscan.io/address/0xEa90CFad1b8e030B8Fd3E63D22074E0AEb8E0DCD#writeProxyContract)
 	- 活动合同选项卡。确保在顶部附近选择了 `Write as Proxy`。
 	- 单击连接到 Web3。
