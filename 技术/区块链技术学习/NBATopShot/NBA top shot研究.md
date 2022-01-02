@@ -1,4 +1,4 @@
-# NBA top show 研究
+# NBA top shot 研究
 ## 分析
 - 分为等级卡，等级越高越稀有，从上到下
 	
