@@ -7,15 +7,14 @@ API 和索引器的主要功能
 - 进程创建请求
 
 #### 架构
-Rarible Protocol 以太坊索引器由以下三个子索引器组成：
+Rarible Protocol 以太坊索引器由以下四个子索引器组成：
 
 - [NFT 索引器](https://github.com/rarible/ethereum-indexer/blob/master/nft):聚合 NFT 数据
 - [ERC-20 索引器](https://github.com/rarible/ethereum-indexer/blob/master/erc20):聚合有关 ERC-20 代币和余额的数据
 - [订单索引器](https://github.com/rarible/ethereum-indexer/blob/master/order):聚合来自不同平台的订单数据
+- [NFT-order](https://github.com/rarible/ethereum-indexer/blob/master/nft-order) 将 nft 和 order 索引器连接在一起
 
-每个子索引器都会监听以太坊区块链的`特定部分`。索引器可用于请求有关区块链状态的数据。
-
-索引器工作是在区块链状态更改时生成事件。它们是用 Spring Framework 开发的，并使用这些外部服务：
+每个子索引器都会监听以太坊区块链的`特定部分`。索引器可用于请求有关区块链状态的数据。索引器工作是在区块链状态更改时生成事件。它们是用 Spring Framework 开发的，并使用这些外部服务：
 
 - MongoDB:主要数据存储
 - Apache Kafka:事件处理
@@ -24,12 +23,12 @@ Rarible Protocol 以太坊索引器由以下三个子索引器组成：
 
 #### 控制器
 1. 创建或修改 NFT 并搜索有关它们的信息
-	- nft-事务控制器
-	- nft-懒惰薄荷控制器
-	- nft-活动控制器
-	- nft-所有权控制人
-	- nft-item-controller
-	- nft-collection-controller
+	- nft-交易控制器
+	- nft-惰性铸币控制器
+	- nft-状态控制器
+	- nft-所有权控制器
+	- nft-实例控制器
+	- nft-合约集合控制器
 - 创建或修改订单并搜索有关订单的信息：
 	- 订单签名控制器
 	- 顺序编码控制器
@@ -43,8 +42,8 @@ Rarible Protocol 以太坊索引器由以下三个子索引器组成：
 	- nft-order-collection-controller
 - 附加控制器
 	- 网关控制器
-	- erc20-平衡控制器
-	- erc20-token-controller
+	- erc20-余额控制器
+	- erc20-token-控制器
 	- 锁控制器
 
 ### API 使用示例
@@ -71,7 +70,7 @@ Rarible Protocol 以太坊索引器由以下三个子索引器组成：
 			  "@type":"ERC721","
 			  signatures":["0xf91e21cda6fc519f4b3ea77086393482a65f715b3e981da8d31c753bf5c5060018b4460cc9935f397808d14365e64214c18d0fc46441b55e0858a398ff7ffc8c1b"]
 			  }'
-	- 请求参数说明
+	- 参数说明
 		- `@typerequired` — 代币类型 ERC721 或 ERC1155
 		- `supply` — Mint 的代币总数。仅适用于 ERC-1155
 		- `contract` — 智能合约的地址
