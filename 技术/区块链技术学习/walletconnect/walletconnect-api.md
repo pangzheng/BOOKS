@@ -1,4 +1,4 @@
-# walletconnect-api
+# walletconnect-api v1.0
 ## 以太坊 Json-RPC API 方法
 ### `personal_sign`
 该方法是计算以太坊特定的签名
