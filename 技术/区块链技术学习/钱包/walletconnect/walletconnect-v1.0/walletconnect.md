@@ -13,12 +13,12 @@ WalletConnect 是一种开放协议，用于在钱包和 Dapps （Web3 应用程
 - 测试钱包
 	- test.walletconnect.org ([源码](https://github.com/WalletConnect/walletconnect-test-wallet))
 
-	![](./pic/walletconnect.jpeg)
+	![](../pic/walletconnect.jpeg)
 - 示例 Dapp
 
 	example.walletconnect.org ([源代码](https://github.com/WalletConnect/walletconnect-example-dapp))
 	
-	![](./pic/walletconnect1.png)
+	![](../pic/walletconnect1.png)
 
 ## 技术规格
 ### 介绍
@@ -54,7 +54,7 @@ WalletConnect 是一种用于将 Dapps 连接到钱包的开放协议。其背�
 		wc:8a5e5bdc-a0e4-4702-ba63-8f1a5655744f@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=41791102999c339c844880b23950704cc43aa840f3739e365323cda4dfa89e7a
 - 第二步-建立(钱包操作)
 
-	![](./pic/walletconnect2.png)	
+	![](../pic/walletconnect2.png)	
 	
 	- 对等点( Wallet )将使用 QR (二维码)码或deep links读取 URI。
 	- 读取 URI 后，对等方将立即接收并解密连接请求有效负载。
@@ -64,7 +64,7 @@ WalletConnect 是一种用于将 Dapps 连接到钱包的开放协议。其背�
 		- 如果获得批准，Dapp 将从钱包中接收提供的帐户和链 ID。
 	- 一旦建立连接，Dapp 将能够发送任何 JSON-RPC 调用请求以由钱包处理，以从其 peer 读取数据或对交易或消息进行签名请求。
 
-	![](./pic/walletconnect3.png)	
+	![](../pic/walletconnect3.png)	
 	
 	此外，钱包方面还有一个选项可以使用推送服务器订阅推送通知。只有在连接请求得到用户批准后，才会注册此推送通知订阅。此订阅可以定制不同程度的隐私。它可以显示通用消息，包括发出请求的对等方的名称，甚至显示本地化消息。（阅读推送通知部分了解更多详情）
 			
@@ -303,7 +303,7 @@ WalletConnect 协议完全支持像 [Argent](https://argent.gitbook.io/argent/wa
 
 尽管移动链接遇到了多个 UX 警告，但我们已经能够使用我们自己的 QR Code Modal 包简化这种模式。
 
-![](./pic/walletconnect4.png)
+![](../pic/walletconnect4.png)
 
 我们为建立连接而选择的跨平台用户体验一致的模式如下
 

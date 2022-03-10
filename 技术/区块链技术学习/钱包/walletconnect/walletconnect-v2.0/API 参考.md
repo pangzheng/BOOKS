@@ -233,12 +233,58 @@ search|返回名称与提供的搜索查询匹配的列表
 	- 返回
 		
 			 {
-			  "count": 142,
 			  "listings": [
 			     "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369": {
 			       "id": "1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369",
 			       "name": "Rainbow",
 			   ...
+			   // 单钱包完整字段
+			    "2a527d1ee63ab8837381714b85f75d57217699c2b758a8d79bf6658f02db0578": {
+			      "id": "2a527d1ee63ab8837381714b85f75d57217699c2b758a8d79bf6658f02db0578",
+			      "name": "WATT ME",
+			      "description": "More than just a wallet Multifunctional app for storing, buying and professional crypto currency trading as well as NFT-tokens storing.",
+			      "homepage": "https://watt.me",
+			      "chains": [
+			        "eip155:1",
+			        "eip155:137",
+			        "eip155:56"
+			      ],
+			      "versions": [
+			        "1"
+			      ],
+			      "image_id": "38c619c4-5365-4de5-09b2-cdde8caf3600",
+			      "image_url": {
+			        "sm": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/38c619c4-5365-4de5-09b2-cdde8caf3600/sm",
+			        "md": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/38c619c4-5365-4de5-09b2-cdde8caf3600/md",
+			        "lg": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/38c619c4-5365-4de5-09b2-cdde8caf3600/lg"
+			      },
+			      "app": {
+			        "browser": null,
+			        "ios": "https://apps.apple.com/ru/app/watt-me/id1594847330",
+			        "android": "https://play.google.com/store/apps/details?id=watt.wallet&hl=ru&gl=US",
+			        "mac": null,
+			        "windows": null,
+			        "linux": null
+			      },
+			      "mobile": {
+			        "native": "wattwallet://wallet-connect/",
+			        "universal": null
+			      },
+			      "desktop": {
+			        "native": null,
+			        "universal": null
+			      },
+			      "metadata": {
+			        "shortName": null,
+			        "colors": {
+			          "primary": "#F5EB51",
+			          "secondary": "#282828"
+			        }
+			      }
+			    }
+			  },
+			  // 单钱包完整字段
+			  "count": 146
 - `GET /api/v1/dapps`
 
 	返回一个 JSON 对象，其中包含公共注册表中列出的所有 dApp。
@@ -249,15 +295,63 @@ search|返回名称与提供的搜索查询匹配的列表
 	- 返回	
 		
 			 {
-			   "count": 155,
 			   "listings": [
 			       "d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110": {
 			         "id": "d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110",
 			         "name": "Etherscan",
-			           ...
+			           ...},
+			           // 单 DAPP 完整字段
+					 "19c7ae6c2f2dad48a51c08b268544379afa37018b758311fa2a1fcc3ccb1a8fd": {
+					      "id": "19c7ae6c2f2dad48a51c08b268544379afa37018b758311fa2a1fcc3ccb1a8fd",
+					      "name": "mStable",
+					      "description": "Swap, save and protect your stablecoins on mStable",
+					      "homepage": "https://mstable.org/",
+					      "chains": [
+					        "eip155:1",
+					        "eip155:137",
+					        "eip155:3"
+					      ],
+					      "versions": [
+					        "1"
+					      ],
+					      "image_id": "9d520ca8-16c6-4934-16c4-7c619f8fdd00",
+					      "image_url": {
+					        "sm": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/9d520ca8-16c6-4934-16c4-7c619f8fdd00/sm",
+					        "md": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/9d520ca8-16c6-4934-16c4-7c619f8fdd00/md",
+					        "lg": "https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/9d520ca8-16c6-4934-16c4-7c619f8fdd00/lg"
+					      },
+					      "app": {
+					        "browser": "https://mstable.org/",
+					        "ios": null,
+					        "android": null,
+					        "mac": null,
+					        "windows": null,
+					        "linux": null
+					      },
+					      "mobile": {
+					        "native": null,
+					        "universal": null
+					      },
+					      "desktop": {
+					        "native": null,
+					        "universal": null
+					      },
+					      "metadata": {
+					        "shortName": "mStable",
+					        "colors": {
+					          "primary": "#000000",
+					          "secondary": "#FAB41F"
+					        }
+					      }
+					    }
+					  },
+					   // 单 DAPP 完整字段
+				 "count": 160
+				}					  			        
+			          
 - `GET /api/v1/all`
 
-	返回一个 JSON 对象，其中包含公共注册表中列出的所有条目。
+	返回一个 JSON 对象，其中包含公共注册表中列出的钱包和 Dapp 所有条目。
 
 	- 请求
 		
@@ -286,11 +380,10 @@ search|返回名称与提供的搜索查询匹配的列表
 			# 解析大 (`lg`) 格式的 Etherscan 徽标。
 			curl 'https://registry.walletconnect.com/api/v1/logo/lg/d2ae9c3c2782806fd6db704bf40ef0238af9470d7964ae566114a033f4a9a110'
 			
-			# -> https://imagedelivery.net/...
-
+			https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/de60f6e0-effe-4b8c-1f3e-e12278839300/lg%
 ### 中继服务器 API
 #### WebSocket API (JSON-RPC)
-- Subscribe
+- Subscribe(订阅动作)
 	- 接口
 
 			// 请求 (Client -> Server)
@@ -309,9 +402,9 @@ search|返回名称与提供的搜索查询匹配的列表
 			  jsonrpc: "2.0";
 			  result: string;
 			}
-	- 例子
+	- 例
 
-			// 请求 (Client -> Server)
+			// 请求 (Server -> Client)
 			{
 			  "id": 1,
 			  "jsonrpc": "2.0",
@@ -327,7 +420,7 @@ search|返回名称与提供的搜索查询匹配的列表
 			  "jsonrpc": "2.0",
 			  "result": "<SUBSCRIPTION_ID>"
 			}		
-- Publish
+- Publish(发布)
 	- 接口
 	
 			// 请求 (Client -> Server)
@@ -348,7 +441,7 @@ search|返回名称与提供的搜索查询匹配的列表
 			  jsonrpc: "2.0";
 			  result: true;
 			}
-	- 例子
+	- 例
 
 			// 请求 (Client -> Server)
 			{
@@ -368,7 +461,7 @@ search|返回名称与提供的搜索查询匹配的列表
 			  "jsonrpc": "2.0",
 			  "result": true
 			}		
-- Subscription
+- Subscription(声明订阅)
 	- 接口
 
 			// 请求 (Server -> Client)
@@ -413,7 +506,7 @@ search|返回名称与提供的搜索查询匹配的列表
 			  "jsonrpc": "2.0",
 			  "result": true
 			}
-- Unsubscribe
+- Unsubscribe(取消声明订阅)
 	- 接口
 
 			// 请求 (Client -> Server)
@@ -456,29 +549,38 @@ search|返回名称与提供的搜索查询匹配的列表
 #### HTTP API
 - Test Hello World
 
-		  GET https://relay.walletconnect.com/hello
-		
-		  响应:
-		  Status: 200
-		  Content-Type: text/plain; charset=utf-8
-		  Body: Hello World, this is WalletConnect v2.0
+		GET https://relay.walletconnect.com/hello
+	- 请求
+
+			curl -v 'https://relay.walletconnect.com/hello'
+	- 响应
+
+			< HTTP/2 403
+			< content-type: text/plain; charset=utf-8
+			< x-content-type-options: nosniff
+			< date: Fri, 25 Feb 2022 03:10:34 GMT
+			< content-length: 54
+			<
+			parameter 'projec_id' not found. Check capitalization
 - 推送通知
 
 		  POST https://relay.walletconnect.com/subscribe
+		  
 		  Content-Type: application/json
+		  
 		  Body:
 		  {
 		    "topic": <client_id>,
 		    "webhook": <push_notification_webhook>
 		  }
-		
-		  响应:
-		  Status: 200
-		  Content-Type: application/json; charset=utf-8
-		  Body:
-		  {
-		    "success": true
-		  }
+	- 响应:
+	
+			  Status: 200
+			  Content-Type: application/json; charset=utf-8
+			  Body:
+			  {
+			    "success": true
+			  }
 
 ### 项目编号
 #### 如何实施
