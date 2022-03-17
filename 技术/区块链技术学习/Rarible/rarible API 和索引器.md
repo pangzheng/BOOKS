@@ -9,8 +9,8 @@ API 和索引器的主要功能
 #### 架构
 Rarible Protocol 以太坊索引器由以下四个子索引器组成：
 
-- [NFT 索引器](https://github.com/rarible/ethereum-indexer/blob/master/nft):聚合 NFT 数据
-- [ERC-20 索引器](https://github.com/rarible/ethereum-indexer/blob/master/erc20):聚合有关 ERC-20 代币和余额的数据
+- [NFT 索引器](https://github.com/rarible/ethereum-indexer/blob/master/nft) 聚合 NFT 数据
+- [ERC-20 索引器](https://github.com/rarible/ethereum-indexer/blob/master/erc20) 聚合有关 ERC-20 代币和余额的数据
 - [订单索引器](https://github.com/rarible/ethereum-indexer/blob/master/order):聚合来自不同平台的订单数据
 - [NFT-order](https://github.com/rarible/ethereum-indexer/blob/master/nft-order) 将 nft 和 order 索引器连接在一起
 
@@ -522,6 +522,7 @@ Rarible Protocol 以太坊索引器由以下四个子索引器组成：
 		        }
 		    }
 		}
+		
 	- 属性说明
 
 		名称|参数|描述
