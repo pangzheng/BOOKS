@@ -137,7 +137,8 @@ Geth v1.4 及更高版本支持使用 JSON-RPC 通知发布/订阅。这允许�
 		<< {"jsonrpc":"2.0","id":2,"result":"0x4a8a4c0517381924f9838102c5a4dcb7"}
 		
 		<< {"jsonrpc":"2.0","method":"eth_subscription","params": {"subscription":"0x4a8a4c0517381924f9838102c5a4dcb7","result":{"address":"0x8320fe7702b96808f7bbc0d4a888ed1468216cfd","blockHash":"0x61cdb2a09ab99abf791d474f20c2ea89bf8de2923a2d42bb49944c8c993cbf04","blockNumber":"0x29e87","data":"0x00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000003","logIndex":"0x0","topics":["0xd78a0cb8bb633d06981248b816e7bd33c2a35a6089241d099fa519e361cab902"],"transactionHash":"0xe044554a0a55067caafd07f8020ab9f2af60bdfe337e395ecd84b4877a3d1ab4","transactionIndex":"0x0"}}}
-
+		
+		 
 ### 新的待处理交易
 返回添加到挂起状态并使用节点中可用的密钥签名的所有交易的哈希值。
 
@@ -158,7 +159,8 @@ Geth v1.4 及更高版本支持使用 JSON-RPC 通知发布/订阅。这允许�
 		            "result":"0xd6fdc5cc41a9959e922f30cb772a9aef46f4daea279307bc5f7024edc4ccd7fa"
 		        }
 		   }
-		   
+
+
 ### 同步
 指示节点何时开始或停止同步。结果可以是指示同步已开始 (true)、已完成 (false) 的布尔值或具有各种进度指示器的对象。
 
@@ -1174,6 +1176,7 @@ Geth 为标准的 “eth”JSON-RPC 命名空间提供了多种扩展。
 		}
 	只是为了完整起见，解码后的响应是：2。
 
+
 ### eth_createAccessList
 该方法创建一个 [EIP2930](https://eips.ethereum.org/EIPS/eip-2930) 类型 `accessList` 基于给定的 `Transaction` 。在 `accessList` 包含所有存储插槽和地址读取和写入的事务，除了发送者帐户和预编译。此方法使用与相同的 `transaction` 调用对象和 `blockNumberOrTag` 对象 `eth_call` 。`AnaccessList` 可用于解除因 `gas` 成本增加而变得无法访问的合同。
 
@@ -1205,7 +1208,7 @@ Geth 为标准的 “eth”JSON-RPC 命名空间提供了多种扩展。
 			  ]
 			  "gasUsed": "0x125f8"
 			}
-			
+
 
 ## les 命名空间
 该 `les` API 允许你管理 LES 服务器设置，包括客户端参数和优先级客户的付款设置。它还提供了在服务器和客户端模式下查询检查点信息的功能。
@@ -1229,6 +1232,7 @@ Geth 为标准的 “eth”JSON-RPC 命名空间提供了多种扩展。
 - les_getCheckpointContractAddress
 	- Example
 
+
 ### les_serverInfo
 获取有关当前连接和总/单个允许连接容量的信息。
 
@@ -1249,6 +1253,7 @@ RPC|{"method": "les_serverInfo", "params": []}
 		  totalCapacity: 1600000,
 		  totalConnectedCapacity: 180000
 		}
+
 
 ### les_clientInfo
 如果 ID 列表为空，则获取指定客户端列表或所有已连接客户端的单个客户端信息（连接、余额、定价）。
@@ -1318,6 +1323,7 @@ RPC|{"method": "les_clientInfo", "params": [[id, ...]]}
 		    priority: true
 		  }
 		}
+		
 ### les_priorityClientInfo
 获取指定 ID 范围内余额为正的客户的个别客户信息，`start` 包括、`stop` 排除。如果 `stop` 为零，则返回结果直到最后一个现有余额条目。`maxCount` 限制返回结果的数量。如果达到计数限制但范围内还有更多 ID，则结果中会包含第一个缺失的 ID，并为其分配一个空值。
 
@@ -1448,6 +1454,7 @@ RPC|{"method": "les_setClientParams", "params": [[id, ...], {string: value, ...}
 			"pricing/negative/requestCostFactor": 1000000000,
 		})
 		null
+		
 ### les_setDefaultParams
 为后续连接的客户端设置默认定价因素。
 
@@ -1894,7 +1901,7 @@ RPC|{"method": "txpool_inspect"}
 		      6: "0x6368f3f8c2b42435d6c136757382e4a59436a681: 17990000000000000000 wei + 90000 gas × 20000000000 wei",
 		      7: "0x6368f3f8c2b42435d6c136757382e4a59436a681: 17900000000000000000 wei + 90000 gas × 20000000000 wei"
 		    }
-		  }
+		  }
 		}
 
 ### txpool_status

@@ -1,4 +1,45 @@
 # Polygon 简介
+## MATIC 2022年4月1号 币价 1.587
+- [gas price](https://polygonscan.com/gastracker)
+	- 30-50 Gwei
+
+1559 是一个tx 做多件事
+
+- erc 1559？
+	- [单笔交易](https://polygonscan.com/tx/0xe97d926a4f3ae4e0495a634a70c401fda8c849e0c494a5040b84498483dea4d5)
+		- gas 消耗
+			- 134,103
+		- 交易价格
+		
+				0.004148349036559395 MATIC ($0.01)
+## 交易查询
+- erc 721
+	- [一次铸造多个铸币](https://polygonscan.com/tx/0xf1f90301f2340518ae7f170b24d3629bb5342d374cac7dcbe4fe03a402286a83)
+		- gas 消耗 
+			- 523,168	
+		- 价格
+
+				0.015834456365885184 MATIC($0.03) 
+	- [单笔交易](https://polygonscan.com/tx/0x7149acd26883d13f569520d640c97061f4244ae7fe2cd96574fcc567d6870c56)
+		- gas 消耗
+			- 62,457 
+		- 价格
+		
+				0.001877578403268705 MATIC ($0.00)
+- erc 1155
+	- [铸造](https://polygonscan.com/tx/0x477125b8a0ced46ce5c689b69358e0cc42a17761c530b1fa76f4fbff973cd2ad)
+		- gas 消耗
+			-  84,949,023
+		- 价格
+				
+				0.160051396500394983 MATIC($0.25)
+	- [交易](https://polygonscan.com/tx/0xb24c79d67e3f1a7ea5c03e5fbb180e0cd60f2f036e32bf506a600efddbf21dcb)
+		- gas 消耗
+			- 89,592
+		- 价格
+
+				0.005966827199820816 MATIC ($0.01)  			
+				
 ## 什么是 Polygon
 Polygon 是公共区块链的扩展解决方案。基于 Plasma 框架 (Plasma MoreVP) 的改编实现 - 基于帐户的实现（[在此处](https://ethresear.ch/t/account-based-plasma-morevp/5480)阅读更多内容），Polygon 支持所有现有的以太坊工具以及更快和更便宜的交易。
 
@@ -96,6 +137,7 @@ Bor 是 Polygon 区块生产者层 - 负责将交易聚合成区块的实体。
 
 
 📜资源#
+
 - 📎 [Bor 架构](https://forum.matic.network/t/matic-system-overview-bor/126)：https://forum.matic.network/t/matic-system-overview-bor/126 
 - 📎 [Heimdall 架构](https://forum.matic.network/t/matic-system-overview-heimdall/125)：https://forum.matic.network/t/matic-system-overview-heimdall/125 
 - 📎 [检查点机制](https://forum.matic.network/t/checkpoint-mechanism-on-heimdall/127)：https ://forum.matic.network/t/checkpoint-mechanism-on-heimdall/127
@@ -104,8 +146,8 @@ Bor 是 Polygon 区块生产者层 - 负责将交易聚合成区块的实体。
 Matic 为应用开发人员提供了三种类型的安全模型来构建他们的 DApp：
 
 - 权益证明安全性
-- 等离子安全
-- 混合（等离子 + PoS）
+- Plasma安全
+- 混合（Plasma + PoS）
 
 以下是 Polygon 提供的每种安全模型的描述，以及每个带有示例 DApp 的开发人员工作流程。
 
