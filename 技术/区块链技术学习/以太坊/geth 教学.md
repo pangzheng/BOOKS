@@ -8,7 +8,6 @@
 使用` clef newaccount ` 命令创建两个帐户，为每个帐户设置密码，并记下每个帐户的公共地址。
 
 	Clef 输出关于 的调试消息Failed to reload keystore contents，在后面的步骤中修复
-
 ### 开始 geth
 #### 网络
 可以使用网络名称作为参数将 Geth 节点连接到多个不同的网络。其中包括主要的以太坊网络、您创建的私有网络以及三个使用不同共识算法的测试网络：
@@ -470,7 +469,7 @@ Geth 有一种开发模式，可以建立一个单节点以太坊测试网络，
 	  --unlock value                      Comma separated list of accounts to unlock // 逗号分隔的要解锁的帐户列表
 	  --password value                    Password file to use for non-interactive password input // 用于非交互式密码输入的密码文件
 	  --signer value                      External signer (url or path to ipc file) // 外部签名者（ipc 文件的 url 或路径）
-	  --allow-insecure-unlock             Allow insecure account unlocking when account-related RPCs are exposed by http // 当账户相关的 RPC 被 http 暴露时，允许不安全的账户解锁
+	  --allow-insecure-unlock             Allow insecure account unlocking when account-related RPCs are exposed by http // 当账户相关的 RPC 被 http 暴露时，允许不安全的账户解锁,这个是极度危险，只能测试链压测环境使用。如果该节点对外，将会导致，这里注意配置文件和启动命令行配置
 	
 	API AND CONSOLE OPTIONS: // API 和控制台选项：
 	  --ipcdisable                        Disable the IPC-RPC server // 禁用 IPC-RPC 服务器
