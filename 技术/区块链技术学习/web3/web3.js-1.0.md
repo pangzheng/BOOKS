@@ -722,7 +722,7 @@ web3.eth.getTransaction()方法返回具有指定哈希值的交易对象。
 	- gasPrice – String: 发送方承诺的gas价格，以wei为单位
 	- gas – Number: 发送方提供的gas用量
 	- input – String: 随交易发送的数据
-- 示例代码：
+- 示例代码
 
 		web3.eth.getTransaction('0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b§234')
 		.then(console.log);
