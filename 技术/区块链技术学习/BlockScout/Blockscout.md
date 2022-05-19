@@ -881,6 +881,126 @@ Blockscout 可能需要一些时间来完全索引一个链，更大的链则需
 	有关 gettext 更多[信息](https://hexdocs.pm/gettext/Mix.Tasks.Gettext.Extract.html)
 	
 	内容移动 https://forum.poa.network/t/faq-fixing-gettext-error-in-blockscout/2444
+	
+- 如何修复索引超时
+
+	BlockScout 使用两个独立索引器来索引网络历史并和上传新块。由于这个过程，节点可能会变得过载，并在制定的超时期限内无法响应 BlockScout 的 RPC 请求。
+	
+	可以调整索引器应用程序已满足节点大小和响应能力。
+	
+	提取器|描述|默认值
+	---|---|---
+	[Catchup Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/catchup/fetcher.ex#L24)|这个提取器索引块、交易、收据，从链的顶端开始向后工作到创世块|批量大小10,并发10
+	[Internal Transaction Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/internal_transaction/fetcher.ex#L20)|这个提取器索引内部事务，对于实时提取器，此过程是同步完成的，而对于追赶提取器，此过程是异步完成的。|批量大小10,并发4
+	[Coin Balance Fether](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/coin_balance/fetcher.ex#L22)|该提取器在地址与交互的块高度索引每个coin 余额|批量大小500,并发4
+	[Uncle Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/uncle/fetcher.ex#L22)|这个提取器索引非共识块、交易和数据|批量大小10,并发10
+	[Token Balance Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/token_balance/fetcher.ex#L29)|这个提取器索引代币余额。由于智能合约格式错误或其他不允许获取余额的功能，可能会遇到一些无法获取的代币余额|批量大小100,并发10
+	[TokenFetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/token/fetcher.ex#L18)|此索引获取代币合约的元数据|批量大小1:并发0
+	
+	- 了解错误和超时
+	
+			application=indexer fetcher=coin_balance count=500 error_count=500 [error] failed to fetch: :timeout
+		在项目提供的错误中，可以看出 `索引器应用程序`由于 `超时` 错误而未能获取 `500 coin` 。通常，当索引器开始接收超时时，也会发生更多来自其他提取器的超时。
+	- 解决超时
+
+		当 fetcher 开始收到超时时，最好采取的措施是降低一些 fetcher 的批量大小和并发，这将减少对节点的压力。
+		
+		对节点造成最大压力的2个索引器是块索引器和内部事务提取器。建议这些 fetcher 值减半并重新启动应用程序。可能还需要重启节点。
+	- 其他行为
+
+		BlockScout 配置了 `n` 在检测到超时时自动停止发送请求几秒钟的功能。可以通过设置不同的值来调整这些设置 `wait_per_timeout`,[查看](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/ethereum_jsonrpc/config/config.exs#L3-L9)
+- 如何更新内存消耗以修复索引器内存错误
+
+	在索引阶段，由于尝试一次获取所有块内容的负载，许多获取过程是异步运行的。这些进程存储在内存中，以在每个异步提取器中定义的设定间隔进行提取。
+	
+	`Indexer.Memory.Monitor` 检查 BEAM 内存使用是否超过设定的限制(默认 1GIB),如果超过，他会要求注册为可收缩的内存最多的进程进行收缩。
+	
+	每分钟检查一次内存使用情况。如果到达软限制，可以收缩工作队列将减少一半的负载。卸载的负载将从数据库中恢复，与重新启动服务器时相同，因此重建工作队列更慢，但使用内存更少。
+	
+	如果所有队列处于最小大小，则无法回收更多内存并记录错误。
+	
+	- 未来工作
+
+		如上述，未来的工作被输入到内存中以供销后处理。这些相同的进程被导入数据库以在服务器重新启动时进行检查，并重新输入到内存中进行处理。
+	- 更新内存
+
+		默认内存限制为 1GIB，在下面进行编辑
+		
+		https://github.com/poanetwork/blockscout/blob/b444ac26bd7738c1ccee0eb8c382ef2b34b7ef24/apps/indexer/config/config.exs#L12
+		
+		此配置使用 Bitwise,在例子中，它计算算数左移结果。推荐的用于索引以太坊主网最小内存为 30GIB
+	- 左位移换算表
+
+		要执行左位移位转换，请打开交互 shell 
+		
+		- 1. `iex` 
+		- 2. `import Bitwise` 
+		- 3. `1 <<< 3 //1073741824`
+
+		左位移|字节|GIB
+		---|---|---
+		1 <<< 30|1073741824|1
+		5 <<< 30|5368709120|5.3
+		10 <<< 30|10737418240|10.7
+		15 <<< 30|16106127360|16.1
+		20 <<< 30|21474836480|21.4
+		25 <<< 30|26843545600|26.8
+		30 <<< 30|32212254720|32.2
+		35 <<< 30|37580963840|37.6
+		40 <<< 30|42949672960|43
+		45 <<< 30|48318382080|48.3	
+		50 <<< 30|53687091200|53.7
+- 如何更新页眉页脚中的菜单链接
+
+	在 block_scout_web 目录中的 config.exs 文件中更新菜单。更新会延续到页眉页脚链接
+
+	https://github.com/poanetwork/blockscout/blob/d164c35e02a1c75b94d93129422485245d22120d/apps/block_scout_web/config/config.exs#L24-L71
+- 如果禁用汇率？
+
+	将 Exploer.ExchangeRates 变量从更改 enabled:true 改为 enbled:false
+	
+	- 配置 explorer Explorer.ExchangeRates
+		- enabled:false
+		- store:ets
+
+	https://github.com/poanetwork/blockscout/blob/7aeecb2a04838cda0289a7fe432db74481cf575a/apps/explorer/config/config.exs#L32
+	
+## 高级功能
+### 自定义/品牌主题
+自定义主题创建一致的品牌，帮助客户游览器交易和其他链上信息，并让客户与应用程序保持互动。
+
+- [黑色森林](https://blockscout.com/xdai/mainnet/0x678ACb78948Be7F354B28DaAb79B1ABD81574c1B/transactions)
+- [圈子 UBI](https://blockscout.com/xdai/mainnet/tx/0x497970f09839f31a0e98ef24cad93df06afe6d264eea68380675e357358da600/token-transfers)
+
+### BlockScout.com 上的托管实例
+在 BlockScout.com 上托管您的链
+
+在 [BlockScout.com](http://blockscout.com/) 	上托管的链对每天访问该网站的用户来说是高度可见的。此外，在上面托管的链可以获得专门的技术支持，包括
+
+- 品牌 ui 设置
+- 稳定版本的自动更新
+- 特定链参数定制，例如市场、验证者名称等
+- Blockscout 核心团队的专门支持
+
+### moonbeam(月光) 支持
+在 Polkadot 上支持与以太坊兼容的合约平行链
+以下高级定制
+
+- moonbeam 平行链 Blockscout 实例的自定义样式
+- 支持 moonbeam 的 Ethereum RPC 
+
+### 导出 CSV
+导出 CSV 是一项高级功能，为用户提供了一种轻松下载和分析区块链数据的方法，可用于地址页面上的选项卡，包括交易、内部交易、token和日志
+
+注意, 3.5.1 之前的版本简化了 csv 导出，仅限交易和传输，无法定义时段。从 3.5.2后，增强了高级功能
+
+在交易的 tracsactions 选项卡相关实例列表下可以找到 csv 按钮
+
+注意，在 token 选项导出 token 转移列表
+
+单击按钮后，您将被转到给定地址和导出交易类型（交易、内部交易、token转移、日志）的 csv 导出页面
+		
+				
 		
 
 
