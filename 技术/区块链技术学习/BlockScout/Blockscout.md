@@ -40,143 +40,143 @@ Blockscout 是一个功能齐全的开源区块链浏览器
 #### 表格
 |变量|必选参数|描述|默认|版本|需要重新编译
 ---|---|---|---|---|---
-|ETHEREUM_JSONRPC_VARIANT|	v|告诉游览器正在使用哪一种 RPC 客户端(即 Geth、parity、besu..)[更多](https://docs.blockscout.com/for-developers/information-and-settings/client-settings-parity-geth-ganache)|ganache|all|
-|ETHEREUM_JSONRPC_HTTP_URL|v|获取区块链信息 RPC URL|localhost:8545|all|
-|DATABASE_URL|v|数据库 URL|空|all
-|ETHEREUM_JSONRPC_TRACE_URL||`trace_block` 和 `trace_replayTransaction` 使用的 Geth、parity、besu.等专用 RPC |localhost:8545|all|
-|Network||主EVM网络环境变量，如 Ethereum或Poa|POA|all
-|SUBNETWORK||子网的环境变量，如core或sokol network ，这将在链列表中下拉选择|POA Sokol|all
-|LOGO||标题logo图像位置变量,可在[这里](https://github.com/poanetwork/blockscout/tree/master/apps/block_scout_web/assets/static/images)找到不同的logo|`/images/blockscout_logo.svg`|all
-|LOGO_FOOTER||页脚logo图像位置，这里找到[更多](https://github.com/poanetwork/blockscout/tree/master/apps/block_scout_web/assets/static/images)|`/images/blockscout_logo.svg`|
-|ETHEREUM_JSONRPC_WS_URL||websocket RPC 地址，用于 `newHeads` 订阅提醒所引起获取新块订阅|ws://localhost:8546|all
-|ETHEREUM_JSONRPC_TRANSPORT||制定游览器连接到区块链节点的传输，可用的 `http` 和 `ipc`。如果选择 `ipc` ，需要设置 `IPC_PATH` |http|v3.1.0+
-|IPC_PATH||如果制定 ipc 传输，设置区块链节点 IPC 文件路径|空|v2.1.1+|
-|NETWORK_PATH||用于设置与根目录中显示的内容不同于网络路径。例，添加 `/eth/mainnet/` 到根目录|/|all
-|API_PATH||API 文档页面的 API URL中的 Path|/|v3.1.0+|
-|SOCKET_ROOT||自定义 websocket 路径|空|v3.1.0+|
-|BLOCKSCOUT_HOST||API 端点例主机|localhost|v2.1.0+|
-|BLOCKSCOUT_PROTOCOL||blockscount 的 URL 方案|在 prod 环境中使用 `https`,dev 环境中使用 `http`|v2.1.0+|
-|SECRET_KEY_BASE||使用 ` mix phx.gen.secre` 生成新的 `Secret Key Base`  字符串以保护资产||all
-|CHECK_ORIGIN||当原始标头存在时，用于检查请求的来源。如果默认为 `false`. 如果为 `true` 将检查主机值| false|all
-|PORT||应用端口|4000|all
-|COIN||此处的coin通过 coinGecko API 检查获取与美金的汇率价格|POA|all
-|COIN_NAME||将链添加到 Metamask 的 coin 名称|空|v4.1.2+|
-|COINGECKO_COIN_ID||显示设置 CoinGecko 币ID|空|v3.1.2+|
-|METADATA_CONTRACT||POA Network 专门使用此环境变量来获取 Validator 信息已显示在 UI 中|空|all
-|VALIDATORS_CONTRACT||POA Network 专门使用此环境变量设置获取当前验证者列表|空|all|
-|KEYS_MANAGER_CONTRACT||POA Network 专门使用这个环境变量设置 KeyManager 代理合约，以便通过挖掘密钥获取支付密钥，这需要确定对验证者的分布式奖励|空|v3.1.2+|
-|REWARDS_CONTRACT||奖励合约地址。此环境变来功能仅在 `EMISSION_FORMAT` 设置为时使用 `POA` | 0xeca443e8e1ab29971a45a9c57a6a9875701698a5|v2.0.4+
-|TOKEN_BRIDGE_CONTRACT||代币桥代理合约,用于 `TokenBridge` 供应模块|0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6|v1.3.2+
-|EMISSION_FORMAT||如果有与 `POA` 网络相同的块发布，则设置该变量为 `CHAIN_SPEC_PATH`|`DEFAULT`|v2.0.4+
-|CHAIN_SPEC_PATH||用于导入区块链释放的奖励范围和创世账户余额的链规范路径，支持 Geth 和 OpenEthereum 风格规范|空|v2.0.4+
-|SUPPLY_MODULE|| xDaiChain/RSK 使用此环境变量来告诉应用程序如何计算链的总供应量，可用值为`TokenBridge`,`RSK`|空|all
-|SOURCE_MODULE||该环境变量用于计算汇率，专门提供 xDaiChain 使用，可为 TokenBridge|空|all
-|POOL_SIZE||定义允许数据库连接数的变量，不包括只读请求|50|all
-|POOL_SIZE_API||用于定义只读 API 请求允许的数据库连接数变量|50|all
-|ECTO_USE_SSL||在 Ecto 查询上使用 SSL 的生产环境变量|true|all
-|DATADOG_HOST||[Datadog](https://docs.datadoghq.com/integrations/) 集成的主机配置|空|all
-|DATADOG_PORT||[Datadog](https://docs.datadoghq.com/integrations/) 集成的端口配置|空|all
-|SPANDEX_BATCH_SIZE||[Spandex](https://github.com/spandex-project/spandex) 和 Datadog 配置设置|空|all
-|SPANDEX_SYNC_THRESHOLD||[Spandex](https://github.com/spandex-project/spandex) 和 Datadog 配置设置|空|all
-|HEART_BEAT_TIMEOUT||生产环境变量，用于发生崩溃时重启程序|30|all
-|HEART_COMMAND||生产环境变量，用于发生崩溃时重启程序|空|all
-|BLOCKSCOUT_VERSION|| 添加的页脚以表示当前的 BlockScout 版本|空|v1.3.4+
-|RELEASE_LINK||页脚指向 Blockscout 发行版本说明的连接|https: //github.com/poanetwork/blockscout/releases/tag/${BLOCKSCOUT_VERSION}|v1.3.5+|
-|ELIXIR_VERSION||在 Blockscout 部署之前要在节点上安装 Elixir 版本，用于 ansible 部署脚本中的 bash 脚本|空|all
-|BLOCK_TRANSFORMER||块 transformer:base or clique|base|v1.3.4+|
-|GRAPHIQL_TRANSACTION||对 GraphiQL 的查询中默认事务的哈希|空|v1.2.0+
-|FIRST_BLOCK||块号 catchup fetcher 导入块的开始位置|0|v1.3.8+
-|LAST_BLOCK||块号 catchup fetcher 停止导入块的位置|空|v2.0.3+
-|TRACE_FIRST_BLOCK||块号，内部交易的索引开始的地方|0|v4.1.0+
-|TRACE_LAST_BLOCK||块号，内部交易食物索引停止的地方|空|v4.1.0+
-|LINK_TO_OTHER_EXPLORERS||`true or false` ，如果为 true ，则在页脚中添加其他资源管理器的链接|空|v1.3.0+
-|OTHER_EXPLORERS||替代资源管理器列表，此环境变量时在 PR [#3414](https://github.com/poanetwork/blockscout/pull/3414) 中引入|空|v3.4.0+
-|SUPPORTED_CHAINS||在页脚和链下拉列表中显示的一系列支持的链。这个 var 是在这个 PR [#1900](https://github.com/poanetwork/blockscout/pull/1900) 中引入的，看起来像一个 json 的对象数组|空|v2.0.0+
-|CACHE_BLOCK_COUNT_PERIOD||具有共识计数缓存的块的生存时间(以秒为单位)。这个变量是在 [#1876](https://github.com/poanetwork/blockscout/pull/1876) 中引入的|2小时|v4.1.3+
-|CACHE_TXS_COUNT_PERIOD||重新启动任务的间隔(以秒为单位)，它计算总txs计数|2小时|v4.1.3+
-|CACHE_ADDRESS_COUNT_PERIOD||缓存的生存时间(以秒为单位)。这个变量在 [#2822](https://github.com/poanetwork/blockscout/pull/2822) 中引入|2小时|v4.1.3+
-|CACHE_ADDRESS_SUM_PERIOD||地址总和(烧录地址除外)缓存的生存时间(以秒为单位)。这个变量是在 [#2862](https://github.com/poanetwork/blockscout/pull/2862)中引入|1小时|v4.1.3+
-|CACHE_TOTAL_GAS_USAGE_PERIOD||以秒为单位重新启动任务的间隔，它计算总气体使用量|2个小时|v4.1.3+
-|CACHE_ADDRESS_TRANSACTIONS_GAS_USAGE_COUNTER_PERIOD||以秒为单位重新启动任务的间隔时间，该任务计算地址处的gas使用量|30分钟|v4.1.3+
-|CACHE_TOKEN_HOLDERS_COUNTER_PERIOD||以秒为单位重新启动任务的时间间隔，该任务计算代币的持有者数量|1个小时|v4.1.3+
-|CACHE_TOKEN_TRANSFERS_COUNTER_PERIOD||以秒为单位重新启动任务的间隔，它计算token的传输计数|1小时|v4.1.3+
-|CACHE_ADDRESS_WITH_BALANCES_UPDATE_INTERVAL||以秒为单位重新启动任务的间隔，该任务计算带有余额的地址|30分钟|v4.1.3+
-|TOKEN_METADATA_UPDATE_INTERVAL||以秒为单位重启更新 token 原数据的任务时间间隔| `60*60*24*2`|v2.0.1+
-|CACHE_AVERAGE_BLOCK_PERIOD||平均块周期缓存的更新，以秒为单位|30分钟|v4.1.3+
-|CACHE_MARKET_HISTORY_PERIOD||更新市场历史缓存，以秒为单位|6小时|v4.1.3+
-|TOKEN_BALANCE_ON_DEMAND_FETCHER_THRESHOLD_MINUTES||使 token 余额缓存失效的阈值。在 [#3870](https://github.com/blockscout/blockscout/pull/3870)|60分钟|v3.7.1+
-|COIN_BALANCE_ON_DEMAND_FETCHER_THRESHOLD_MINUTES||使 coin 余额缓存无效的阈值。在 [#5240](https://github.com/blockscout/blockscout/pull/5240)|60分钟|v4.1.2+
-|ALLOWED_EVM_VERSIONS||用于合约验证允许 EVM 版本的逗号分隔列表，这个变量在 [#1964](https://github.com/poanetwork/blockscout/pull/1964) 引入|"homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg,istanbul"|v2.0.0+
-|UNCLES_IN_AVERAGE_BLOCK_TIME||在平均区块时间计算中，包括或排除非共识区块，排除如果 `false`| `false` |v2.0.1+
-|DISABLE_WEBAPP||如果为 true，则 webapp 的端点是隐藏的(编译时)。此外，启用它会使同志通过 `db_notify`| `false`|v2.0.3+|v|
-|DISABLE_READ_API||如果 true，则 api 的只读端点被隐藏(编译时)|`false`|v2.0.3+|v|
-|DISABLE_WRITE_API||如果 true,则写入 api 的端点事隐藏的(编译时)|`false`|v2.0.3+|v|
-|DISABLE_INDEXER||如果 true，索引器应用程序不运行|`false`|v2.0.3+|v|
-|INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER||如果 true ，挂起事务提取器被禁用|`false`|v4.1.3+
-|INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER||如果 true ，挂起事务提取器被禁用|`false`|v4.1.2+
-|INDEXER_DISABLE_BLOCK_REWARD_FETCHER||如果是 true，块奖励获取器被禁用|`false`|v4.1.3+
-|INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER||如果 true ，coin 余额提取器将被禁用|`false`|v4.1.3+
-|INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER||如果 true ，禁用遍历token原数据提取器|`false`|v4.1.3+
-|INDEXER_MEMORY_LIMIT||索引器的内存软限制|1Gb||v4.1.3+
-|INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE||空块清理器的批量大小(重新获取器)|100|v4.1.3+
-|INDEXER_DISABLE_EMPTY_BLOCK_SANITIZER||如果是 true 空块清理被禁用|`false`|v4.1.3+
-|WEBAPP_URL||链接到 web 应用程序的实例， 如: protocol://host/path|空|v2.0.3+
-|API_URL||链接到 api 应用程序的实例， 如: protocol://host/path|空|v2.0.3+
-|WOBSERVER_ENABLED||如果 true 启用 wobserver 接口|空|v3.3.2+|v|
-|SHOW_ADDRESS_MARKETCAP_PERCENTAGE||在顶部账户页面上配置市值百分比列|`true`|v2.1.1+
-|CHECKSUM_ADDRESS_HASHES||如果设置为 true,则重定向到地址哈嘻的校验和版本|`true`|v3.1.0+
-|CHECKSUM_FUNCTION||定义校验和地址函数2个可用值，`rsk,eth`|eth|v2.0.1+
-|DISABLE_EXCHANGE_RATES||禁用或者启用从 coingecko api 获取的 coin 价格| `false`|v3.1.2+|
-|DISABLE_KNOWN_TOKENS||禁用或者启用已知合约的代币符号|`false`|v3.4.0+
-|ENABLE_TXS_STATS||禁用或者启用每天的 txs 统计信息收集|`false`|v3.1.2+
-|SHOW_PRICE_CHART||在主页禁用或者启用 coin图标的价格和市值|`false`|v3.1.2+
-|SHOW_TXS_CHART||在主页禁用或者启用每日交易次数表|`false`|v3.1.2+
-|HISTORY_FETCH_INTERVAL||以分钟为单位的间隔，请求每天的 txs 计数以在主页上显示每天 txs 计数图表的频率|60|v3.1.2+
-|TXS_HISTORIAN_INIT_LAG||txs计数历史获取重的初始延迟(以分钟为单位)，以便在主页上显示每天的 txs 技术历史图表|0|v3.1.2+
-|TXS_STATS_DAYS_TO_COMPILE_AT_INIT||获取每天 txs 计数历史的天数，以便将其显示在主页上的每天 txs 计数历史图表中|365|v3.1.2+
-|COIN_BALANCE_HISTORY_DAYS||在 coin 余额历史图表中考虑天数|10|v3.1.3+
-|APPS_MENU||如果为 treu，则会出现 apps 导航菜单|`false`|v3.3.1+
-|EXTERNAL_APPS||在应用程序菜单项重显示的一组外部应用程序。此 var 在 pr [#3184](https://github.com/poanetwork/blockscout/pull/3184) 引入，看起来是像一个json对象数组|空|v3.3.1+|
-|ETH_OMNI_BRIDGE_MEDIATOR||home omniBridge 的地址，用于桥接来自eth 的多个 token。提供此地址可启动桥接代币功能，桥接状态和链接到外部链中的原始代币|空|v3.6.0+
-|BSC_OMNI_BRIDGE_MEDIATOR||home omniBridge 的地址，用于桥接来自eth 的多个 token。提供此地址可启动桥接代币功能，桥接状态和链接到外部链中的原始代币|空|v3.6.0+
-|AMB_BRIDGE_MEDIATORS||逗号分隔的 AMB 扩展的中介地址哈希表，用于通过这些中介地址获取桥接 token|空|v3.3.3+
-|GAS_PRICE||Gwei 的 GAS 价格，如果变量存在，gas price 将显示在主页上|空|v3.3.2+
-|FOREIGN_JSON_RPC||JOSN RPC 到外链，以便通过 Omni-bridge token 取桥接的元数据。在 PR [#3282](https://github.com/poanetwork/blockscout/pull/3282) 中引入|空|v3.3.3+
-|BRIDGE_MARKET_CAP_UPDATE_INTERVAL||TokenBridge 供应模块的市值更新间隔与 TokenBrdge 和 OmniBridge 一样，以秒为单位。PR [#3293](https://github.com/poanetwork/blockscout/pull/3293) | 30分钟|v3.3.3+
-|RESTRICTED_LIST||以逗号分隔的地址列表，以启用对它们的受限访问|空|v3.3.3+
-|RESTRICTED_LIST_KEY||访问 `RESTRICTED_LIST ` 变量列出地址的key,可以通过查询参数传递到页面的 URL:?key=...|空|v3.3.3+
-|ADDRESS_TRANSACTIONS_CACHE_PERIOD||地址的交易计数器的生存时间(以秒为单位)。这个变来功能在 PR [3330](https://github.com/poanetwork/blockscout/pull/3330) 引入|1小时|v3.4.0+
-|DISABLE_BRIDGE_MARKET_CAP_UPDATER||禁用来自 TokenBridge 和 AMB 扩展的 TokenBridge 市值重复合并|空|v3.3.3+
-|POS_STAKING_CONTRACT||POSDAO 质押合约的地址。提供后，启用 StakingDapp .ValidatorSet 和 BlockReward 合约地址是使用相应的getter 获取的|空|v3.4.0+
-|ENABLE_POS_STAKING_IN_MENU||在菜单中启用 Staking dapp| `false`|v3.6.0+
-|TOKEN_EXCHANGE_RATE_CACHE_PERIOD|| 管理 token 汇率的缓存失效|1小时|v3.5.0+
-|ADDRESS_TOKENS_USD_SUM_CACHE_PERIOD||管理每个代币持有者地址的代币美元价值总和的缓存失效期|空|v3.5.0+
-|SHOW_MAINTENANCE_ALERT||在资源管理器顶部禁用/启用公告|错误|v3.6.0+
-|MAINTENANCE_ALERT_MESSAGE||资源管理器顶部公告的消息文本|空|v3.6.0+
-|SHOW_STAKING_WARNING||在质押 dapp 中禁用/启用公告| `false`|v3.6.0+
-|STAKING_WARNING_MESSAGE||staking dapp 餧公告的消息文本|空|v3.6.0+
-|CUSTOM_CONTRACT_ADDRESSES_TEST_TOKEN||测试代币的地址列表，将应用测试标签，这些代币将被排除在全桥市值计算之外|空|v3.6.0+
-|ENABLE_SOURCIFY_INTEGRATION||通过 sourcify 启用和禁用合同验证| `false`|v3.7.0+
-|SOURCIFY_SERVER_URL||sourcify 后段的 url|https://sourcify.dev/server|v3.7.0+
-|SOURCIFY_REPO_URL||具有完全验证合同的 Sourcify 存储库 url |https://repo.sourcify.dev/contracts/|v3.7.0+
-|CHAIN_ID||网络的链ID 。例如，在 xdai 链的情况下为100|空|v3.7.0+
-|MAX_SIZE_UNLESS_HIDE_ARRAY||在智能合约中隐藏长数组 [#4218](https://github.com/blockscout/blockscout/pull/4218)|50|v3.7.1+
-|HIDE_BLOCK_MINER||如果值为 `true` 则在块页面和切片隐藏矿工/验证者/排序者 [#4611](https://github.com/blockscout/blockscout/pull/4611) |空|v4.0.0+
-|DISPLAY_TOKEN_ICONS||如果为 true，则显示来自 trustwallet 资产存储库 token 图标，[#4596](https://github.com/blockscout/blockscout/pull/4596)|空|v4.0.0+
-|SHOW_TENDERLY_LINK||如果 true，则交易页面会显示 `tenderly `开盘按钮，[#4656](https://github.com/blockscout/blockscout/pull/4656)|空|v4.0.0+
-|TENDERLY_CHAIN_PATH|| tenderly 中交易的链式路径，例如对于 xdai 中的交易，tenderly 链看起来是 https://dashboard.tenderly.co/tx/xdai/0x... 然后 `TENDERLY_CHAIN_PATH =/xdai. ` [#4656](https://github.com/blockscout/blockscout/pull/4656)|空|v4.0.0+
-|MAX_STRING_LENGTH_WITHOUT_TRIMMING||隐藏长合约方法数据，更多详情[#4667](https://github.com/blockscout/blockscout/pull/4667)|2040|v4.0.0+
-|RE_CAPTCHA_SECRET_KEY||google reCAPTCHA 密钥。由高级 csv 导出使用 [#4747](https://github.com/blockscout/blockscout/pull/4747)|空|v4.0.0+
-|RE_CAPTCHA_CLIENT_KEY||google reCAPTCHA 客户端密钥，由高级 csv 导出使用。[#4747](https://github.com/blockscout/blockscout/pull/4747)|空|v4.0.0+
-|ADDRESS_TOKEN_TRANSFERS_COUNTER_CACHE_PERIOD||以秒为单位重新启动任务的间隔，计算该地址的token 传输次数[#4699](https://github.com/blockscout/docs/blob/master/for-developers/information-and-settings/broken-reference/README.md)|空|v4.0.0+
-|JSON_RPC|| walletconnect 集成链 JsonRPC [#4931](https://github.com/blockscout/blockscout/pull/4931)|空|v4.0.0+
-|API_RATE_LIMIT|| 全局API 速率限制，所有用户每秒的请求数 [#5030](https://github.com/blockscout/blockscout/pull/5030)|50|v4.1.1+
-|API_RATE_LIMIT_BY_KEY||静态 API 密钥的专用 API 速率限制 [#5080](https://github.com/blockscout/blockscout/pull/5080)|50|v4.1.1+
-|API_RATE_LIMIT_BY_IP||白名单IP的专用 API 速率限制，[#5090](https://github.com/blockscout/blockscout/pull/5090)|50|v4.1.1+
-|API_RATE_LIMIT_WHITELISTED_IPS||具有专用速率限制的逗号分隔的白名单 IP 列表。[#5090](https://github.com/blockscout/blockscout/pull/5090)|空|v4.1.1+
-|API_RATE_LIMIT_STATIC_API_KEY||具有专用 API 速率限制的静态 API 密钥，[#5080](https://github.com/blockscout/blockscout/pull/5080)|空|v4.1.1+
-|ETHEREUM_JSONRPC_DEBUG_TRACE_TRANSACTION_TIMEOUT||存档节点的 `debug_traceTransaction ` Json rpc 方法请求超时。 geth 支持的[时间格式](https://pkg.go.dev/time#ParseDuration) [#5500](https://github.com/blockscout/blockscout/pull/5505)|5s|v4.1.3+
-|ADMIN_PANEL_ENABLED||如果 true， admin/ 路由可用 [#5208](https://github.com/blockscout/blockscout/pull/5208)|空|v4.1.2+
+|`ETHEREUM_JSONRPC_VARIANT`|	v|告诉游览器正在使用哪一种 RPC 客户端(即 Geth、parity、besu..)[更多](https://docs.blockscout.com/for-developers/information-and-settings/client-settings-parity-geth-ganache)|ganache|all|
+|`ETHEREUM_JSONRPC_HTTP_URL`|v|获取区块链信息 RPC URL|localhost:8545|all|
+|`DATABASE_URL`|v|数据库 URL|空|all
+|`ETHEREUM_JSONRPC_TRACE_URL`||`trace_block` 和 `trace_replayTransaction` 使用的 Geth、parity、besu.等专用 RPC |localhost:8545|all|
+|`Network`||主EVM网络环境变量，如 Ethereum或Poa|POA|all
+|`SUBNETWORK`||子网的环境变量，如core或sokol network ，这将在链列表中下拉选择|POA Sokol|all
+|`LOGO`||标题logo图像位置变量,可在[这里](https://github.com/poanetwork/blockscout/tree/master/apps/block_scout_web/assets/static/images)找到不同的logo|`/images/blockscout_logo.svg`|all
+|`LOGO_FOOTER`||页脚logo图像位置，这里找到[更多](https://github.com/poanetwork/blockscout/tree/master/apps/block_scout_web/assets/static/images)|`/images/blockscout_logo.svg`|
+|`ETHEREUM_JSONRPC_WS_URL`||websocket RPC 地址，用于 `newHeads` 订阅提醒所引起获取新块订阅|ws://localhost:8546|all
+|`ETHEREUM_JSONRPC_TRANSPORT`||制定游览器连接到区块链节点的传输，可用的 `http` 和 `ipc`。如果选择 `ipc` ，需要设置 `IPC_PATH` |http|v3.1.0+
+|`IPC_PATH`||如果制定 ipc 传输，设置区块链节点 IPC 文件路径|空|v2.1.1+|
+|`NETWORK_PATH`||用于设置与根目录中显示的内容不同于网络路径。例，添加 `/eth/mainnet/` 到根目录|/|all
+|`API_PATH`||API 文档页面的 API URL中的 Path|/|v3.1.0+|
+|`SOCKET_ROOT`||自定义 websocket 路径|空|v3.1.0+|
+|`BLOCKSCOUT_HOST`||API 端点例主机|localhost|v2.1.0+|
+|`BLOCKSCOUT_PROTOCOL`||blockscount 的 URL 方案|在 prod 环境中使用 `https`,dev 环境中使用 `http`|v2.1.0+|
+|`SECRET_KEY_BASE`||使用 ` mix phx.gen.secre` 生成新的 `Secret Key Base`  字符串以保护资产||all
+|`CHECK_ORIGIN`||当原始标头存在时，用于检查请求的来源。如果默认为 `false`. 如果为 `true` 将检查主机值| false|all
+|`PORT`||应用端口|4000|all
+|`COIN`||此处的coin通过 coinGecko API 检查获取与美金的汇率价格|POA|all
+|`COIN_NAME`||将链添加到 Metamask 的 coin 名称|空|v4.1.2+|
+|`COINGECKO_COIN_ID`||显示设置 CoinGecko 币ID|空|v3.1.2+|
+|`METADATA_CONTRACT`||POA Network 专门使用此环境变量来获取 Validator 信息已显示在 UI 中|空|all
+|`VALIDATORS_CONTRACT`||POA Network 专门使用此环境变量设置获取当前验证者列表|空|all|
+|`KEYS_MANAGER_CONTRACT`||POA Network 专门使用这个环境变量设置 KeyManager 代理合约，以便通过挖掘密钥获取支付密钥，这需要确定对验证者的分布式奖励|空|v3.1.2+|
+|`REWARDS_CONTRACT`||奖励合约地址。此环境变来功能仅在 `EMISSION_FORMAT` 设置为时使用 `POA` | 0xeca443e8e1ab29971a45a9c57a6a9875701698a5|v2.0.4+
+|`TOKEN_BRIDGE_CONTRACT`||代币桥代理合约,用于 `TokenBridge` 供应模块|0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6|v1.3.2+
+|`EMISSION_FORMAT`||如果有与 `POA` 网络相同的块发布，则设置该变量为 `CHAIN_SPEC_PATH`|`DEFAULT`|v2.0.4+
+|`CHAIN_SPEC_PATH`||用于导入区块链释放的奖励范围和创世账户余额的链规范路径，支持 Geth 和 OpenEthereum 风格规范|空|v2.0.4+
+|`SUPPLY_MODULE`|| xDaiChain/RSK 使用此环境变量来告诉应用程序如何计算链的总供应量，可用值为`TokenBridge`,`RSK`|空|all
+|`SOURCE_MODULE`||该环境变量用于计算汇率，专门提供 xDaiChain 使用，可为 TokenBridge|空|all
+|`POOL_SIZE`||定义允许数据库连接数的变量，不包括只读请求|50|all
+|`POOL_SIZE_API`||用于定义只读 API 请求允许的数据库连接数变量|50|all
+|`ECTO_USE_SSL`||在 Ecto 查询上使用 SSL 的生产环境变量|true|all
+|`DATADOG_HOST`||[Datadog](https://docs.datadoghq.com/integrations/) 集成的主机配置|空|all
+|`DATADOG_PORT`||[Datadog](https://docs.datadoghq.com/integrations/) 集成的端口配置|空|all
+|`SPANDEX_BATCH_SIZE`||[Spandex](https://github.com/spandex-project/spandex) 和 Datadog 配置设置|空|all
+|`SPANDEX_SYNC_THRESHOLD`||[Spandex](https://github.com/spandex-project/spandex) 和 Datadog 配置设置|空|all
+|`HEART_BEAT_TIMEOUT`||生产环境变量，用于发生崩溃时重启程序|30|all
+|`HEART_COMMAND`||生产环境变量，用于发生崩溃时重启程序|空|all
+|`BLOCKSCOUT_VERSION`|| 添加的页脚以表示当前的 BlockScout 版本|空|v1.3.4+
+|`RELEASE_LINK`||页脚指向 Blockscout 发行版本说明的连接|https: //github.com/poanetwork/blockscout/releases/tag/${BLOCKSCOUT_VERSION}|v1.3.5+|
+|`ELIXIR_VERSION`||在 Blockscout 部署之前要在节点上安装 Elixir 版本，用于 ansible 部署脚本中的 bash 脚本|空|all
+|`BLOCK_TRANSFORMER`||块 transformer:base or clique|base|v1.3.4+|
+|`GRAPHIQL_TRANSACTION`||对 GraphiQL 的查询中默认事务的哈希|空|v1.2.0+
+|`FIRST_BLOCK`||块号 catchup fetcher 导入块的开始位置|0|v1.3.8+
+|`LAST_BLOCK`||块号 catchup fetcher 停止导入块的位置|空|v2.0.3+
+|`TRACE_FIRST_BLOCK`||块号，内部交易的索引开始的地方|0|v4.1.0+
+|`TRACE_LAST_BLOCK`||块号，内部交易食物索引停止的地方|空|v4.1.0+
+|`LINK_TO_OTHER_EXPLORERS`||`true or false` ，如果为 true ，则在页脚中添加其他资源管理器的链接|空|v1.3.0+
+|`OTHER_EXPLORERS`||替代资源管理器列表，此环境变量时在 PR [#3414](https://github.com/poanetwork/blockscout/pull/3414) 中引入|空|v3.4.0+
+|`SUPPORTED_CHAINS`||在页脚和链下拉列表中显示的一系列支持的链。这个 var 是在这个 PR [#1900](https://github.com/poanetwork/blockscout/pull/1900) 中引入的，看起来像一个 json 的对象数组|空|v2.0.0+
+|`CACHE_BLOCK_COUNT_PERIOD`||具有共识计数缓存的块的生存时间(以秒为单位)。这个变量是在 [#1876](https://github.com/poanetwork/blockscout/pull/1876) 中引入的|2小时|v4.1.3+
+|`CACHE_TXS_COUNT_PERIOD`||重新启动任务的间隔(以秒为单位)，它计算总txs计数|2小时|v4.1.3+
+|`CACHE_ADDRESS_COUNT_PERIOD`||缓存的生存时间(以秒为单位)。这个变量在 [#2822](https://github.com/poanetwork/blockscout/pull/2822) 中引入|2小时|v4.1.3+
+|`CACHE_ADDRESS_SUM_PERIOD`||地址总和(烧录地址除外)缓存的生存时间(以秒为单位)。这个变量是在 [#2862](https://github.com/poanetwork/blockscout/pull/2862)中引入|1小时|v4.1.3+
+|`CACHE_TOTAL_GAS_USAGE_PERIOD`||以秒为单位重新启动任务的间隔，它计算总气体使用量|2个小时|v4.1.3+
+|`CACHE_ADDRESS_TRANSACTIONS_GAS_USAGE_COUNTER_PERIOD`||以秒为单位重新启动任务的间隔时间，该任务计算地址处的gas使用量|30分钟|v4.1.3+
+|`CACHE_TOKEN_HOLDERS_COUNTER_PERIOD`||以秒为单位重新启动任务的时间间隔，该任务计算代币的持有者数量|1个小时|v4.1.3+
+|`CACHE_TOKEN_TRANSFERS_COUNTER_PERIOD`||以秒为单位重新启动任务的间隔，它计算token的传输计数|1小时|v4.1.3+
+|`CACHE_ADDRESS_WITH_BALANCES_UPDATE_INTERVAL`||以秒为单位重新启动任务的间隔，该任务计算带有余额的地址|30分钟|v4.1.3+
+|`TOKEN_METADATA_UPDATE_INTERVAL`||以秒为单位重启更新 token 原数据的任务时间间隔| `60*60*24*2`|v2.0.1+
+|`CACHE_AVERAGE_BLOCK_PERIOD`||平均块周期缓存的更新，以秒为单位|30分钟|v4.1.3+
+|`CACHE_MARKET_HISTORY_PERIOD`||更新市场历史缓存，以秒为单位|6小时|v4.1.3+
+|`TOKEN_BALANCE_ON_DEMAND_FETCHER_THRESHOLD_MINUTES`||使 token 余额缓存失效的阈值。在 [#3870](https://github.com/blockscout/blockscout/pull/3870)|60分钟|v3.7.1+
+|`COIN_BALANCE_ON_DEMAND_FETCHER_THRESHOLD_MINUTES`||使 coin 余额缓存无效的阈值。在 [#5240](https://github.com/blockscout/blockscout/pull/5240)|60分钟|v4.1.2+
+|`ALLOWED_EVM_VERSIONS`||用于合约验证允许 EVM 版本的逗号分隔列表，这个变量在 [#1964](https://github.com/poanetwork/blockscout/pull/1964) 引入|"homestead, tangerineWhistle, spuriousDragon, byzantium, constantinople, petersburg,istanbul"|v2.0.0+
+|`UNCLES_IN_AVERAGE_BLOCK_TIME`||在平均区块时间计算中，包括或排除非共识区块，排除如果 `false`| `false` |v2.0.1+
+|`DISABLE_WEBAPP`||如果为 true，则 webapp 的端点是隐藏的(编译时)。此外，启用它会使同志通过 `db_notify`| `false`|v2.0.3+|v|
+|`DISABLE_READ_API`||如果 true，则 api 的只读端点被隐藏(编译时)|`false`|v2.0.3+|v|
+|`DISABLE_WRITE_API`||如果 true,则写入 api 的端点事隐藏的(编译时)|`false`|v2.0.3+|v|
+|`DISABLE_INDEXER`||如果 true，索引器应用程序不运行|`false`|v2.0.3+|v|
+|`INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER`||如果 true ，挂起事务索引器被禁用|`false`|v4.1.3+
+|`INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER`||如果 true ，挂起事务索引器被禁用|`false`|v4.1.2+
+|`INDEXER_DISABLE_BLOCK_REWARD_FETCHER`||如果是 true，块奖励获取器被禁用|`false`|v4.1.3+
+|`INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER`||如果 true ，coin 余额索引器将被禁用|`false`|v4.1.3+
+|`INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER`||如果 true ，禁用遍历token原数据索引器|`false`|v4.1.3+
+|`INDEXER_MEMORY_LIMIT`||索引器的内存软限制|1Gb|v4.1.3+
+|`INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE`||空块清理器的批量大小(重新获取器)|100|v4.1.3+
+|`INDEXER_DISABLE_EMPTY_BLOCK_SANITIZER`||如果是 true 空块清理被禁用|`false`|v4.1.3+
+|`WEBAPP_URL`||链接到 web 应用程序的实例， 如: protocol://host/path|空|v2.0.3+
+|`API_URL`||链接到 api 应用程序的实例， 如: protocol://host/path|空|v2.0.3+
+|`WOBSERVER_ENABLED`||如果 true 启用 wobserver 接口|空|v3.3.2+|v|
+|`SHOW_ADDRESS_MARKETCAP_PERCENTAGE`||在顶部账户页面上配置市值百分比列|`true`|v2.1.1+
+|`CHECKSUM_ADDRESS_HASHES`||如果设置为 true,则重定向到地址哈嘻的校验和版本|`true`|v3.1.0+
+|`CHECKSUM_FUNCTION`||定义校验和地址函数2个可用值，`rsk,eth`|eth|v2.0.1+
+|`DISABLE_EXCHANGE_RATES`||禁用或者启用从 coingecko api 获取的 coin 价格| `false`|v3.1.2+|
+|`DISABLE_KNOWN_TOKENS`||禁用或者启用已知合约的代币符号|`false`|v3.4.0+
+|`ENABLE_TXS_STATS`||禁用或者启用每天的 txs 统计信息收集|`false`|v3.1.2+
+|`SHOW_PRICE_CHART`||在主页禁用或者启用 coin 图标的价格和市值|`false`|v3.1.2+
+|`SHOW_TXS_CHART`||在主页禁用或者启用每日交易次数表|`false`|v3.1.2+
+|`HISTORY_FETCH_INTERVAL`||以分钟为单位的间隔，请求每天的 txs 计数以在主页上显示每天 txs 计数图表的频率|60|v3.1.2+
+|`TXS_HISTORIAN_INIT_LAG`||txs计数历史获取重的初始延迟(以分钟为单位)，以便在主页上显示每天的 txs 技术历史图表|0|v3.1.2+
+|`TXS_STATS_DAYS_TO_COMPILE_AT_INIT`||获取每天 txs 计数历史的天数，以便将其显示在主页上的每天 txs 计数历史图表中|365|v3.1.2+
+|`COIN_BALANCE_HISTORY_DAYS`||在 coin 余额历史图表中考虑天数|10|v3.1.3+
+|`APPS_MENU`||如果为 treu，则会出现 apps 导航菜单|`false`|v3.3.1+
+|`EXTERNAL_APPS`||在应用程序菜单项重显示的一组外部应用程序。此 var 在 pr [#3184](https://github.com/poanetwork/blockscout/pull/3184) 引入，看起来是像一个json对象数组|空|v3.3.1+|
+|`ETH_OMNI_BRIDGE_MEDIATOR`||home omniBridge 的地址，用于桥接来自eth 的多个 token。提供此地址可启动桥接代币功能，桥接状态和链接到外部链中的原始代币|空|v3.6.0+
+|`BSC_OMNI_BRIDGE_MEDIATOR`||home omniBridge 的地址，用于桥接来自eth 的多个 token。提供此地址可启动桥接代币功能，桥接状态和链接到外部链中的原始代币|空|v3.6.0+
+|`AMB_BRIDGE_MEDIATORS`||逗号分隔的 AMB 扩展的中介地址哈希表，用于通过这些中介地址获取桥接 token|空|v3.3.3+
+|`GAS_PRICE`||Gwei 的 GAS 价格，如果变量存在，gas price 将显示在主页上|空|v3.3.2+
+|`FOREIGN_JSON_RPC`||JOSN RPC 到外链，以便通过 Omni-bridge token 取桥接的元数据。在 PR [#3282](https://github.com/poanetwork/blockscout/pull/3282) 中引入|空|v3.3.3+
+|`BRIDGE_MARKET_CAP_UPDATE_INTERVAL`||TokenBridge 供应模块的市值更新间隔与 TokenBrdge 和 OmniBridge 一样，以秒为单位。PR [#3293](https://github.com/poanetwork/blockscout/pull/3293) | 30分钟|v3.3.3+
+|`RESTRICTED_LIST`||以逗号分隔的地址列表，以启用对它们的受限访问|空|v3.3.3+
+|`RESTRICTED_LIST_KEY`||访问 `RESTRICTED_LIST ` 变量列出地址的key,可以通过查询参数传递到页面的 URL:?key=...|空|v3.3.3+
+|`ADDRESS_TRANSACTIONS_CACHE_PERIOD`||地址的交易计数器的生存时间(以秒为单位)。这个变来功能在 PR [3330](https://github.com/poanetwork/blockscout/pull/3330) 引入|1小时|v3.4.0+
+|`DISABLE_BRIDGE_MARKET_CAP_UPDATER`||禁用来自 TokenBridge 和 AMB 扩展的 TokenBridge 市值重复合并|空|v3.3.3+
+|`POS_STAKING_CONTRACT`||POSDAO 质押合约的地址。提供后，启用 StakingDapp .ValidatorSet 和 BlockReward 合约地址是使用相应的getter 获取的|空|v3.4.0+
+|`ENABLE_POS_STAKING_IN_MENU`||在菜单中启用 Staking dapp| `false`|v3.6.0+
+|`TOKEN_EXCHANGE_RATE_CACHE_PERIOD `|| 管理 token 汇率的缓存失效|1小时|v3.5.0+
+|`ADDRESS_TOKENS_USD_SUM_CACHE_PERIOD` ||管理每个代币持有者地址的代币美元价值总和的缓存失效期|空|v3.5.0+
+|`SHOW_MAINTENANCE_ALERT`||在资源管理器顶部禁用/启用公告|错误|v3.6.0+
+|`MAINTENANCE_ALERT_MESSAGE`||资源管理器顶部公告的消息文本|空|v3.6.0+
+|`SHOW_STAKING_WARNING`||在质押 dapp 中禁用/启用公告| `false`|v3.6.0+
+|`STAKING_WARNING_MESSAGE`||staking dapp 餧公告的消息文本|空|v3.6.0+
+|`CUSTOM_CONTRACT_ADDRESSES_TEST_TOKEN`||测试代币的地址列表，将应用测试标签，这些代币将被排除在全桥市值计算之外|空|v3.6.0+
+|`ENABLE_SOURCIFY_INTEGRATION`||通过 sourcify 启用和禁用合同验证| `false`|v3.7.0+
+|`SOURCIFY_SERVER_URL`||sourcify 后段的 url|https://sourcify.dev/server|v3.7.0+
+|`SOURCIFY_REPO_URL`||具有完全验证合同的 Sourcify 存储库 url |https://repo.sourcify.dev/contracts/|v3.7.0+
+|`CHAIN_ID`||网络的链ID 。例如，在 xdai 链的情况下为100|空|v3.7.0+
+|`MAX_SIZE_UNLESS_HIDE_ARRAY`||在智能合约中隐藏长数组 [#4218](https://github.com/blockscout/blockscout/pull/4218)|50|v3.7.1+
+|`HIDE_BLOCK_MINER`||如果值为 `true` 则在块页面和切片隐藏矿工/验证者/排序者 [#4611](https://github.com/blockscout/blockscout/pull/4611) |空|v4.0.0+
+|`DISPLAY_TOKEN_ICONS`||如果为 true，则显示来自 trustwallet 资产存储库 token 图标，[#4596](https://github.com/blockscout/blockscout/pull/4596)|空|v4.0.0+
+|`SHOW_TENDERLY_LINK`||如果 true，则交易页面会显示 `tenderly `开盘按钮，[#4656](https://github.com/blockscout/blockscout/pull/4656)|空|v4.0.0+
+|`TENDERLY_CHAIN_PATH`|| tenderly 中交易的链式路径，例如对于 xdai 中的交易，tenderly 链看起来是 https://dashboard.tenderly.co/tx/xdai/0x... 然后 `TENDERLY_CHAIN_PATH =/xdai. ` [#4656](https://github.com/blockscout/blockscout/pull/4656)|空|v4.0.0+
+|`MAX_STRING_LENGTH_WITHOUT_TRIMMING`||隐藏长合约方法数据，更多详情[#4667](https://github.com/blockscout/blockscout/pull/4667)|2040|v4.0.0+
+|`RE_CAPTCHA_SECRET_KEY`||google reCAPTCHA 密钥。由高级 csv 导出使用 [#4747](https://github.com/blockscout/blockscout/pull/4747)|空|v4.0.0+
+|`RE_CAPTCHA_CLIENT_KEY`||google reCAPTCHA 客户端密钥，由高级 csv 导出使用。[#4747](https://github.com/blockscout/blockscout/pull/4747)|空|v4.0.0+
+|`ADDRESS_TOKEN_TRANSFERS_COUNTER_CACHE_PERIOD`||以秒为单位重新启动任务的间隔，计算该地址的token 传输次数[#4699](https://github.com/blockscout/docs/blob/master/for-developers/information-and-settings/broken-reference/README.md)|空|v4.0.0+
+|`JSON_RPC`|| walletconnect 集成链 JsonRPC [#4931](https://github.com/blockscout/blockscout/pull/4931)|空|v4.0.0+
+|`API_RATE_LIMIT`|| 全局API 速率限制，所有用户每秒的请求数 [#5030](https://github.com/blockscout/blockscout/pull/5030)|50|v4.1.1+
+|`API_RATE_LIMIT_BY_KEY`||静态 API 密钥的专用 API 速率限制 [#5080](https://github.com/blockscout/blockscout/pull/5080)|50|v4.1.1+
+|`API_RATE_LIMIT_BY_IP`||白名单IP的专用 API 速率限制，[#5090](https://github.com/blockscout/blockscout/pull/5090)|50|v4.1.1+
+|`API_RATE_LIMIT_WHITELISTED_IPS`||具有专用速率限制的逗号分隔的白名单 IP 列表。[#5090](https://github.com/blockscout/blockscout/pull/5090)|空|v4.1.1+
+|`API_RATE_LIMIT_STATIC_API_KEY`||具有专用 API 速率限制的静态 API 密钥，[#5080](https://github.com/blockscout/blockscout/pull/5080)|空|v4.1.1+
+|`ETHEREUM_JSONRPC_DEBUG_TRACE_TRANSACTION_TIMEOUT`||存档节点的 `debug_traceTransaction ` Json rpc 方法请求超时。 geth 支持的[时间格式](https://pkg.go.dev/time#ParseDuration) [#5500](https://github.com/blockscout/blockscout/pull/5505)|5s|v4.1.3+
+|`ADMIN_PANEL_ENABLED`||如果 true， admin/ 路由可用 [#5208](https://github.com/blockscout/blockscout/pull/5208)|空|v4.1.2+
 
 
 ### 弃用环境变量
@@ -284,23 +284,23 @@ websockets endpoint|`ETHEREUM_JSONRPC_WS_URL`| `ws://localhost:8546`|订阅 `new
 
 环境变量|默认
 ---|---
-BLOCKSCOUT_VERSION|`unknown`
-COIN|`POA`
-DB_HOST|-
-DB_PASSWORD|-
-DB_PORT|-
-DB_USERNAME|-
-ETHEREUM_JSONRPC_HTTP_URL|`http://localhost:8545`
-ETHEREUM_JSONRPC_TRACE_URL|`http://localhost:8545`
-ETHEREUM_JSONRPC_WS_URL|`ws://localhost:8546`
-ETHEREUM_JSONRPC_VARIANT|`parity`
-HEART_BEAT_TIMEOUT|`30`
-HEART_COMMAND|`sudo systemctl restart explorer.service`
-LOGO|`/images/blockscout_logo.svg`
-NETWORK|`POA Network`
-SUBNETWORK|`Sokol Testnet`
-NETWORK_ICON|`_test_network_icon.html`
-LINK_TO_OTHER_EXPLORERS|`true`
+`BLOCKSCOUT_VERSION`|`unknown`
+`COIN`|`POA`
+`DB_HOST`|-
+`DB_PASSWORD`|-
+`DB_PORT`|-
+`DB_USERNAME`|-
+`ETHEREUM_JSONRPC_HTTP_URL`|`http://localhost:8545`
+`ETHEREUM_JSONRPC_TRACE_URL`|`http://localhost:8545`
+`ETHEREUM_JSONRPC_WS_URL`|`ws://localhost:8546`
+`ETHEREUM_JSONRPC_VARIANT`|`parity`
+`HEART_BEAT_TIMEOUT`|`30`
+`HEART_COMMAND`|`sudo systemctl restart explorer.service`
+`LOGO`|`/images/blockscout_logo.svg`
+`NETWORK`|`POA Network`
+`SUBNETWORK`|`Sokol Testnet`
+`NETWORK_ICON`|`_test_network_icon.html`
+`LINK_TO_OTHER_EXPLORERS`|`true`
 
 ### 无法使用 env 更改的配置
 - [更新 验证者、矿工、签名者](https://github.com/poanetwork/blockscout/blob/12aa15671142af00b35ff05aeac107c2c686c4c8/apps/block_scout_web/priv/gettext/default.pot)
@@ -484,16 +484,16 @@ BlockScout 支持3种不同的 Json RPC 变体，可以使用 `ETHEREUM_JSONRPC_
 
 变量|描述|默认值
 ---|---|---
-ETHEREUM_JSONRPC_VARIANT|JSON RPC 服务的变体，填写上面可选4个选项|parity
-ETHEREUM_JSONRPC_HTTP_URL| HTTP JSON RPC URL 仅用于 geth 或 ganache |基于 JSONRPC
-ETHEREUM_JSONRPC_WS_URL|WS JSON RPC |基于 JSONRPC
-ETHEREUM_JSONRPC_TRACE_URL|用于跟踪 URL 仅用于 parity |`http://localhost:8545`
-COIN|默认硬币|POA
-LOGO|默认硬币logo|空
-NETWORK|网络|空
-SUBNETWORK|子网|空
-NETWORK_ICON|网络图标|空
-NETWORK_PATH|网络路径|`/`
+`ETHEREUM_JSONRPC_VARIANT`|JSON RPC 服务的变体，填写上面可选4个选项|parity
+`ETHEREUM_JSONRPC_HTTP_URL`| HTTP JSON RPC URL 仅用于 geth 或 ganache |基于 JSONRPC
+`ETHEREUM_JSONRPC_WS_URL`|WS JSON RPC |基于 JSONRPC
+`ETHEREUM_JSONRPC_TRACE_URL`|用于跟踪 URL 仅用于 parity |`http://localhost:8545`
+`COIN`|默认硬币|POA
+`LOGO`|默认硬币logo|空
+`NETWORK`|网络|空
+`SUBNETWORK`|子网|空
+`NETWORK_ICON`|网络图标|空
+`NETWORK_PATH`|网络路径|`/`
 	
 #### JSONRPC 变体默认值
 - ETHEREUM_JSONRPC_HTTP_URL `默认值`
@@ -516,7 +516,7 @@ NETWORK_PATH|网络路径|`/`
 ### [部署 Blockscont](https://docs.blockscout.com/for-developers/ansible-deployment/deploying-blockscout) 
 ### [销毁基础设施](https://docs.blockscout.com/for-developers/ansible-deployment/destroying-provisioned-infrastructure)
 ### [常见附加任务](https://docs.blockscout.com/for-developers/ansible-deployment/common-additional-tasks)
-### [常见错误和问题](https://docs.blockscout.com/for-developers/ansible-deployment/common-errors-and-questions)			
+### [常见错误和问题](https://docs.blockscout.com/for-developers/ansible-deployment/common-errors-and-questions)
 ### [AWS Marketplace](https://docs.blockscout.com/for-developers/ansible-deployment/aws-marketplace)
 
 ## 手动部署
@@ -888,30 +888,30 @@ Blockscout 可能需要一些时间来完全索引一个链，更大的链则需
 	
 	可以调整索引器应用程序已满足节点大小和响应能力。
 	
-	提取器|描述|默认值
+	索引器|描述|默认值
 	---|---|---
-	[Catchup Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/catchup/fetcher.ex#L24)|这个提取器索引块、交易、收据，从链的顶端开始向后工作到创世块|批量大小10,并发10
-	[Internal Transaction Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/internal_transaction/fetcher.ex#L20)|这个提取器索引内部事务，对于实时提取器，此过程是同步完成的，而对于追赶提取器，此过程是异步完成的。|批量大小10,并发4
-	[Coin Balance Fether](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/coin_balance/fetcher.ex#L22)|该提取器在地址与交互的块高度索引每个coin 余额|批量大小500,并发4
-	[Uncle Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/uncle/fetcher.ex#L22)|这个提取器索引非共识块、交易和数据|批量大小10,并发10
-	[Token Balance Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/token_balance/fetcher.ex#L29)|这个提取器索引代币余额。由于智能合约格式错误或其他不允许获取余额的功能，可能会遇到一些无法获取的代币余额|批量大小100,并发10
+	[Catchup Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/catchup/fetcher.ex#L24)|这个索引器索引块、交易、收据，从链的顶端开始向后工作到创世块|批量大小10,并发10
+	[Internal Transaction Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/internal_transaction/fetcher.ex#L20)|这个索引器索引内部事务，对于实时索引器，此过程是同步完成的，而对于追赶索引器，此过程是异步完成的。|批量大小10,并发4
+	[Coin Balance Fether](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/coin_balance/fetcher.ex#L22)|该索引器在地址与交互的块高度索引每个coin 余额|批量大小500,并发4
+	[Uncle Block Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/block/uncle/fetcher.ex#L22)|这个索引器索引非共识块、交易和数据|批量大小10,并发10
+	[Token Balance Fetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/token_balance/fetcher.ex#L29)|这个索引器索引代币余额。由于智能合约格式错误或其他不允许获取余额的功能，可能会遇到一些无法获取的代币余额|批量大小100,并发10
 	[TokenFetcher](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/indexer/lib/indexer/token/fetcher.ex#L18)|此索引获取代币合约的元数据|批量大小1:并发0
 	
 	- 了解错误和超时
 	
 			application=indexer fetcher=coin_balance count=500 error_count=500 [error] failed to fetch: :timeout
-		在项目提供的错误中，可以看出 `索引器应用程序`由于 `超时` 错误而未能获取 `500 coin` 。通常，当索引器开始接收超时时，也会发生更多来自其他提取器的超时。
+		在项目提供的错误中，可以看出 `索引器应用程序`由于 `超时` 错误而未能获取 `500 coin` 。通常，当索引器开始接收超时时，也会发生更多来自其他索引器的超时。
 	- 解决超时
 
 		当 fetcher 开始收到超时时，最好采取的措施是降低一些 fetcher 的批量大小和并发，这将减少对节点的压力。
 		
-		对节点造成最大压力的2个索引器是块索引器和内部事务提取器。建议这些 fetcher 值减半并重新启动应用程序。可能还需要重启节点。
+		对节点造成最大压力的2个索引器是块索引器和内部事务索引器。建议这些 fetcher 值减半并重新启动应用程序。可能还需要重启节点。
 	- 其他行为
 
 		BlockScout 配置了 `n` 在检测到超时时自动停止发送请求几秒钟的功能。可以通过设置不同的值来调整这些设置 `wait_per_timeout`,[查看](https://github.com/poanetwork/blockscout/blob/1475e3bfd002d9397efd0f0cc29c20f39a70d023/apps/ethereum_jsonrpc/config/config.exs#L3-L9)
 - 如何更新内存消耗以修复索引器内存错误
 
-	在索引阶段，由于尝试一次获取所有块内容的负载，许多获取过程是异步运行的。这些进程存储在内存中，以在每个异步提取器中定义的设定间隔进行提取。
+	在索引阶段，由于尝试一次获取所有块内容的负载，许多获取过程是异步运行的。这些进程存储在内存中，以在每个异步索引器中定义的设定间隔进行提取。
 	
 	`Indexer.Memory.Monitor` 检查 BEAM 内存使用是否超过设定的限制(默认 1GIB),如果超过，他会要求注册为可收缩的内存最多的进程进行收缩。
 	
@@ -998,7 +998,9 @@ Blockscout 可能需要一些时间来完全索引一个链，更大的链则需
 
 注意，在 token 选项导出 token 转移列表
 
-单击按钮后，您将被转到给定地址和导出交易类型（交易、内部交易、token转移、日志）的 csv 导出页面
+单击按钮后，您将被转到给定地址和导出交易类型（交易、内部交易、token转移、日志）的 csv 导出页面，可为数据导出指定任意时间段。默认情况下，当前时间是上个月。
+### 高级交易页面
+
 		
 				
 		
