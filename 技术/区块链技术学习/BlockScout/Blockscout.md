@@ -112,11 +112,11 @@ Blockscout 是一个功能齐全的开源区块链浏览器
 |`DISABLE_READ_API`||如果 true，则 api 的只读端点被隐藏(编译时)|`false`|v2.0.3+|v|
 |`DISABLE_WRITE_API`||如果 true,则写入 api 的端点事隐藏的(编译时)|`false`|v2.0.3+|v|
 |`DISABLE_INDEXER`||如果 true，索引器应用程序不运行|`false`|v2.0.3+|v|
-|`INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER`||如果 true ，挂起事务索引器被禁用|`false`|v4.1.3+
-|`INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER`||如果 true ，挂起事务索引器被禁用|`false`|v4.1.2+
-|`INDEXER_DISABLE_BLOCK_REWARD_FETCHER`||如果是 true，块奖励获取器被禁用|`false`|v4.1.3+
-|`INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER`||如果 true ，coin 余额索引器将被禁用|`false`|v4.1.3+
-|`INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER`||如果 true ，禁用遍历token原数据索引器|`false`|v4.1.3+
+|`INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER`||如果 true ，禁用 pending 事务索引器|`false`|v4.1.3+
+|`INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER`||如果 true ，禁用 internal 事务索引器|`false`|v4.1.2+
+|`INDEXER_DISABLE_BLOCK_REWARD_FETCHER`||如果是 true，禁用块奖励索引器|`false`|v4.1.3+
+|`INDEXER_DISABLE_ADDRESS_COIN_BALANCE_FETCHER`||如果 true ，禁用 coin 余额索引器|`false`|v4.1.3+
+|`INDEXER_DISABLE_CATALOGED_TOKEN_UPDATER_FETCHER`||如果 true ，禁用遍历 token 原数据索引器|`false`|v4.1.3+
 |`INDEXER_MEMORY_LIMIT`||索引器的内存软限制|1Gb|v4.1.3+
 |`INDEXER_EMPTY_BLOCKS_SANITIZER_BATCH_SIZE`||空块清理器的批量大小(重新获取器)|100|v4.1.3+
 |`INDEXER_DISABLE_EMPTY_BLOCK_SANITIZER`||如果是 true 空块清理被禁用|`false`|v4.1.3+
@@ -1000,6 +1000,91 @@ Blockscout 可能需要一些时间来完全索引一个链，更大的链则需
 
 单击按钮后，您将被转到给定地址和导出交易类型（交易、内部交易、token转移、日志）的 csv 导出页面，可为数据导出指定任意时间段。默认情况下，当前时间是上个月。
 ### 高级交易页面
+默认 Blockscout 交易页面包括用户的基本信息，例如交易哈希、区块号、nonce和 tx 费用。虽然这对许多用户来说已经足够了，但项目可以升级到高级页面，为用户提供额外的数据点和带有工具提示和组织良好的信息和用户友好型布局。
+#### 基本布局
+![](./pic/premium-page1.png)
+
+- 页面功能
+	- 基本信息
+	- 开放布局
+
+#### 优质布局
+![](./pic/premium-page.png)
+
+- 页面功能
+	- 基本信息
+	- 开放布局
+	- 工具提示
+	- 确认后的状态块
+	- 使用简单复制图标字段
+	- gas 价格/tx 价格
+
+### [ERC-1155 支持](https://blockscout.com/xdai/mainnet/tokens/0x93d0c9a35c43f6BC999416A06aaDF21E68B29EBA/token-transfers)
+### 资源需求
+资源需求因链的大小和参数有很大区别，这主要影响[数据库存储](https://docs.blockscout.com/for-developers/information-and-settings/database-storage-requirements)需求。基本的[先觉条件](https://docs.blockscout.com/for-developers/information-and-settings/requirements)和设置可以在[信息和设置](https://docs.blockscout.com/for-developers/information-and-settings)部分中找到。
+
+BlockScout 需要一个完整的存档节点来导入目标网络上每个地址的每个状态更改
+#### 推荐的基础硬件
+最佳建议
+
+-|-
+---|---
+cpu| 16核32 线程
+mem|128GB
+
+#### 托管
+-|-
+---|---
+应用服务| 1个 linux EC2.t3.Medium/8GB  SSD(NVMe)
+数据库|1*RDS db.t3.Medium postgreSQL/500GB SSD
+负载均衡| 100TPS
+带宽|100Mb
+#### 节点要求
+- 具有 JSON RPC 接口的存档节点，应严格遵循 https://eth.wiki/json-rpc/API 中描述的输入/输出接口。
+- websocket 接口(可选)用于订阅新块头。否则，Blockscout 将通过 JsonRPC 定期轮询来触发 `eth_blockNumber`
+- 支持以下标准 Ethereum Json rpc 
+	- https://eth.wiki/json-rpc/API#eth_blocknumber
+	- https://eth.wiki/json-rpc/API#eth_call
+	- https://eth.wiki/json-rpc/API#eth_getbalance
+	- https://eth.wiki/json-rpc/API#eth_getcode
+	- https://eth.wiki/json-rpc/API#eth_getblockbyhash
+	- https://eth.wiki/json-rpc/API#eth_getblockbynumber
+	- https://eth.wiki/json-rpc/API#eth_gettransactionbyhash
+	- https://eth.wiki/json-rpc/API#eth_gettransactionbyblockhashandindex
+	- https://eth.wiki/json-rpc/API#eth_gettransactionbyblocknumberandindex
+	- https://eth.wiki/json-rpc/API#eth_gettransactionreceipt
+	- https://eth.wiki/json-rpc/API#eth_getunclebyblockhashandindex
+	- https://eth.wiki/json-rpc/API#eth_getlogs
+
+#### 获取待处理的交易
+客户端|方法
+---|---
+OpenEthereum |`parity_pendingTransactions`
+Geth |`txpool_content`
+
+#### 启用跟踪以获取内部事务
+客户端|方法
+---|---
+OpenEthereum|`trace_replayBlockTransactions`
+	|`trace_block (fetch block rewards)`
+Geth |`debug_traceTransactions`
+
+#### JSON RPC 性能基准
+Blockscout 中用于索引的关键 Json RPC 方法响应时间的时间度量.[提高速度的方法](https://docs.blockscout.com/for-developers/developer-faqs/how-do-i-speed-up-my-hosted-blockscout-instance)
+
+- `eth_getBlockByNumber` 对于一个有 15 笔交易的区块，没有交易收据，所需响应时间应 `< 0.5s`
+
+	参考 Gnosis 链，20笔交易响应为 0.4 秒
+- `eth_getTransactionReceipt` 对于随机事务，所需的响应时间 `<0.5s` 
+
+	参考 Gnosis 链，响应时间为 0.3-0.4 秒
+- 批处理 `eth_getTransactionReceipt` 15 个事务科接受的响应时间小于 1 秒
+
+	参考 Gnosis 链存档节点，响应时间为 0.6-0.7秒
+	
+## 参考
+[docs.blockscout.com](https://docs.blockscout.com)  
+	 
 
 		
 				
