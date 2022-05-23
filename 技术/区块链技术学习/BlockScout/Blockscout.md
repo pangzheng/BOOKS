@@ -128,12 +128,12 @@ Blockscout 是一个功能齐全的开源区块链浏览器
 |`CHECKSUM_FUNCTION`||定义校验和地址函数2个可用值，`rsk,eth`|eth|v2.0.1+
 |`DISABLE_EXCHANGE_RATES`||禁用或者启用从 coingecko api 获取的 coin 价格| `false`|v3.1.2+|
 |`DISABLE_KNOWN_TOKENS`||禁用或者启用已知合约的代币符号|`false`|v3.4.0+
-|`ENABLE_TXS_STATS`||禁用或者启用每天的 txs 统计信息收集|`false`|v3.1.2+
+|`ENABLE_TXS_STATS`||禁用或者启用每天的 txs 统计信息收集,下面参数 `ENABLE_TXS_STATS`、 `SHOW_TXS_CHART `、`HISTORY_FETCH_INTERVAL`、`TXS_HISTORIAN_INIT_LAG`、`TXS_STATS_DAYS_TO_COMPILE_AT_INIT` [联动](https://gitter.im/poanetwork/blockscout?at=5eaaa41997338850a2db1737#)，注意设置完需要等待最多1天系统更新数据 |`false`|v3.1.2+
 |`SHOW_PRICE_CHART`||在主页禁用或者启用 coin 图标的价格和市值|`false`|v3.1.2+
-|`SHOW_TXS_CHART`||在主页禁用或者启用每日交易次数表|`false`|v3.1.2+
-|`HISTORY_FETCH_INTERVAL`||以分钟为单位的间隔，请求每天的 txs 计数以在主页上显示每天 txs 计数图表的频率|60|v3.1.2+
-|`TXS_HISTORIAN_INIT_LAG`||txs计数历史获取重的初始延迟(以分钟为单位)，以便在主页上显示每天的 txs 技术历史图表|0|v3.1.2+
-|`TXS_STATS_DAYS_TO_COMPILE_AT_INIT`||获取每天 txs 计数历史的天数，以便将其显示在主页上的每天 txs 计数历史图表中|365|v3.1.2+
+|`SHOW_TXS_CHART`||在主页禁用或者启用每日交易次数表,下面参数 `ENABLE_TXS_STATS`、 `SHOW_TXS_CHART `、`HISTORY_FETCH_INTERVAL`、`TXS_HISTORIAN_INIT_LAG`、`TXS_STATS_DAYS_TO_COMPILE_AT_INIT` [联动](https://gitter.im/poanetwork/blockscout?at=5eaaa41997338850a2db1737#)，注意设置完需要等待最多1天系统更新数据|`false`|v3.1.2+
+|`HISTORY_FETCH_INTERVAL`||以分钟为单位的间隔，请求每天的 txs 计数以在主页上显示每天 txs 计数图表的频率,下面参数 `ENABLE_TXS_STATS`、 `SHOW_TXS_CHART `、`HISTORY_FETCH_INTERVAL`、`TXS_HISTORIAN_INIT_LAG`、`TXS_STATS_DAYS_TO_COMPILE_AT_INIT` [联动](https://gitter.im/poanetwork/blockscout?at=5eaaa41997338850a2db1737#)，注意设置完需要等待最多1天系统更新数据|30|v3.1.2+
+|`TXS_HISTORIAN_INIT_LAG`||txs计数历史获取重的初始延迟(以分钟为单位)，以便在主页上显示每天的 txs 技术历史图表,下面参数 `ENABLE_TXS_STATS`、 `SHOW_TXS_CHART `、`HISTORY_FETCH_INTERVAL`、`TXS_HISTORIAN_INIT_LAG`、`TXS_STATS_DAYS_TO_COMPILE_AT_INIT` [联动](https://gitter.im/poanetwork/blockscout?at=5eaaa41997338850a2db1737#)，注意设置完需要等待最多1天系统更新数据|0|v3.1.2+
+|`TXS_STATS_DAYS_TO_COMPILE_AT_INIT`||获取每天 txs 计数历史的天数，以便将其显示在主页上的每天 txs 计数历史图表中,下面参数 `ENABLE_TXS_STATS`、 `SHOW_TXS_CHART `、`HISTORY_FETCH_INTERVAL`、`TXS_HISTORIAN_INIT_LAG`、`TXS_STATS_DAYS_TO_COMPILE_AT_INIT` [联动](https://gitter.im/poanetwork/blockscout?at=5eaaa41997338850a2db1737#)，注意设置完需要等待最多1天系统更新数据|10|v3.1.2+
 |`COIN_BALANCE_HISTORY_DAYS`||在 coin 余额历史图表中考虑天数|10|v3.1.3+
 |`APPS_MENU`||如果为 treu，则会出现 apps 导航菜单|`false`|v3.3.1+
 |`EXTERNAL_APPS`||在应用程序菜单项重显示的一组外部应用程序。此 var 在 pr [#3184](https://github.com/poanetwork/blockscout/pull/3184) 引入，看起来是像一个json对象数组|空|v3.3.1+|
