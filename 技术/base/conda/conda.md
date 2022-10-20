@@ -85,7 +85,14 @@ Conda 允许您创建单独的环境，其中包含不会与其他环境交互�
 - 要查看所有环境的列表，请键入
 
 		conda info --envs
-	将出现一个环境列表，类似于以下内容：						
+	将出现一个环境列表，类似于以下内容：
+	
+		conda environments:
+
+		    base           /home/username/Anaconda3
+		    snowflakes   * /home/username/Anaconda3/envs/snowflakes						
+## 参考
+[conda docs](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#starting-conda)		    
 	
 
 	
