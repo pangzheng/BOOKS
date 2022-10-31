@@ -151,4 +151,4 @@
 - xformers - https://github.com/facebookresearch/xformers
 - DeepDanbooru - interrogator for anime diffusers https://github.com/KichangKim/DeepDanbooru
 
- 
+  
