@@ -96,7 +96,7 @@
 				$ sudo apt install python3.10 -y
 				$ sudo apt-get -y install python3.10-venv
 				$ cd /usr/bin/
-				$ rm -Rf python3
+				$ sudo rm -Rf python3
 				$ sudo ln -s python3.10 python3
 				$ python3 -V
 	- rocky
@@ -146,7 +146,6 @@
 			
 					00:07.0 VGA compatible controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)	
 	- 安装 GPU 驱动
-		
 	- 检查 gpu 驱动 	
 		- 7 检查
 
@@ -291,8 +290,10 @@
 		
 		NAME=stable-diffusion-webui
 		PIDFILE=/tmp/$NAME.pid
-		DAEMON_OPTS=/home/$user/stable-diffusion-webui/ubuntu-webui.sh
-		UPDATE_DAEMON_OPTS=/home/pangzheng/stable-diffusion-webui/webui.sh
+		DAEMON_OPTS=ubuntu-webui.sh
+		UPDATE_DAEMON_OPTS=webui.sh
+		DEPLOY_DIR=/home/pangzheng/stable-diffusion-webui
+		
 		
 		PID=`ps axuf | grep launch.py | grep -v grep  | awk '{print $2}'`
 		
@@ -306,11 +307,11 @@
 		                exit 1
 		        fi
 		
-		        nohup /usr/bin/bash ${DAEMON_OPTS} &
+		        cd $DEPLOY_DIR && nohup /usr/bin/bash  ${DAEMON_OPTS} &
 		
 		        echo " $NAME start done"
 		
-		        tail -f /home/$user/tools/nohup.out
+		        cd $DEPLOY_DIR && tail -f nohup.out
 		}
 		
 		update_method(){
@@ -321,11 +322,11 @@
                 exit 1
         fi
 
-        nohup /usr/bin/bash ${UPDATE_DAEMON_OPTS} &
+        cd $DEPLOY_DIR && nohup /usr/bin/bash ${UPDATE_DAEMON_OPTS} &
 
         echo " $NAME start done"
 
-        tail -f /home/pangzheng/tools/nohup.out
+        cd $DEPLOY_DIR && tail -f nohup.out
 		}
 		
 		stop_method(){
@@ -355,7 +356,7 @@
 		
 		logs_method(){
 		
-		        tail -f /home/$user/tools/nohup.out
+		        cd $DEPLOY_DIR  && tail -f nohup.out
 		}
 		
 		case "$1" in
@@ -388,12 +389,111 @@
 
 - 参数优化
 	- 开启 xformers 和 deepdanbooru
-		- xformers
+		- 安装 Xformers
 
-			优化计算使用
+			Xformers 库是加速图像生成的一种可选方式。除了一种特定的配置外，没有适用于 Windows 的二进制文件，但您可以自己构建它。
+			
+			来自匿名用户的指南，尽管我认为它适用于在 Linux 上构建：
+			
+			关于如何构建 XFORMERS 的指南还包括如何让自己摆脱 voldy 新提交的 sm86 限制
+				
+				sudo apt-get install python3-dev
+				cd stable-diffusion-webui
+				source ./venv/bin/activate
+				cd repositories
+				git clone https://github.com/facebookresearch/xformers.git
+				cd xformers
+				git submodule update --init --recursive
+				pip install -r requirements.txt
+				pip install -e .
+
+			报错
+
+		- `error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1`
+			- 解决
+		
+					sudo apt-get install python3-dev
+		- 测试
+			- 未打开 Xformers
+
+					Launching launch.py...
+					################################################################
+					Python 3.10.8 (main, Oct 12 2022, 19:14:26) [GCC 9.4.0]
+					Commit hash: 17a2076f72562b428052ee3fc8c43d19c03ecd1e
+					Installing requirements for Web UI
+					Launching Web UI with arguments:
+					LatentDiffusion: Running in eps-prediction mode
+					DiffusionWrapper has 859.52 M params.
+					making attention of type 'vanilla' with 512 in_channels
+					Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+					making attention of type 'vanilla' with 512 in_channels
+					Loading weights [925997e9] from /home/pangzheng/stable-diffusion-webui/models/Stable-diffusion/animefull-final-pruned-4.2G.ckpt
+					Loading VAE weights from: /home/pangzheng/stable-diffusion-webui/models/Stable-diffusion/animefull-final-pruned-4.2G.vae.pt
+					Applying cross attention optimization (Doggettx).
+					Model loaded.
+					Loaded a total of 0 textual inversion embeddings.
+					Embeddings:
+					Running on local URL:  http://127.0.0.1:7860
+					
+					To create a public link, set `share=True` in `launch()`.
+					100%|██████████| 20/20 [00:04<00:00,  4.21it/s]
+					Total progress: 100%|██████████| 20/20 [00:04<00:00,  4.18it/s]
+			- 打开 Xformers
+		
+					Launching launch.py...
+					################################################################
+					Python 3.10.8 (main, Oct 12 2022, 19:14:26) [GCC 9.4.0]
+					Commit hash: 17a2076f72562b428052ee3fc8c43d19c03ecd1e
+					Installing requirements for Web UI
+					Launching Web UI with arguments: --force-enable-xformers  <----这里
+					LatentDiffusion: Running in eps-prediction mode
+					DiffusionWrapper has 859.52 M params.
+					making attention of type 'vanilla' with 512 in_channels
+					Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
+					making attention of type 'vanilla' with 512 in_channels
+					Loading weights [925997e9] from /home/pangzheng/stable-diffusion-webui/models/Stable-diffusion/animefull-final-pruned-4.2G.ckpt
+					Loading VAE weights from: /home/pangzheng/stable-diffusion-webui/models/Stable-diffusion/animefull-final-pruned-4.2G.vae.pt
+					Applying xformers cross attention optimization. <----这里
+					Model loaded.
+					Loaded a total of 0 textual inversion embeddings.
+					Embeddings:
+					Running on local URL:  http://127.0.0.1:7860
+					
+					To create a public link, set `share=True` in `launch()`.
+					
+					100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:03<00:00,  5.33it/s] <----这里
+					Total progress: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:03<00:00,  5.24it/s]
+			- 提速证明
+
+				实际证明打开 Xformers 可以提速 1/4 效率
+			- 参考
+				- [Xformers](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Xformers)
 		- deepdanbooru
+			- 安装 
 
-			自动获取标签(词条)
+				自动获取标签(词条)
+			
+				- 简单(需要网络好)
+
+					配置配置文件
+				
+						vi  ~/stable-diffusion-webui/webui-user.sh
+						.....
+						export COMMANDLINE_ARGS="--deepdanbooru"
+				- 手动
+					
+						cd stable-diffusion-webui
+						source ./venv/bin/activate
+						cd repositories
+						git clone https://github.com/KichangKim/DeepDanbooru.git
+						cd DeepDanbooru
+						pip install -r requirements.txt
+
+							
+			- 启动
+
+							
+					
 		- 设置 	
 			
 				vi  ~/stable-diffusion-webui/webui-user.sh
@@ -443,6 +543,17 @@
 			                auth_basic_user_file /etc/nginx/.htpasswd;
 			                proxy_pass http://SD_Node/;
 			        }
+			        
+			        location /outputs {
+			                auth_basic           "Please input password";
+			                auth_basic_user_file /etc/nginx/.htpasswd;
+			                root /home/pangzheng/stable-diffusion-webui/; #指定目录所在路径
+			                autoindex on; #开启目录浏览
+			                #autoindex_format html; #以html风格将目录展示在浏览器中
+			                autoindex_exact_size off; #切换为 off 后，以可读的方式显示文件大小，单位为 KB、MB 或者 GB
+			                autoindex_localtime on; #以服务器的文件时间作为显示的时间
+			                charset utf-8,gbk; #展示中文文件名
+			       }
 			}
 	- 重启
 			
