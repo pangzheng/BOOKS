@@ -555,6 +555,18 @@
 			                charset utf-8,gbk; #展示中文文件名
 			       }
 			}
+	- 设置上传大小
+		- PNG Info 大画 会被 nginx 阻拦
+
+				sudo vi /etc/nginx/nginx.conf
+				
+				....................
+				http {
+				.......add......
+				client_max_body_size 50m;
+				....................
+				}
+						
 	- 重启
 			
 			$ sudo systemctl stop nginx
