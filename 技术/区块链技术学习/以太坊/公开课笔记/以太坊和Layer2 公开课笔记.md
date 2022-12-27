@@ -360,4 +360,4 @@ Polygon 社区做的好，并且收购了很多 ZK-Rollup 的研发团队，来�
  				 	 
 
 ## 参考
-[Web3新人公开课：第3讲 以太坊和Layer2](https://www.bilibili.com/video/BV1kP4y197vL/?spm_id_from=333.999.list.card_archive.click&vd_source=001dc29c0216ec8137c45550994354e9)
+[Web3新人公开课：第3讲 以太坊和Layer2](https://www.bilibili.com/video/BV1kP4y197vL)
