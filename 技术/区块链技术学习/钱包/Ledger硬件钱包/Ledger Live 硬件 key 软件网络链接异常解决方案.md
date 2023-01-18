@@ -24,7 +24,7 @@
 
 	这个软件的主要作用是劫持主机软件的请求流量到网络工具中建立的网络，具体不表。当然原理明白了，类似同类型的软件也应该可以，我之前用过类似的，但在 win 上。
 
-#### Proxfier 设置
+#### [Proxfier](https://www.proxifier.com/download/) 设置
 安装因操作系统不同就不说了，这里仅说配置，以 mac 为例
 
 1. 设置服务器
@@ -131,7 +131,8 @@
 - 注意不要使用官方的 Ledger Live 软件直接操作了链，官方bug太多	
 						
 
-		
+## 参考
+- [Ledger Live网络连接出错？无法验证真伪？使用V2ray+Proxifier完美解决Ledger Live连接错误的问题|ledger live connection error](https://www.youtube.com/watch?v=0TypinIZXPc)		
 		
 	
 					
