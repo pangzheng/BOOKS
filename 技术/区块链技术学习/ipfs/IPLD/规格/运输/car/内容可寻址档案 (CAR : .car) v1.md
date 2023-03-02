@@ -14,6 +14,22 @@ CAR 格式旨在作为任何 IPLD DAG（图形）的序列化表示，作为其�
 
 ![](./pic/content-addressable-archives.png)
 
+- 存储块(Store the Blocks)
+
+	IPLD 块可以在任何方式存储在数据库或序列化文件中
+- 序列化 car 文件1
+
+	car 文件是任何 IPLD DAG 的串行表示，作为其块的串联，加上描述文件中图形的头(`w/root CIDs`)
+	
+		对于 IPLD DAG 来说可以将其视为一个超级简单的 .tar 文件
+
+	开销很小(只有标头)，因为块本身只是用其原生 IPLD 编辑器编码的原始图形数据
+- 序列化 car 文件2
+
+	car 文件是任何 IPLD DAG 的串行表示，作为其块的串联。加上描述文件中的图形标题(w/root CID)
+	
+		对于 IPLD DAG 来说可以将其视为一个超级简单的 .tar 文件
+	
 Certified ARchive 这个名称以前也被用来指代 [CAR 格式](https://github.com/ipfs/archive-format)
 
 ## 格式说明
@@ -46,10 +62,10 @@ CAR 格式的第一个字节包含一个 `varint`，这个无符号整数指定�
 
 - 本节中组合的 CID 和数据的字节长度，编码为 `varint`
 - 本节中块的 CID，以 CID 的原始字节形式编码
-- 区块的二进制数据
+- 数据块的二进制数据
 
 ### 长度
-每个 Section 都以无符号整数的 varint 表示形式开头，指示包含该部分其余部分的字节数。
+每个 Section 都以无符号整数[LEB128](https://en.wikipedia.org/wiki/LEB128)的 varint 表示形式开头，指示包含该部分其余部分的字节数。
 ### 客户识别码
 在长度之后，块的 CID 以原始字节形式包含在内。读取 Section 的解码器必须根据 CID 字节编码规则对 CID 进行解码，该编码规则不提供稳定的长度。有关 CID 编码的详细信息，请参阅 [https://github.com/multiformats/cid](https://github.com/multiformats/cid) 。目前支持 CIDv0 和 CIDv1。（注意：请参阅未解决问题下的[CID 版本](https://ipld.io/specs/transport/car/carv1/#cid-version)。）
 
