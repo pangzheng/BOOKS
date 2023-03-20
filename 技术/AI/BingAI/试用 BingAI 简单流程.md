@@ -34,6 +34,10 @@
 - 关闭 Edge 游览器重新打开，这步很重要
 
 ## BingAI 打开方法
+### 设置 Bing 国家地区
+- 魔法打开 [www.bing.com/new](www.bing.com/new)
+- 设置国家 ![](8.png)
+
 ### 方法1
 - 重新打开点击 Bing 快捷键
 
