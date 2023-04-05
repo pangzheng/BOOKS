@@ -61,20 +61,27 @@
 
 您可以在 [https://github.com/ipfs-shipyard/ipfs-webui/blob/master/docs/LOCALIZATION.md](https://github.com/ipfs-shipyard/ipfs-webui/blob/master/docs/LOCALIZATION.md)阅读更多关于我们如何在此应用程序中使用 Transifex 和 i18next 的信息
 
-## 自增
-### 配置跨域配置
+## 配置跨域配置
+### 配置问题
 ipfs api 访问需要配置跨域设置，否则报
 
 	Access to fetch at 'http://127.0.0.1:5001/api/v0/id' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
-配置方法
 
-	$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST", "OPTIONS"]'
-	或
-	$ ipfs config  --json API.HTTPHeaders.Access-Control-Allow-Methods '["GET", "POST"]'
-	$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
-	$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
-	$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Headers '["Authorization"]'
-	$ ipfs config --json API.HTTPHeaders.Access-Control-Expose-Headers '["Location"]'
+### 配置方法
+- 配置
+	- 命令行方法
+	
+			// 对应报错，Access to fetch at 'http://127.0.0.1:5001/api/v0/id' 设置 API 的操作范围
+			$ ipfs config  --json API.HTTPHeaders.Access-Control-Allow-Methods '["GET", "POST"]'
+			// 设置跨域，注意这里根据报设置，比如上面的跨域报错为 origin 'http://localhost:3000，就要设置
+			$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3000"]'
+	- 编辑器方法
+	
+			$ export EDITOR=vim
+			$ ipfs config edit
+- 重启 ipfs 后查看配置
+
+		$ ipfs config show
 
 ## 参考
 - [使用React前端框架结合js-ipfs-api实现IPFS的文本数据流传输](https://rectsuly.github.io/2018/02/%E4%BD%BF%E7%94%A8react%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%BB%93%E5%90%88js-ipfs-api%E5%AE%9E%E7%8E%B0ipfs%E7%9A%84%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%B5%81%E4%BC%A0%E8%BE%93/)
