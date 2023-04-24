@@ -3,7 +3,7 @@ Submarine 是上传保持私有且脱离公共 IPFS 网络的内容的过程。�
 
 此 API 可用于上传文件和文件夹、列出内容以及生成访问 Token以查看和下载内容。
 
-查看 Submarine 内容需要专用网关. 通过专用网关查看海底内容时，您必须包含有效的访问 Token。可以使用生成访问 Token. 这是你应该如何构建一个链接来查看 Submarined 内容：
+查看 Submarine 内容需要专用网关. 通过专用网关查看 Submarined 内容时，您必须包含有效的访问 Token。可以使用生成访问 Token. 这是你应该如何构建一个链接来查看 Submarined 内容：
 
 - 单个文件
 
@@ -29,7 +29,7 @@ auth 端点允许您为 Submarined 文件和文件夹生成访问Token。
 
 ### 生成访问 Token
 	/auth/content/jwt
-此端点允许您创建一个访问 Token，该 Token 将用于通过专用网关查看潜艇内容。Token 是有时间限制的，你通过这个端点来控制时间。
+此端点允许您创建一个访问 Token，该 Token 将用于通过专用网关查看Submarined内容。Token 是有时间限制的，你通过这个端点来控制时间。
 
 - `POST https://managed.mypinata.cloud/api/v2/auth/content/jwt`
 

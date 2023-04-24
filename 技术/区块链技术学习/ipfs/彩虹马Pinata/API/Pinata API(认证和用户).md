@@ -3,7 +3,7 @@ Pinata API 是使用 Pinata 的主要接口。它负责所有 IPFS 固定功能�
 ## 验证
 要连接到 Pinata API，您需要生成 Pinata API 密钥。访问 [Pinata API](https://app.pinata.cloud/keys) 页面以生成新密钥。
 
-当您单击“新 API 密钥”时，系统将提示您选择权限和您生成的密钥的使用次数。如您所料，管理员权限可以访问所有 API 端点。如果您想指定特定的端点，您可以通过扩展端点的父路由并打开权限来实现。
+当您单击“New API Key”时，系统将提示您选择权限和您生成的密钥的使用次数。如您所料，管理员权限可以访问所有 API 端点。如果您想指定特定的端点，您可以通过扩展端点的父路由并打开权限来实现。
 
 默认情况下，所有密钥都可以无限使用。但是，如果您想限制一个密钥的使用次数，您可以通过设置 Max Uses 字段来实现。
 
@@ -16,9 +16,13 @@ Pinata API 是使用 Pinata 的主要接口。它负责所有 IPFS 固定功能�
 ### 重要的
 当您生成密钥时，您将看到一个带有 Pinata API Key 、Pinata API Secret 和 JWT 的模式。
 
-您的“Pinata API 密钥”充当我们 REST API 的公钥，您的“Pinata Secret API 密钥”充当您公钥的密码。JWT 是两者的编码组合。请务必将您的秘密密钥保密。
+- 您的“Pinata API Key”充当 REST API 的公钥
+- 您的 “Pinata Secret API Key”充当您公钥的密码
+
+JWT 是两者的编码组合。请务必将您的秘密密钥保密。
 
 为了增加客户的安全性，这些密钥在 Pinata 端进行了加密，并且只会显示一次，因此请将它们记下来。如果您丢失了这些值，则需要撤销密钥并创建一个新密钥。
+
 ### 连接到 Pinata API
 Pinata 请求的基本 URL 是：https://api.pinata.cloud
 
@@ -29,10 +33,11 @@ Pinata 请求的基本 URL 是：https://api.pinata.cloud
 	根据网络搜索结果，Bearer Authentication（也称为 Token 认证）是一种 HTTP 认证方案，涉及称为 bearer tokens 的安全 Token。Bearer Authentication 的名称可以理解为“给予此 Token 持有者访问权限”。`bearer token` 是一个神秘的字符串，通常由服务器在响应登录请求时生成。它是一种用于访问 OAuth 2.0 保护的资源的方法。
 - `Custom Headers`
 
-要使用不记名身份验证模型，您将需要在创建 API 密钥时生成的 JWT。此 Token 可用作 `Authorization` 以下格式的所有 API 请求的标头：
+	要使用不记名身份验证模型，您将需要在创建 API 密钥时生成的 JWT。此 Token 可用作 `Authorization` 以下格式的所有 API 请求的标头：
 
-	"Authorization": "Bearer YOUR_JWT"
+		"Authorization": "Bearer YOUR_JWT"
 
+### 测试密钥
 - `Get https://api.pinata.cloud/data/testAuthentication`
 
 	测试您的 API 密钥和连接到 Pinata API 的能力。
@@ -51,9 +56,10 @@ Pinata 请求的基本 URL 是：https://api.pinata.cloud
 ### Custom Headers
 如果 `Bearer Authentication` 验证，您的 API 请求将需要包含两个标头：
 
-- `pinata_api_key` (把你的个人 pinata api 密钥放在这里） 
-- `pinata_secret_api_key` （将您的个人 pinata 秘密 api 密钥放在这里） 
+- `pinata_api_key` (把你的个人 pinata api key 放在这里） 
+- `pinata_secret_api_key` （将您的个人 pinata secret api key 放在这里） 
 
+#### 接口
 - Get `https://api.pinata.cloud/data/testAuthentication`
 
 	测试您的 API 密钥和连接到 Pinata API 的能力。
