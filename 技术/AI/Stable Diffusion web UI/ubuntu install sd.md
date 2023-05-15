@@ -468,38 +468,13 @@
 				实际证明打开 Xformers 可以提速 1/4 效率
 			- 参考
 				- [Xformers](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Xformers)
-		- deepdanbooru
-			- 安装 
-
-				自动获取标签(词条)
-			
-				- 简单(需要网络好)
-
-					配置配置文件
+		- deepdanbooru				
+			- 设置 	
 				
-						vi  ~/stable-diffusion-webui/webui-user.sh
-						.....
-						export COMMANDLINE_ARGS="--deepdanbooru"
-				- 手动
-					
-						cd stable-diffusion-webui
-						source ./venv/bin/activate
-						cd repositories
-						git clone https://github.com/KichangKim/DeepDanbooru.git
-						cd DeepDanbooru
-						pip install -r requirements.txt
-
-							
-			- 启动
-
-							
-					
-		- 设置 	
-			
-				vi  ~/stable-diffusion-webui/webui-user.sh
-				.....
-				export COMMANDLINE_ARGS="--xformers --deepdanbooru"
-		- 重启启动		
+					vi  ~/stable-diffusion-webui/webui-user.sh
+					.....
+					export COMMANDLINE_ARGS="--xformers --deepdanbooru"
+			- 重启启动		
 					
 ## ubunt 安装 Nginx 登陆认证反向代理
 - 安装 nginx
@@ -631,7 +606,8 @@
 			......
 	- 解决
 
-			rm -Rf /home/$user/.cache/huggingface/transformers/c506559a5367a918bab46c39c79af91ab88846b49c8abd9d09e699ae067505c6.6365d436cc844f2f2b4885629b559d8ff0938ac484c01a6796538b2665de96c7			
+			rm -Rf /home/$user/.cache/huggingface/transformers/c506559a5367a918bab46c39c79af91ab88846b49c8abd9d09e699ae067505c6.6365d436cc844f2f2b4885629b559d8ff0938ac484c01a6796538b2665de96c7
+						
 									
 ## 模型下载
 - SD 标准模型
@@ -648,7 +624,129 @@
 - 二次元模型
 
 	你懂的		
+
+## 更新版本
+## 报错处理
+### Ubuntu
+- pip 加速
+	- 错误
+
+		pip 慢
+	- 解决方案
+
+		将 pip 替换成阿里源
+		
+		- 使用用户权限进入用户目录
+
+				cd /home/pangzheng
+		- 创建 pip 配置目录
+			
+				mkdir .pip
+		- 创建配置文件
+
+				vi pip.conf
+
+				## Note, this file is written by cloud-init on first boot of an instance
+				## modifications made here will not survive a re-bundle.
+				###
+				[global]
+				index-url=http://mirrors.cloud.aliyuncs.com/pypi/simple/
 				
+				[install]
+				trusted-host=mirrors.cloud.aliyuncs.com
+		- 保存退出		
+- torch 
+	- 错误
+		
+			...
+			RuntimeError: Couldn't install torch.
+			Command: "/usr/bin/python3" -m pip install torch==2.0.0 torchvision==0.15.1 --extra-index-url https://download.pytorch.org/whl/cu118
+			Error code: 1
+	- [解决方案](https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/6592)
+
+		安装正确版本的 python 3.10.x 后，我的解决方案是从 stable-diffusion-webui-master 目录中删除“venv”文件夹。。		
+- TCMalloc
+	- 错误
+
+			Cannot locate TCMalloc (improves CPU memory usage)
+	- [解决方案](https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/10117)
+
+			sudo apt-get install libgoogle-perftools4 libtcmalloc-minimal4 -y
+- pip
+	- 错误
+		
+			[notice] A new release of pip is available: 23.0.1 -> 23.1.2
+			[notice] To update, run: pip install --upgrade pip
+	- 解决
+		- 进入 `stable-diffusion-webui` 目录
+		- 进入虚拟机
+				
+				source venv/bin/activate
+		- 升级 pip
+
+				pip install --upgrade pip
+- Xformers
+	- 错误
+
+		启动报错
+			
+			No module 'xformers'. Proceeding without it. 
+	- [解决方案](https://blog.csdn.net/weixin_42045719/article/details/130071986)
+		- 进入 `stable-diffusion-webui` 目录
+		- 编辑	
+				
+				vi webui-user.sh			
+				
+				# 添加
+				export COMMANDLINE_ARGS="--xformers" 
+		- 重启安装解决
+- 任务管理器错误
+	- 错误
+
+		刷新页面打开后，点击任务无法进行，且无法切换模型，打开控制台报错
+
+			WebSocket connection to 'ws://123.56.40.96/queue/join' failed: 
+	- [解决方案](https://github.com/AUTOMATIC1111/stable-diffusion-webui/issues/9074)
+		- 进入 `stable-diffusion-webui` 目录
+		- 编辑	
+				
+				vi webui-user.sh			
+				
+				# 添加
+				export COMMANDLINE_ARGS="--xformers --no-gradio-queue"
+- deepdanbooru 
+	- 错误
+	
+		点击 deepdanbooru 取图获取魔法词，安装报错	
+	- 解决方案
+		
+		找台可以网路加速的机器，下载，复制到对应目录，重启服务
+		
+		- 模型地址
+
+				https://github.com/AUTOMATIC1111/TorchDeepDanbooru/releases/download/v1/model-resnet_custom_v3.pt 
+		- 下载地方
+
+				/data/home/pangzheng/stable-diffusion-webui/models/torch_deepdanbooru/model-resnet_custom_v3.pt
+- A tensor with all NaNs was produced in VAE
+	- 错误
+
+			modules.devices.NansException: A tensor with all NaNs was produced in VAE. This could be because there's not enough precision to represent the picture. Try adding --no-half-vae commandline argument to fix this. Use --disable-nan-check commandline argument to disable this check.
+	- [解决方案](https://www.scratchina.com/html/aigcjishu/357.html)
+		- 进入 `stable-diffusion-webui` 目录
+		- 编辑	
+				
+				vi webui-user.sh			
+				
+				# 添加
+				export COMMANDLINE_ARGS="--xformers --no-half-vae --no-gradio-queue" 
+		- 重启安装解决
+- No such file or directory: 'xdg-open'
+	- 错误
+
+		点击 ui 的目录报错
+			
+				FileNotFoundError: [Errno 2] No such file or directory: 'xdg-open' 							
 ## 参考
 - [NVIDIA Drivers on Rocky Linux](https://darryldias.me/2021/nvidia-drivers-on-rocky-linux/)
 - [Install NVIDIA Drivers [515.76 / 510.85.02 / 470.141.03 / 390.154 / 340.108] on CentOS Stream 9/8, RHEL 9/8, Rocky Linux 8.5](https://www.if-not-true-then-false.com/2021/install-nvidia-drivers-on-centos-rhel-rocky-linux/)
