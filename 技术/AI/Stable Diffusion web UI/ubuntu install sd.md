@@ -607,7 +607,45 @@
 	- 解决
 
 			rm -Rf /home/$user/.cache/huggingface/transformers/c506559a5367a918bab46c39c79af91ab88846b49c8abd9d09e699ae067505c6.6365d436cc844f2f2b4885629b559d8ff0938ac484c01a6796538b2665de96c7
-						
+- pip 安装错误
+	- 错误
+
+		执行任何 pip 命令均包错
+		
+			$ python3.10 -m pip list
+			Traceback (most recent call last):
+			  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+			    return _run_code(code, main_globals, None,
+			  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+			    exec(code, run_globals)
+			  File "/usr/lib/python3/dist-packages/pip/__main__.py", line 19, in <module>
+			    sys.exit(_main())
+			  File "/usr/lib/python3/dist-packages/pip/_internal/cli/main.py", line 73, in main
+			    command = create_command(cmd_name, isolated=("--isolated" in cmd_args))
+			  File "/usr/lib/python3/dist-packages/pip/_internal/commands/__init__.py", line 96, in create_command
+			    module = importlib.import_module(module_path)
+			  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+			    return _bootstrap._gcd_import(name[level:], package, level)
+			  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+			  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+			  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+			  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+			  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+			  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+			  File "/usr/lib/python3/dist-packages/pip/_internal/commands/list.py", line 13, in <module>
+			    from pip._internal.cli.req_command import IndexGroupCommand
+			  File "/usr/lib/python3/dist-packages/pip/_internal/cli/req_command.py", line 15, in <module>
+			    from pip._internal.index.package_finder import PackageFinder
+			  File "/usr/lib/python3/dist-packages/pip/_internal/index/package_finder.py", line 21, in <module>
+			    from pip._internal.index.collector import parse_links
+			  File "/usr/lib/python3/dist-packages/pip/_internal/index/collector.py", line 12, in <module>
+			    from pip._vendor import html5lib, requests
+			ImportError: cannot import name 'html5lib' from 'pip._vendor' (/usr/lib/python3/dist-packages/pip/_vendor/__init__.py)
+	- 解决
+
+			$ sudo apt-get remove python3-pip				$ curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+			$ python3.10 -m pip --version
+				pip 23.1.2 from /home/pangzheng/.local/lib/python3.10/site-packages/pip (python 3.10)				
 									
 ## 模型下载
 - SD 标准模型
@@ -621,6 +659,17 @@
 		- v1-5-pruned.ckpt - 7.7GB, ema + non-ema 权重。使用更多的VRAM -适合微调
 
 				cp sd-v1-*  /home/$user/stable-diffusion-webui/models/Stable-diffusion/
+	- 2.1
+
+		这里有很多模型，下载 ckpt 的就行了
+		
+		- [base 512](https://huggingface.co/stabilityai/stable-diffusion-2-base/tree/main)
+		- [768](https://huggingface.co/stabilityai/stable-diffusion-2-1/tree/main)
+
+		但还需要配 [yaml](https://github.com/Stability-AI/stablediffusion/tree/main/configs/stable-diffusion)
+		
+		- [base 512](https://github.com/Stability-AI/stablediffusion/blob/main/configs/stable-diffusion/v2-inference.yaml)
+		- [768](https://github.com/Stability-AI/stablediffusion/blob/main/configs/stable-diffusion/v2-inference-v.yaml) 			
 - 二次元模型
 
 	你懂的		
