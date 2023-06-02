@@ -277,23 +277,18 @@
 		< fi
 			
 - 守护进程
-		$ vi stable-diffusion-webui.sh
-
-		.......
-		#! /bin/sh
 
 		### BEGIN INIT INFO
-		# Provides:          $user
+		# Provides:          pangzheng
 		# Short-NAMEription: the stable-diffusion webui service
 		# Description:       Manage stable-diffusion webui service Lifecycle
 		### END INIT INFO
 		
 		NAME=stable-diffusion-webui
 		PIDFILE=/tmp/$NAME.pid
-		DAEMON_OPTS=ubuntu-webui.sh
-		UPDATE_DAEMON_OPTS=webui.sh
-		DEPLOY_DIR=/home/pangzheng/stable-diffusion-webui
-		
+		SD_PATH=/home/pangzheng/sd
+		UPDATE_DAEMON_PATH=$SD_PATH/stable-diffusion-webui
+		LOGFILE=$SD_PATH/stable-diffusion-webui/nohup.out
 		
 		PID=`ps axuf | grep launch.py | grep -v grep  | awk '{print $2}'`
 		
@@ -307,26 +302,26 @@
 		                exit 1
 		        fi
 		
-		        cd $DEPLOY_DIR && nohup /usr/bin/bash  ${DAEMON_OPTS} &
+		        cd  ${UPDATE_DAEMON_PATH} && nohup /bin/bash ubuntu-webui.sh &
 		
 		        echo " $NAME start done"
 		
-		        cd $DEPLOY_DIR && tail -f nohup.out
+		        tail -f $LOGFILE
 		}
 		
 		update_method(){
-        echo -n "Starting $NAME"
-
-        if [ $PID ];then
-                echo "$NAME is running......"
-                exit 1
-        fi
-
-        cd $DEPLOY_DIR && nohup /usr/bin/bash ${UPDATE_DAEMON_OPTS} &
-
-        echo " $NAME start done"
-
-        cd $DEPLOY_DIR && tail -f nohup.out
+		        echo -n "Starting $NAME"
+		
+		        if [ $PID ];then
+		                echo "$NAME is running......"
+		                exit 1
+		        fi
+		
+		        cd  ${UPDATE_DAEMON_PATH} && nohup /bin/bash webui.sh &
+		
+		        echo " $NAME start done"
+		
+		        tail -f $LOGFILE
 		}
 		
 		stop_method(){
@@ -356,10 +351,18 @@
 		
 		logs_method(){
 		
-		        cd $DEPLOY_DIR  && tail -f nohup.out
+		        tail -f $LOGFILE
+		}
+		
+		clean_method(){
+		
+		        echo "" > $LOGFILE
 		}
 		
 		case "$1" in
+		  clean)
+		        clean_method
+		        ;;
 		  status)
 		        status_method
 		        ;;
@@ -367,25 +370,25 @@
 		        start_method
 		        ;;
 		  update)
-        		  update_method
-        		  ;;
+		        update_method
+		        ;;
 		  stop)
 		        stop_method
 		        ;;
 		  restart)
 		        stop_method
-		        start_method
+		start_method
 		        ;;
-		 logs)
+		  logs)
 		        logs_method
 		        ;;
 		  *)
 		        echo "Usage: $0 {status|start|update|stop|restart}" >&2
 		        exit 1
-		        ;;
+	        ;;
 		esac
 		
-		exit 0
+		exit 0        
 
 - 参数优化
 	- 开启 xformers 和 deepdanbooru
