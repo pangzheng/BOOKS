@@ -381,8 +381,228 @@ controlnet 下完插件后，还需要下很多模型来使用，所以需要从
 
 			![](./pic/controlnet1.1-12.png)
 			
-			
+## [Controlnet 1.1 + canny ](https://www.bilibili.com/video/BV1Wk4y1L7AK/?spm_id_from=333.337.search-card.all.click&vd_source=f6f37263151dcfb42f0a8663116bb22b)
+获取画面线条，然后重新上色、材质、光照等，所以效果是与上面的模型不一样，
+### 使用场景
+比如上面说到的漫画上色、或者人物服装换色
+### 配置
+- 模型文件
+	- control_v11p_sd15_canny.pth
+- 预处理器
+	- 原图
 
+		![](./pic/controlnet1.1-13.png)
+	- canny(*推荐*)
+
+		![](./pic/controlnet1.1-14.png)
+	- invert (from white bg & black line)
+
+		生成黑白反色的控制图，暂时没想到什么地方用
+		![](./pic/controlnet1.1-15.png)	
+- 参数
+	
+	在 canny 处理器下，可以通过调低高阈值获取画面更多的细节线条，这样来加大对生成图的更多限制
+	
+	![](./pic/controlnet1.1-16.png)	
+
+
+## [Controlnet 1.1 + MLSD 直线模型 ](https://www.bilibili.com/video/BV1Wk4y1L7AK/?spm_id_from=333.337.search-card.all.click&vd_source=f6f37263151dcfb42f0a8663116bb22b)
+获取画面直线条线搞，如果是曲线就会忽略
+### 使用场景
+可以做一些建筑设计相关，比如室内设计
+### 配置
+- 模型文件
+	- control_v11p_sd15_canny.pth
+- 预处理器
+	- 原图(用法线的图对比)
+
+		![](./pic/controlnet1.1-9.png)
+	- mlsd(*推荐*)
+
+		![](./pic/controlnet1.1-17.png)
+	- invert (from white bg & black line)
+
+		生成黑白反色的控制图，暂时没想到什么地方用
+		![](./pic/controlnet1.1-18.png)	
+- 参数
+	
+	在 mlsd 处理器下，通过分辨率增高，反而细节变少了，对细节误差较大，所以可能产生更多噪点影响准确度，如下
+	
+	![](./pic/controlnet1.1-19.png)	
+	
+	![](./pic/controlnet1.1-20.png)
+	
+	- MLSD Value Threshold
+	
+		霍夫变换阈值越小，细节更重
+		
+		- 0.1
+
+			![](./pic/controlnet1.1-17.png)
+		- 0.01 
+
+			![](./pic/controlnet1.1-21.png)
+	- MLSD Distance Threshold
+
+		霍夫变换距离阈值，增大密集线条逐渐减少
+		
+		![](./pic/controlnet1.1-22.png)
+
+## [Controlnet 1.1 + scribble 涂鸦](https://www.bilibili.com/video/BV1Uu411p76u/?spm_id_from=333.337.search-card.all.click&vd_source=f6f37263151dcfb42f0a8663116bb22b)
+涂鸦有两种模式
+
+- 合成涂鸦式
+- 交互式手绘涂鸦
+
+### 使用场景
+文化创作的概念设计
+
+### 配置
+- 模型文件
+	- control_v11p_sd15_scribble.pth
+- 预处理器
+	- 准备数据
+		- 原图
+	
+			![](./pic/controlnet1.1-23.png)
+		- 参数
+
+				DPM2 a Karras	
+		- 想要修改的咒语，正向咒语不加其他的
+		
+				In the cinema 	
+		- 合成涂鸦式	
+			- scribble_pidinet
+				- 控制画面
+				
+					![](./pic/controlnet1.1-24.png)
+				- 合成
+					
+					![](./pic/controlnet1.1-25.png)	
+			- scribble_hed
+				- 控制画面
+				
+					![](./pic/controlnet1.1-26.png)
+				- 合成
+					
+					![](./pic/controlnet1.1-27.png)
+			- scribble_xdog
+				- 控制画面
+				
+					![](./pic/controlnet1.1-28.png)
+				- 合成
+					
+					![](./pic/controlnet1.1-29.png)		
+		- 手绘涂鸦
+			
+			就是直接拿笔画
+			
+			- 手绘涂鸦画板	
+			
+				![](./pic/controlnet1.1-30.png)	
+			- 手绘涂鸦
+	
+				![](./pic/controlnet1.1-31.png)
+			- 合成结果
+	
+				![](./pic/controlnet1.1-32.png)		  	
+		- invert (from white bg & black line)
+
+		生成黑白反色的控制图，暂时没想到什么地方用
+
+## Controlnet 1.1 + Soft Edge 软边缘 
+对比线图，这个模型更在乎轮廓线图
+
+性能可以大致记为
+
+- 鲁棒性
+
+		SoftEdge_PIDI_safe > SoftEdge_HED_safe >> SoftEdge_PIDI > SoftEdge_HED
+- 最高结果质量
+
+		SoftEdge_HED > SoftEdge_PIDI > SoftEdge_HED_safe > SoftEdge_PIDI_safe
+		
+### 使用场景
+换装？
+
+### 配置
+- 模型文件
+	- control_v11p_sd15_softedge.pth
+- 预处理器
+	- 原图(用法线的图对比)
+
+		![](./pic/controlnet1.1-13.png)
+	- 咒语
+	
+			1girl, subway station,  	
+	- SoftEdge_HED
+		- 控制图
+
+			![](./pic/controlnet1.1-33.png)
+		- 结果
+
+			![](./pic/controlnet1.1-34.png)  
+	- SoftEdge_PIDI
+		- 控制图
+
+			![](./pic/controlnet1.1-35.png)
+		- 结果
+
+			![](./pic/controlnet1.1-36.png)  
+	- SoftEdge_HED_safe
+		- 控制图
+
+			![](./pic/controlnet1.1-37.png)
+		- 结果
+
+			![](./pic/controlnet1.1-38.png)  
+	- SoftEdge_PIDI_saf
+		- 控制图
+
+			![](./pic/controlnet1.1-39.png)
+		- 结果
+
+			![](./pic/controlnet1.1-40.png)  
+
+## [Controlnet 1.1 + Segmentation 分割 ]()
+可以通过  ADE20K 或 COCO 颜色标注画面物体模块内容，获取画面物体色块分割标注
+### 使用场景
+可以做一些建筑设计相关，比如室内设计
+### 配置
+- 模型文件
+	- control_v11p_sd15_seg.pth
+- 预处理器
+	- 原图(用法线的图对比)
+
+		![](./pic/controlnet1.1-41.jpeg) 
+	- 反推咒语
+
+			no humans, scenery, sky, outdoors, building, window, tree, reflection, night, plant, balcony, day, blue sky, water, lamppost, house, door
+	- 换了一个主模型
+
+			xsarchitecturalv3com_v31.ckpt [7bf72c55d3]
+	- seg_ofade20k
+		- 控制图
+
+			![](./pic/controlnet1.1-42.png)
+		- 结果
+
+			![](./pic/controlnet1.1-43.png) 
+	- seg_ofcoco
+		- 控制图
+
+			![](./pic/controlnet1.1-44.png)
+		- 结果
+
+			![](./pic/controlnet1.1-45.png)
+	- seg_ufade20k
+		- 控制图
+
+			![](./pic/controlnet1.1-46.png)
+		- 结果
+
+			![](./pic/controlnet1.1-47.png)
+	
 ## 错误处理
 ### 下载错误
 - 报错

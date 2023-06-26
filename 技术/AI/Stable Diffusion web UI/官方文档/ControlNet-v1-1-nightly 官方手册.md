@@ -90,7 +90,7 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 - 该模型从深度 1.0 恢复，它应该在深度 1.0 运行良好的所有情况下运行良好。如果没有，请打开图像问题，我们将查看您的案例。Depth 1.1 在 depth 1.0 的许多失败案例中效果很好。
 - 如果您使用具有 384 预处理器分辨率的 Midas 深度（webui 插件中的“深度”），则深度 1.0 和 1.1 之间的差异应该很小。但是，如果您尝试其他预处理器分辨率或其他预处理器（如 leres 和 zoe），深度 1.1 预计会比 1.0 好一点。
 
-## ControlNet 1.1 normalbae 法线 ***
+## ControlNet 1.1 normalbae  ***
 使用法线贴图控制 SD。
 
 - 模型文件
@@ -121,7 +121,7 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 - 这个 Normal 1.1 更合理，因为预处理器经过训练可以使用相对正确的协议（NYU-V2 的可视化方法）来估计法线贴图。这意味着法线 1.1 可以解释来自渲染引擎的真实法线贴图，只要颜色正确（蓝色在前面，红色在左边，绿色在上面）。
 - 在我们的测试中，这个模型是健壮的，可以达到与深度模型相似的性能。在之前的 CNET 1.0 中，Normal 1.0 并不是很常用。但是这个 Normal 2.0 有了很大的改进，并且有可能被更频繁地使用。
 
-## ControlNet 1.1 Canny
+## ControlNet 1.1 Canny ***
 使用 Canny Maps 控制 SD。
 
 - 模型文件
@@ -150,12 +150,13 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 - 一些合理的数据增强应用于训练，如随机左右翻转。
 - 尽管很难评估 ControlNet，但我们发现 Canny 1.1 比 Canny 1.0 更健壮，视觉质量也更高。
 
-## ControlNet 1.1 MLSD
-用 M-LSD 直线控制稳定扩散。
+## ControlNet 1.1 MLSD ***
+用 M-LSD 直线控制 SD。
 
-模型文件：control_v11p_sd15_mlsd.pth
-
-配置文件：control_v11p_sd15_mlsd.yaml
+- 模型文件
+	- control_v11p_sd15_mlsd.pth
+- 配置文件
+	- control_v11p_sd15_mlsd.yaml
 
 训练数据：M-LSD 线。
 
@@ -163,53 +164,65 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 
 我们修复了之前训练数据集中的几个问题。该模型从 ControlNet 1.0 恢复并使用 A100 80G 的 200 GPU 小时进行训练。
 
-python gradio_mlsd.py
-随机种子 12345（“房间”）的非 cherry-picked 批次测试：
+	python gradio_mlsd.py
+随机种子 12345（“room”）的非 cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-5.png)
 
-MLSD 1.1 的改进：
+### MLSD 1.1 的更新：
+- 之前 cnet 1.0 的训练数据集存在几个问题，包括
+	- 一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；
+	- 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；
+	- 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。
+	- 新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
+- 我们通过使用 MLSD 查找其中包含超过 16 条直线的图像，增加了 300K 个图像，从而扩大了训练数据集。
+- 一些合理的数据增强应用于训练，如随机左右翻转。
+- 从 MLSD 1.0 恢复并继续使用 A100 80G 的 200 GPU 小时进行训练。
 
-之前cnet 1.0的训练数据集存在几个问题，包括（1）一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；(2) 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；(3) 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
-我们通过使用 MLSD 查找其中包含超过 16 条直线的图像，增加了 300K 个图像，从而扩大了训练数据集。
-一些合理的数据增强应用于训练，如随机左右翻转。
-从 MLSD 1.0 恢复并继续使用 A100 80G 的 200 GPU 小时进行训练。
-ControlNet 1.1 涂鸦
-用涂鸦控制稳定扩散。
+## ControlNet 1.1 Scribble 涂鸦
+用涂鸦控制 SD。
 
-模型文件：control_v11p_sd15_scribble.pth
-
-配置文件：control_v11p_sd15_scribble.yaml
+- 模型文件
+	- control_v11p_sd15_scribble.pth
+- 配置文件
+	- control_v11p_sd15_scribble.yaml
 
 训练数据：合成的涂鸦。
 
-可接受的预处理器：合成涂鸦（Scribble_HED、Scribble_PIDI 等）或手绘涂鸦。
+可接受的预处理器：
+
+- 合成涂鸦（Scribble_HED、Scribble_PIDI 等）
+- 或手绘涂鸦。
 
 我们修复了之前训练数据集中的几个问题。该模型从 ControlNet 1.0 恢复并使用 A100 80G 的 200 GPU 小时进行训练。
 
-# To test synthesized scribbles
-python gradio_scribble.py
-# To test hand-drawn scribbles in an interactive demo
-python gradio_interactive.py
-随机种子 12345（“图书馆里的人”）的非 cherry-picked 批次测试：
+	# 测试合成涂鸦
+	python gradio_scribble.py
+	# 交互式手绘涂鸦
+	python gradio_interactive.py
+随机种子 12345（`man in library`）的非 cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-6.png)
+随机种子 12345 的非 cherry-picked 批测试（交互式，`the beautiful landscape`）：
 
-随机种子 12345 的非 cherry-picked 批测试（交互式，“美丽的风景”）：
+![](./pic/controlnet1.1-7.png)
 
-图片
+### Scribble 1.1 的更新：
+- 之前 cnet 1.0 的训练数据集存在几个问题，包括
+	- 一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；
+	- 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；
+	- 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。
+	- 新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
+- 我们发现用户有时喜欢画很粗的涂鸦。因此，我们使用更积极的随机形态变换来合成涂鸦。即使涂鸦相对较粗（训练数据的最大宽度为 512 画布中的 24 像素宽度的涂鸦，但即使对于更宽的涂鸦，它似乎也能正常工作；最小宽度为 1 像素，该模型应该也能正常工作).
+- 从 Scribble 1.0 恢复，继续使用 A100 80G 的 200 GPU 小时。
 
-Scribble 1.1 的改进：
+## ControlNet 1.1 softedge 软边缘
+使用软边控制 SD。
 
-之前cnet 1.0的训练数据集存在几个问题，包括（1）一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；(2) 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；(3) 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
-我们发现用户有时喜欢画很粗的涂鸦。因此，我们使用更积极的随机形态变换来合成涂鸦。即使涂鸦相对较粗（训练数据的最大宽度为 512 画布中的 24 像素宽度的涂鸦，但即使对于更宽的涂鸦，它似乎也能正常工作；最小宽度为 1 像素，该模型应该也能正常工作).
-从 Scribble 1.0 恢复，继续使用 A100 80G 的 200 GPU 小时。
-ControlNet 1.1 软边缘
-使用软边控制稳定扩散。
-
-模型文件：control_v11p_sd15_softedge.pth
-
-配置文件：control_v11p_sd15_softedge.yaml
+- 模型文件
+	- control_v11p_sd15_softedge.pth
+- 配置文件
+	- control_v11p_sd15_softedge.yaml
 
 训练数据：SoftEdge_PIDI、SoftEdge_PIDI_safe、SoftEdge_HED、SoftEdge_HED_safe。
 
@@ -217,32 +230,40 @@ ControlNet 1.1 软边缘
 
 与以前的模型相比，该模型有了显着改进。所有用户应尽快更新。
 
-ControlNet 1.1 中的新功能：现在我们添加了一种名为“SoftEdge_safe”的新型软边缘。这是因为 HED 或 PIDI 倾向于在软估计中隐藏原始图像的损坏灰度版本，而这种隐藏模式会分散 ControlNet 的注意力，从而导致不良结果。解决方案是使用预处理将边缘图量化为多个级别，以便完全删除隐藏的模式。实现在 annotator/util.py 的第 78 行。
+ControlNet 1.1 中的新功能：现在我们添加了一种名为“SoftEdge_safe”的新型软边缘。这是因为 HED 或 PIDI 倾向于在软估计中隐藏原始图像的损坏灰度版本，而这种隐藏模式会分散 ControlNet 的注意力，从而导致不良结果。解决方案是使用预处理将边缘图量化为多个级别，以便完全删除隐藏的模式。实现在 [annotator/util.py 的第 78 行](https://github.com/lllyasviel/ControlNet-v1-1-nightly/blob/4c9560ebe7679daac53a0599a11b9b7cd984ac55/annotator/util.py#L78)。
 
-性能可以大致记为：
+性能可以大致记为
 
-鲁棒性：SoftEdge_PIDI_safe > SoftEdge_HED_safe >> SoftEdge_PIDI > SoftEdge_HED
+- 鲁棒性
 
-最高结果质量：SoftEdge_HED > SoftEdge_PIDI > SoftEdge_HED_safe > SoftEdge_PIDI_safe
+		SoftEdge_PIDI_safe > SoftEdge_HED_safe >> SoftEdge_PIDI > SoftEdge_HED
+- 最高结果质量
+
+		SoftEdge_HED > SoftEdge_PIDI > SoftEdge_HED_safe > SoftEdge_PIDI_safe
 
 考虑到权衡，我们建议默认使用 SoftEdge_PIDI。在大多数情况下，它工作得很好。
 
-python gradio_softedge.py
-随机种子12345（“帅哥”）非cherry-picked批次测试：
+	python gradio_softedge.py
+随机种子12345（`a handsome man`）非cherry-picked批次测试：
 
-图片
+![](./pic/controlnet1.1-8.png)
 
-Soft Edge 1.1 的改进：
+### Soft Edge 1.1 的更新：
+- Soft Edge 1.1 在以前的 ControlNet 中称为 HED 1.0。
+- 之前 cnet 1.0 的训练数据集存在几个问题，包括
+	- 一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；
+	- 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；
+	- 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。
+	- 新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
+- Soft Edge 1.1 明显（几乎 100% 的情况下）优于 HED 1.0。这主要是因为 HED 或 PIDI 估计器倾向于将损坏的原始图像的灰度版本隐藏在软边缘图中，而之前的模型 HED 1.0 过度拟合以恢复隐藏的损坏图像而不是执行边界感知扩散。Soft Edge 1.1 的训练使用了 75% 的“安全”过滤来去除此类隐藏的损坏灰度图像内部控制图。这使得 Soft Edge 1.1 非常强大。在实际测试中，Soft Edge 1.1 与深度模型一样可用，并且有可能被更频繁地使用。
 
-Soft Edge 1.1 在以前的 ControlNet 中称为 HED 1.0。
-之前cnet 1.0的训练数据集存在几个问题，包括（1）一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；(2) 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；(3) 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
-Soft Edge 1.1 明显（几乎 100% 的情况下）优于 HED 1.0。这主要是因为 HED 或 PIDI 估计器倾向于将损坏的原始图像的灰度版本隐藏在软边缘图中，而之前的模型 HED 1.0 过度拟合以恢复隐藏的损坏图像而不是执行边界感知扩散。Soft Edge 1.1 的训练使用了 75% 的“安全”过滤来去除此类隐藏的损坏灰度图像内部控制图。这使得 Soft Edge 1.1 非常强大。在实际测试中，Soft Edge 1.1 与深度模型一样可用，并且有可能被更频繁地使用。
-ControlNet 1.1 分段
-用语义分割控制稳定扩散。
+## ControlNet 1.1 Segmentation 分段
+用语义分割控 SD。
 
-模型文件：control_v11p_sd15_seg.pth
-
-配置文件：control_v11p_sd15_seg.yaml
+- 模型文件
+	- control_v11p_sd15_seg.pth
+- 配置文件
+	- control_v11p_sd15_seg.yaml
 
 训练数据：COCO + ADE20K。
 
@@ -250,25 +271,26 @@ ControlNet 1.1 分段
 
 现在该模型可以接收 ADE20K 或 COCO 两种类型的注释。我们发现识别分段协议对于 ControlNet 编码器来说是微不足道的，并且训练多个分段协议的模型可以带来更好的性能。
 
-python gradio_seg.py
+	python gradio_seg.py
 使用随机种子 12345（ADE20k 协议，“house”）的非 cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-9.png)
 
 使用随机种子 12345 的非 cherry-picked 批次测试（COCO 协议，“house”）：
 
-图片
+![](./pic/controlnet1.1-10.png)
 
-分段 1.1 的改进：
+### 分段 1.1 的更新：
+- 支持 COCO 协议。之前的 Segmentation 1.0 支持大约 150 种颜色，但是 Segmentation 1.1 支持 coco 另外182种颜色。
+- 从分段 1.0 恢复。所有以前的输入应该仍然有效。
 
-支持 COCO 协议。之前的Segmentation 1.0支持大约150种颜色，但是Segmentation 1.1支持coco另外182种颜色。
-从分段 1.0 恢复。所有以前的输入应该仍然有效。
-ControlNet 1.1 Openpose
-使用 Openpose 控制稳定扩散。
+## ControlNet 1.1 Openpose 姿势
+使用 Openpose 控制 SD。
 
-模型文件：control_v11p_sd15_openpose.pth
-
-配置文件：control_v11p_sd15_openpose.yaml
+- 模型文件
+	- control_v11p_sd15_openpose.pth
+- 配置文件
+	- control_v11p_sd15_openpose.yaml
 
 该模型经过训练，可以接受以下组合：
 
