@@ -76,7 +76,7 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 可接受的预处理器：Depth_Midas、Depth_Leres、Depth_Zoe。该模型非常稳健，可以处理来自渲染引擎的真实深度图。
 
 	python gradio_depth.py
-随机种子 ``12345`（`a handsome man`）非 cherry-picked 批次测试：
+随机种子 ``12345`（`a handsome man`）Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-1.png)
 
@@ -109,11 +109,11 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 请注意，此方法比 ControlNet 1.0 中的 normal-from-midas 方法合理得多。以前的方法将被放弃。
 
 	python gradio_normalbae.py
-随机种子 12345（`a man made of flowers`）的非 cherry-picked 批次测试：
+随机种子 12345（`a man made of flowers`）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-2.png)
 
-随机种子 12345（`room`）的非 cherry-picked 批次测试：
+随机种子 12345（`room`）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-3.png)
 
@@ -136,7 +136,7 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 我们修复了之前训练数据集中的几个问题。
 
 	python gradio_canny.py
-随机种子 12345（`dog in a room`）的非 cherry-picked 批次测试：
+随机种子 12345（`dog in a room`）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-4.png)
 
@@ -165,7 +165,7 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 我们修复了之前训练数据集中的几个问题。该模型从 ControlNet 1.0 恢复并使用 A100 80G 的 200 GPU 小时进行训练。
 
 	python gradio_mlsd.py
-随机种子 12345（“room”）的非 cherry-picked 批次测试：
+随机种子 12345（“room”）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-5.png)
 
@@ -200,10 +200,10 @@ ControlNet 1.1 包括 14 个模型（11 个生产就绪模型和 3 个实验模�
 	python gradio_scribble.py
 	# 交互式手绘涂鸦
 	python gradio_interactive.py
-随机种子 12345（`man in library`）的非 cherry-picked 批次测试：
+随机种子 12345（`man in library`）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-6.png)
-随机种子 12345 的非 cherry-picked 批测试（交互式，`the beautiful landscape`）：
+随机种子 12345 的Non-cherry-picked 批测试（交互式，`the beautiful landscape`）：
 
 ![](./pic/controlnet1.1-7.png)
 
@@ -244,7 +244,7 @@ ControlNet 1.1 中的新功能：现在我们添加了一种名为“SoftEdge_sa
 考虑到权衡，我们建议默认使用 SoftEdge_PIDI。在大多数情况下，它工作得很好。
 
 	python gradio_softedge.py
-随机种子12345（`a handsome man`）非cherry-picked批次测试：
+随机种子12345（`a handsome man`）Non-cherry-picked批次测试：
 
 ![](./pic/controlnet1.1-8.png)
 
@@ -272,11 +272,11 @@ ControlNet 1.1 中的新功能：现在我们添加了一种名为“SoftEdge_sa
 现在该模型可以接收 ADE20K 或 COCO 两种类型的注释。我们发现识别分段协议对于 ControlNet 编码器来说是微不足道的，并且训练多个分段协议的模型可以带来更好的性能。
 
 	python gradio_seg.py
-使用随机种子 12345（ADE20k 协议，“house”）的非 cherry-picked 批次测试：
+使用随机种子 12345（ADE20k 协议，“house”）的Non-cherry-picked 批次测试：
 
 ![](./pic/controlnet1.1-9.png)
 
-使用随机种子 12345 的非 cherry-picked 批次测试（COCO 协议，“house”）：
+使用随机种子 12345 的Non-cherry-picked 批次测试（COCO 协议，“house”）：
 
 ![](./pic/controlnet1.1-10.png)
 
@@ -294,61 +294,79 @@ ControlNet 1.1 中的新功能：现在我们添加了一种名为“SoftEdge_sa
 
 该模型经过训练，可以接受以下组合：
 
-打开姿势身体
-张开手
-打开姿势脸
-Openpose 身体 + Openpose 手
-Openpose 身体 + Openpose 脸部
-Openpose 手 + Openpose 脸
-Openpose 身体 + Openpose 手 + Openpose 脸
+- Openpose body
+	- 身体姿势 
+- Openpose hand
+	- 手姿势 
+- Openpose face
+	- 脸姿势 
+- Openpose body + Openpose hand
+	- 身体和手姿势 
+- Openpose body + Openpose face
+	- 身体和脸姿势 
+- Openpose hand + Openpose face
+	- 手和脸姿势 
+- Openpose body + Openpose hand + Openpose face
+	- 全部姿势 
+
 然而，提供所有这些组合太复杂了。我们建议只为用户提供两种选择：
 
-“Openpose”= Openpose 身体
-"Openpose Full" = Openpose 身体 + Openpose 手 + Openpose 脸
+- `Openpose` = Openpose body
+	- 身体姿势 
+- `Openpose Full` = Openpose body + Openpose hand + Openpose face
+	- 全部姿势 
+
 您可以尝试演示：
 
-python gradio_openpose.py
-随机种子 12345（“穿西装的人”）的非 cherry-picked 批次测试：
+	python gradio_openpose.py
+随机种子 12345（`man in suit`）的Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-11.png)
 
-非cherry-picked batch test with random seed 12345（野外多人，“派对帅哥”）：
+Non-cherry-picked batch test with random seed 12345（野外多人，`handsome boys in the party`）：
 
-图片
+![](./pic/controlnet1.1-12.png)
 
-Openpose 1.1 的改进：
+### Openpose 1.1 的更新：
 
-这个模型的改进主要是基于我们对OpenPose的改进实现。我们仔细回顾了pytorch的OpenPose和CMU的c++ openpose的区别。现在处理器应该更准确，尤其是手。处理器的改进导致了Openpose 1.1的改进。
-支持更多输入（手和脸）。
-之前cnet 1.0的训练数据集存在几个问题，包括（1）一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；(2) 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；(3) 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
-ControlNet 1.1 线稿
-用线稿控制稳定扩散。
+- 这个模型的改进主要是基于我们对 OpenPose 的改进实现。我们仔细回顾了 pytorch 的 OpenPose 和 CMU 的 c++ openpose 的区别。现在处理器应该更准确，尤其是手。处理器的改进导致了 Openpose 1.1 的改进。
+- 支持更多输入（手和脸）。
+- 之前 cnet 1.0 的训练数据集存在几个问题，包括
+	- 一小部分灰度人像被复制了数千次（！！），导致之前的模型有点可能生成灰度人像；
+	- 某些图像质量低下、非常模糊或有明显的 JPEG 伪影；
+	- 由于我们数据处理脚本的错误导致一小部分图片出现配对提示错误。
+	- 新模型修复了训练数据集的所有问题，在很多情况下应该更合理。
 
-模型文件：control_v11p_sd15_lineart.pth
+## ControlNet 1.1 Lineart线稿
+用线稿控制 SD。
 
-配置文件：control_v11p_sd15_lineart.yaml
+- 模型文件
+	- control_v11p_sd15_lineart.pth
+- 配置文件
+	- control_v11p_sd15_lineart.yaml
 
-该模型是在 awacke1/Image-to-Line-Drawings 上训练的。预处理器可以从图像（Lineart 和 Lineart_Coarse）生成详细或粗略的线稿。该模型经过足够的数据增强训练，可以接收手动绘制的线稿。
+该模型是在 `awacke1/Image-to-Line-Drawings`  上训练的。预处理器可以从图像（`Lineart` 和 `Lineart_Coarse`）生成详细或粗略的线稿。该模型经过足够的数据增强训练，可以接收手动绘制的线稿。
 
-python gradio_lineart.py
-随机种子 12345 的非 cherry-picked 批次测试（详细的艺术线条提取器，“袋子”）：
+	python gradio_lineart.py
+随机种子 12345 的Non-cherry-picked 批次测试（详细的艺术线条提取器，`bag`）：
 
-图片
+![](./pic/controlnet1.1-13.png)
 
-随机种子 12345 的非 cherry-picked 批次测试（粗线条提取器，“Michael Jackson's concert”）：
+随机种子 12345 的Non-cherry-picked 批次测试（粗线条提取器，`Michael Jackson's concert`）：
 
-图片
+![](./pic/controlnet1.1-14.png)
 
-使用随机种子 12345 的非 cherry-picked 批次测试（使用手动绘制的线稿，“狼”）：
+使用随机种子 12345 的Non-cherry-picked 批次测试（使用手动绘制的线稿，`wolf `）：
 
-图片
+![](./pic/controlnet1.1-15.png)
 
-ControlNet 1.1 动漫线稿
-用动漫艺术线条控制稳定扩散。
+## ControlNet 1.1 Anime Lineart 动漫线稿
+用动漫艺术线条控制 SD。
 
-模型文件：control_v11p_sd15s2_lineart_anime.pth
-
-配置文件：control_v11p_sd15s2_lineart_anime.yaml
+- 模型文件
+	- control_v11p_sd15s2_lineart_anime.pth
+- 配置文件
+	- control_v11p_sd15s2_lineart_anime.yaml
 
 培训数据和实施细节：（已删除说明）。
 
@@ -356,242 +374,241 @@ ControlNet 1.1 动漫线稿
 
 一些重要的通知：
 
-您需要一个文件“anything-v3-full.safetensors”来运行演示。我们不会提供文件。请自行在 Internet 上查找该文件。
-该模型使用 3x 令牌长度和 clip skip 2 进行训练。
-这是一个长提示模型。除非您使用 LoRA，否则长提示的结果会更好。
-此型号不支持猜测模式。
-演示：
-
-python gradio_lineart_anime.py
-非 cherry-picked batch test with random seed 12345 ("1girl, in classroom, skirt, uniform, red hair, bag, green eyes"):
-
-图片
-
-随机种子12345非cherry-picked批次测试（“1girl，saber，at night，sword，green eyes，golden hair，stocking”）：
-
-图片
-
-Non-cherry-picked batch test with random seed 12345（提取线图，“1girl，Castle，银发，裙子，Gemstone，电影灯光，机械手，4k，8k，极其详细，哥特，绿眼”）：
-
-图片
-
-ControlNet 1.1 洗牌
-通过内容随机播放控制稳定的传播。
-
-模型文件：control_v11e_sd15_shuffle.pth
-
-配置文件：control_v11e_sd15_shuffle.yaml
+- 您需要一个文件 `anything-v3-full.safetensors` 来运行演示。我们不会提供文件。请自行在 Internet 上查找该文件。
+- 该模型使用 3x token 长度和 clip skip 2 进行训练。
+- 这是一个长提示模型。除非您使用 LoRA，否则长提示的结果会更好。
+- 此型号不支持猜测模式。
 
 演示：
 
-python gradio_shuffle.py
-该模型经过训练以重组图像。我们使用随机流来打乱图像并控制稳定扩散来重组图像。
+	python gradio_lineart_anime.py
+Non-cherry-picked batch test with random seed 12345 (`1girl, in classroom, skirt, uniform, red hair, bag, green eyes`):
 
-随机种子 12345（“香港”）的非樱桃采摘批次测试：
+![](./pic/controlnet1.1-16.png)
 
-图片
+随机种子12345Non-cherry-picked批次测试（`1girl，saber，at night，sword，green eyes，golden hair，stocking`）：
+
+![](./pic/controlnet1.1-17.png)
+
+Non-cherry-picked batch test with random seed 12345（提取线图，`1girl, Castle, silver hair, dress, Gemstone, cinematic lighting, mechanical hand, 4k, 8k, extremely detailed, Gothic, green eye`）：
+
+![](./pic/controlnet1.1-18.png)
+
+## ControlNet 1.1 Shuffle洗牌
+通过内容随机播放控制 SD。
+
+- 模型文件
+	- control_v11e_sd15_shuffle.pth
+- 配置文件
+	- control_v11e_sd15_shuffle.yaml
+
+演示：
+
+	python gradio_shuffle.py
+该模型经过训练以重组图像。[我们使用随机流来打乱图像并控制稳定扩散来重组图像](https://github.com/lllyasviel/ControlNet-v1-1-nightly/blob/main/github_docs/annotator.md#content-reshuffle)。
+
+随机种子 12345（“hong kong”）的 Non-cherry-picked 批次测试：
+
+![](./pic/controlnet1.1-19.png)
 
 在右侧的 6 张图像中，左上角的图像是“打乱”的图像。其他都是输出。
 
 事实上，由于 ControlNet 被训练来重组图像，我们甚至不需要打乱输入——有时我们可以只使用原始图像作为输入。
 
-这样，这个ControlNet可以通过提示或者其他ControlNet的引导来改变图像风格。
+这样，这个 ControlNet 可以通过提示或者其他 ControlNet 的引导来改变图像风格。
 
 请注意，此方法与 CLIP 视觉或其他一些模型无关。
 
 这是一个纯 ControlNet。
 
-随机种子 12345（“钢铁侠”）的非 cherry-picked 批次测试：
+随机种子 12345（`iron man`）的Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-20.png)
 
-随机种子 12345（“蜘蛛侠”）的非 cherry-picked 批次测试：
+随机种子 12345（`spider man`）的Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-21.png)
 
-多控制网（仅限 A1111）
+## ControlNets 组合使用（仅限 A1111）
+- 源图像（未使用）：
 
-源图像（未使用）：
+	![](./pic/controlnet1.1-22.png)
+- Canny 图像（输入）：
 
+	![](./pic/controlnet1.1-23.png)
+- Shuffle 图像（输入）：
 
-Canny 图像（输入）：
+	![](./pic/controlnet1.1-24.png)
+- 输出：
 
+	![](./pic/controlnet1.1-25.png)
 
-随机播放图像（输入）：
-
-
-输出：
-
-图像
-
-（来自：Mikubill/sd-webui-controlnet#736（评论））
+（来自：[Mikubill/sd-webui-controlnet#736](https://github.com/Mikubill/sd-webui-controlnet/issues/736#issuecomment-1509986321)（评论））
 
 如果您实施自己的推理，则很重要：
 
-请注意，此 ControlNet 需要在 ControlNet 编码器输出和 SD Unet 层之间添加全局平均池“x = torch.mean(x, dim=(2, 3), keepdim=True)”。并且 ControlNet 必须仅放在 cfg 规模的条件侧。我们建议使用 yaml 文件中的“global_average_pooling”项来控制此类行为。
+请注意，此 ControlNet 需要在 ControlNet 编码器输出和 SD Unet 层之间添加全局平均池
 
-请注意，此 ControlNet Shuffle 将是唯一一种我们将在长期支持中保持稳健性的图像风格化方法。我们已经测试了其他 CLIP 图像编码器、Unclip、图像标记化和基于图像的提示，但这些方法似乎不能很好地处理用户提示或额外/多个 U-Net 注入。另请参阅此处、此处和其他一些相关问题的证据。经过最近的一些研究/实验，我们计划在未来支持更多类型的程式化方法。
+	x = torch.mean(x, dim=(2, 3), keepdim=True)
+并且 ControlNet 必须仅放在 cfg 规模的条件侧。我们建议使用 yaml 文件中的
 
-ControlNet 1.1 指导 Pix2Pix
-使用 Instruct Pix2Pix 控制稳定扩散。
+	global_average_pooling
+项来控制此类行为。经过最近的一些研究/实验，我们计划在未来支持更多类型的程式化方法。
 
-模型文件：control_v11e_sd15_ip2p.pth
+## ControlNet 1.1 Instruct Pix2Pix 指导 
+使用 Instruct Pix2Pix 控制 SD。
 
-配置文件：control_v11e_sd15_ip2p.yaml
-
-演示：
-
-python gradio_ip2p.py
-这是一个在Instruct Pix2Pix 数据集上训练的控制网络。
-
-不同于官方的Instruct Pix2Pix，这个模型是用50%的指令提示和50%的描述提示来训练的。例如，“一个可爱的男孩”是描述提示，而“让男孩变得可爱”是指令提示。
-
-因为这是一个ControlNet，所以你不需要为原来的IP2P的double cfg tuning而烦恼。并且，该模型可以应用于任何基础模型。
-
-此外，似乎“将其变成 X”之类的指令比“将 Y 变成 X”更有效。
-
-随机种子 12345 的非 cherry-picked 批次测试（“make it on fire”）：
-
-图片
-
-使用随机种子 12345（“让它过冬”）的非樱桃采摘批次测试：
-
-图片
-
-我们将此模型标记为“实验性”，因为它有时需要挑选。例如，这是使用随机种子 12345（“让他成为钢铁侠”）的非 cherry-picked 批次测试：
-
-图片
-
-ControlNet 1.1 修复
-使用 Inpaint 控制稳定扩散。
-
-模型文件：control_v11p_sd15_inpaint.pth
-
-配置文件：control_v11p_sd15_inpaint.yaml
+- 模型文件
+	- control_v11e_sd15_ip2p.pth
+- 配置文件
+	- control_v11e_sd15_ip2p.yaml
 
 演示：
 
-python gradio_inpaint.py
+	python gradio_ip2p.py
+这是一个在 [Instruct Pix2Pix 数据集](https://github.com/timothybrooks/instruct-pix2pix)上训练的控制网络。
+
+不同于官方的 Instruct Pix2Pix，这个模型是用50%的指令提示和50%的描述提示来训练的。例如，`a cute boy` 是描述提示，而 `make the boy cute` 是指令提示。
+
+因为这是一个 ControlNet，所以你不需要为原来的 IP2P 的 double cfg tuning 而烦恼。并且该模型可以应用于任何基础模型。
+
+此外，似乎 `make it into X` 之类的指令比 `make Y into X` 更有效。
+
+随机种子 12345 的Non-cherry-picked 批次测试（`make it on fire`）：
+
+![](./pic/controlnet1.1-26.png)
+
+使用随机种子 12345（`make it winter`）的 Non-cherry-picked 批次测试：
+
+![](./pic/controlnet1.1-27.png)
+
+我们将此模型标记为 `experimental `，因为它有时需要挑选。例如，这是使用随机种子 12345（`make he iron man`）的Non-cherry-picked 批次测试：
+
+![](./pic/controlnet1.1-28.png)
+
+## ControlNet 1.1 Inpaint修复
+使用 Inpaint  控制 SD。
+
+- 模型文件
+	- control_v11p_sd15_inpaint.pth
+- 配置文件
+	- control_v11p_sd15_inpaint.yaml
+
+演示：
+
+	python gradio_inpaint.py
 一些注意事项：
 
-这个修复 ControlNet 使用 50% 的随机掩码和 50% 的随机光流遮挡掩码进行训练。这意味着该模型不仅可以支持修复应用程序，还可以处理视频光流扭曲。也许我们将来会提供一些示例（取决于我们的工作量）。
-我们更新了渐变 (2023/5/11)，以便主 ControlNet 存储库中的独立渐变代码也不会更改未屏蔽区域。自动 1111 用户不受影响。
-随机种子12345（“帅哥”）非cherry-picked批次测试：
+- 这个修复 ControlNet 使用 50% 的随机掩码和 50% 的随机光流遮挡掩码进行训练。这意味着该模型不仅可以支持修复应用程序，还可以处理视频光流扭曲。也许我们将来会提供一些示例（取决于我们的工作量）。
+- 我们更新了渐变 (2023/5/11)，以便主 ControlNet 存储库中的独立渐变代码也不会更改未屏蔽区域。自动 1111 用户不受影响。
 
-图片
+随机种子12345（`a handsome man`）Non-cherry-picked 批次测试：
 
-另请参阅在自动 1111 中使用 ControlNet Inpaint的指南。
+![](./pic/controlnet1.1-29.png)
 
-ControlNet 1.1 磁贴
-2023 年 4 月 25 日更新：之前未完成的瓷砖模型现已完成。新名称是“control_v11f1e_sd15_tile”。“f1e”表示第一个错误修复（“f1”），实验性（“e”）。删除了之前的“control_v11u_sd15_tile”。如果您的型号名称是“v11u”，请更新。
+另请参阅在自动 1111 中[使用 ControlNet Inpaint的指南](https://github.com/Mikubill/sd-webui-controlnet/discussions/1143)。
 
-用瓷砖控制稳定扩散。
+## ControlNet 1.1 Tile 磁贴
+2023 年 4 月 25 日更新：之前未完成的瓷砖模型现已完成。新名称是 `control_v11f1e_sd15_tile`。“f1e”表示第一个错误修复（“f1”），实验性（“e”）。删除了之前的 `control_v11u_sd15_tile` 。如果您的型号名称是“v11u”，请更新。
 
-模型文件：control_v11f1e_sd15_tile.pth
+用 Tile 控制 SD。
 
-配置文件：control_v11f1e_sd15_tile.yaml
+- 模型文件
+	- control_v11f1e_sd15_tile.pth
+- 配置文件
+	- control_v11f1e_sd15_tile.yaml
 
 演示：
 
-python gradio_tile.py
+	python gradio_tile.py
 该模型可以以多种方式使用。总的来说，该模型有两种行为：
 
-忽略图像中的细节并生成新的细节。
-如果局部瓦片语义和提示不匹配，则忽略全局提示，并根据局部上下文引导扩散。
+- 忽略图像中的细节并生成新的细节。
+- 如果局部瓦片语义和提示不匹配，则忽略全局提示，并根据局部上下文引导扩散。
+
 因为该模型可以生成新的细节并忽略现有的图像细节，所以我们可以使用该模型去除不良细节并添加细化的细节。例如，消除由图像大小调整引起的模糊。
 
 下面是 8 倍超分辨率的示例。这是一个 64x64 的狗图像。
 
-p
+![](./pic/controlnet1.1-30.png)
 
-随机种子 12345（“草原上的狗”）的非 cherry-picked 批次测试：
+随机种子 12345（`dog on grassland`）的 Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-31.png)
 
 请注意，此模型不是超分辨率模型。它忽略图像中的细节并生成新的细节。这意味着您可以使用它来修复图像中的不良细节。
 
-例如，下面是一张被 Real-ESRGAN 损坏的狗图像。这是一个典型的例子，当源上下文太小时，超分辨率方法有时无法放大图像。
+例如，下面是一张被 `Real-ESRGAN` 损坏的狗图像。这是一个典型的例子，当源上下文太小时，超分辨率方法有时无法放大图像。
 
-p
+![](./pic/controlnet1.1-32.png)
 
-随机种子 12345（“草原上的狗”）的非 cherry-picked 批次测试：
+随机种子 12345（`dog on grassland`）的 Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-33.png)
 
 如果你的图像已经有很好的细节，你仍然可以使用这个模型来替换图像细节。请注意，Stable Diffusion 的 I2I 可以实现类似的效果，但此模型使您更容易维护整体结构并且即使去噪强度为 1.0 也仅更改细节。
 
-使用随机种子 12345（“Silver Armor”）的非 cherry-picked 批次测试：
+使用随机种子 12345（`Silver Armor`）的Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-34.png)
 
 越来越多的人开始考虑采用不同的方法在拼贴处进行漫射，以便图像可以非常大（4k 或 8k）。
 
-问题是，在 Stable Diffusion 中，您的提示总是会影响每个板块。
+问题是，在 SD 中，您的提示总是会影响每个板块。
 
-比如你的提示是“a beautiful girl”，你把一张图片分成4×4=16个block，每个block做diffusion，那么你得到的是16个“beautiful girls”，而不是“a beautiful girl”。这是一个众所周知的问题。
+比如你的提示是 `a beautiful girl`，你把一张图片分成 4×4=16 个 block，每个 block 做 diffusion，那么你得到的是16个 `beautiful girls`，而不是`a beautiful girl`。这是一个众所周知的问题。
 
-现在人们的解决办法是使用一些无意义的提示，比如“清晰、清晰、超清晰”来扩散块。但是你可以预料，如果去污强度高，结果会很糟糕。而且由于提示很糟糕，所以内容非常随机。
+现在人们的解决办法是使用一些无意义的提示，比如 `"clear, clear, super clear` 来 diffusion 块。但是你可以预料，如果去污强度高，结果会很糟糕。而且由于提示很糟糕，所以内容非常随机。
 
 ControlNet Tile 可以解决这个问题。对于给定的图块，它识别图块内部的内容并增加识别语义的影响，如果内容不匹配，它还会减少全局提示的影响。
 
-随机种子12345（“帅哥”）非cherry-picked批次测试：
+随机种子12345（`a handsome man`）Non-cherry-picked 批次测试：
 
-图片
+![](./pic/controlnet1.1-35.png)
 
-可以看到提示是“帅哥”，但是模型并没有在那棵树叶上画“帅哥”。相反，它会相应地识别树叶涂料。
+可以看到提示是 `a handsome man`，但是模型并没有在那棵树叶上画 `a handsome man` 。相反，它会相应地识别树叶涂料。
 
 通过这种方式，ControlNet 能够更改任何稳定扩散模型的行为以在分块中执行扩散。
 
-ControlNet Tile 图库
+### ControlNet Tile 图库
+注意：我们对平铺图像放大的官方支持仅限 A1111。此 repo 中的 gradio 示例不包括平铺放大脚本。请使用 A1111 扩展来执行平铺放大（使用其他平铺脚本，如 `Ultimate SD Upscale` 或 `Tiled Diffusion/VAE`）。
 
-注意：我们对平铺图像放大的官方支持仅限 A1111。此 repo 中的 gradio 示例不包括平铺放大脚本。请使用 A1111 扩展来执行平铺放大（使用其他平铺脚本，如 Ultimate SD Upscale 或 Tiled Diffusion/VAE）。
+- 来自 [Mikubill/sd-webui-controlnet#1142](https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601)（评论）
+	- （输出，单击图像查看全分辨率）
+	
+		![](./pic/controlnet1.1-36.png)
+	- （放大输出）
+		- ![](./pic/controlnet1.1-37.png)
+		- ![](./pic/controlnet1.1-38.png)
+		- ![](./pic/controlnet1.1-39.png)
+- 来自 [Mikubill/sd-webui-controlnet#1142](https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788617)（评论）
+	- （输入）
+	
+		![](./pic/controlnet1.1-40.png)
+	- （输出，单击图像查看全分辨率）
+	
+		![](./pic/controlnet1.1-41.png)
+- 来自：[#50](https://github.com/lllyasviel/ControlNet-v1-1-nightly/issues/50#issuecomment-1541914890)（评论）
+	- （输入）
 
-来自Mikubill/sd-webui-controlnet#1142（评论）
+		![](./pic/controlnet1.1-42.png)
+	- （输出，单击图像查看完整分辨率，请注意，此示例极具挑战性）
 
-（输出，单击图像查看全分辨率）
+		![](./pic/controlnet1.1-43.png)
+- 来自 [Mikubill/sd-webui-controlnet#1142](https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5796326)（评论）：
+- （前）
 
-奶奶补偿
+	![](./pic/controlnet1.1-44.png)
+- （之后，单击图像查看完整分辨率）
 
-（放大输出）
-
-奶奶脸
-
-祖母躯干
-
-奶奶-Comp_torso2
-
-来自Mikubill/sd-webui-controlnet#1142（评论）
-
-（输入）
-
-图像
-
-（输出，单击图像查看全分辨率） 图像
-
-来自：#50（评论）
-
-（输入）
-
-图像
-
-（输出，单击图像查看完整分辨率，请注意，此示例极具挑战性）
-
-图像
-
-来自Mikubill/sd-webui-controlnet#1142（评论）：
-
-（前）
-
-2600914554720735184649534855329348215514636378-166329422
-
-（之后，单击图像查看完整分辨率） 2600914554720735184649534855329348215514636383-1549088886
+	![](./pic/controlnet1.1-45.png)
 
 与即将推出的 Midjourney V5/V5.1 的比较。
 
-注释您自己的数据
+## 注释您自己的数据
 我们提供简单的 python 脚本来处理图像。
 
-请在此处查看渐变示例。
+[请在此处查看渐变示例](https://github.com/lllyasviel/ControlNet-v1-1-nightly/blob/main/github_docs/annotator.md)。
 
 ## 参考
 [ControlNet 1.1](https://github.com/lllyasviel/ControlNet-v1-1-nightly#model-specification)
