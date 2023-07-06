@@ -322,7 +322,7 @@ C-Combinator 是 SeeDAO 推出的战略孵化器，另一个工具。以 Web3 �
 		第一期需要 8-10% 的项目 token 融资，胜出有4-6w usdt
 		 
 ## SeeDAO 汇总结构架构图
-![](./pic/经济模型.jpeg)
+![](./pic/SeeDao架构研究.jpeg)
 		
 		
 			   		
