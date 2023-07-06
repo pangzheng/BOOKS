@@ -14,25 +14,25 @@
 ### 1.2 钱包切换区块链网络测试
 - 进入钱包
 
-	![](./pic/Metamask.png)
+	![](./pic/metamask.png)
 - 点击切换网络按钮
 
-	![](./pic/Metamask1.png)
+	![](./pic/metamask1.png)
 - 测试切换网络
 	- ETH
 		- 网络选择
 		
-			![](./pic/Metamask2.png)
+			![](./pic/metamask2.png)
 		- 等待界面
 
-			![](./pic/Metamask3.png)
+			![](./pic/metamask3.png)
 		- 切换结果
 			- 成功
 
-				![](./pic/Metamask5.png)	 	
+				![](./pic/metamask5.png)	 	
 			- 失败,网络超时
 	
-				![](./pic/Metamask4.png)	
+				![](./pic/metamask4.png)	
 			
 					如果网络失败或找不到网络，请查看下面一章
 					
@@ -183,16 +183,16 @@
 	
 - 打开钱包
 
-	![](./pic/Metamask6.png)	
+	![](./pic/metamask6.png)	
 - 鼠标向下滚动，点击添加收藏品
 
-	![](./pic/Metamask7.png)
+	![](./pic/metamask7.png)
 - 将刚才收集的2个信息添加在这里，点击添加
 
-	![](./pic/Metamask8.png)
+	![](./pic/metamask8.png)
 - 等待后提示添加成功		
 	 
-	 ![](./pic/Metamask9.png)
+	 ![](./pic/metamask9.png)
 - 添加其他 Deshool 的课程 NFT 同样如此
 
 #### 2.1.6 查看 SBT
