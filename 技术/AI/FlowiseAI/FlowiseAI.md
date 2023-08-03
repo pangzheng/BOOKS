@@ -1133,13 +1133,16 @@ ChatGPT 将返回一个如下所示的 JSON 对象：
 #### 16.3.3 资源
 - [LangChain JS chroma](https://js.langchain.com/docs/modules/indexes/vector_stores/integrations/chroma)
 - [Chroma Getting Started](https://docs.trychroma.com/getting-started)
-​
+
+
 ## ​17 第三方平台集成
 Flowise可以在第三方平台上使用。以下是一些使用示例：
 
 - [zapier-zaps](https://docs.flowiseai.com/3rd-party-platform-integration/zapier-zaps)
-​
+
+
 ### 17.1 zapier-zaps
+
 #### 17.1.1 先决条件
 1. [登录](https://zapier.com/app/login)或[注册](https://zapier.com/sign-up)Zapier
 2. 请参阅[部署](https://docs.flowiseai.com/deployment)以创建 Flowise 的云托管版本。
@@ -1149,34 +1152,178 @@ Flowise可以在第三方平台上使用。以下是一些使用示例：
 2. 单击创建
 
 	![](./pic/64.png)		
-接收触发消息
-单击或搜索Discord
-选择作为事件发布到频道的新消息，然后单击继续
-登录您的 Discord 帐户
-将Zapier Bot添加到您的首选服务器
-授予适当的权限并单击授权，然后单击继续
-选择您喜欢的与 Zapier Bot 交互的渠道，然后单击继续
-向您在步骤 8 中选择的频道发送消息
-单击测试触发器
-选择您的消息，然后单击“继续”以选择记录
-过滤掉 Zapier 机器人的消息
-单击或搜索过滤器
-将过滤器配置为如果收到来自Zapier Bot 的消息则不继续，然后单击继续
-FlowiseAI 生成结果消息
-点击+ ，点击或搜索FlowiseAI
-选择将预测作为事件，然后单击继续
-单击“登录”并插入您的详细信息，然后单击“是，继续使用 FlowiseAI”
-选择Discord 中的内容和您的 Flow ID，然后单击继续
-单击“测试操作”并等待结果
-发送结果消息
-单击+ ，单击或搜索Discord
-选择将频道消息作为事件发送，然后单击继续
-选择您登录的 Discord 帐户，然后单击“继续”
-为通道选择您喜欢的通道，并从 FlowiseAI 中为消息文本选择文本和字符串源（如果可用），然后单击继续
-单击测试操作
-瞧你应该会看到消息到达你的 Discord 频道
-最后，重命名您的 Zap 并发布它
 
+#### 17.1.3 接收触发消息
+1. 单击或搜索Discord
+
+	![](./pic/65.png)		
+2. 选择作为事件发布到频道(New Message Posted to Channel)的新消息，然后单击继续
+
+	![](./pic/66.png)
+3. 登录您的 Discord 帐户
+
+	![](./pic/67.png)
+4. 将 `Zapier Bot` 添加到您的首选服务器
+
+	![](./pic/68.png)
+5. 授予适当的权限并单击授权，然后单击继续
+
+	![](./pic/69.png)
+	![](./pic/70.png)
+6. 选择您喜欢的与 Zapier Bot 交互的渠道，然后单击继续
+
+	![](./pic/71.png)
+7. 向您在步骤 8 中选择的频道发送消息
+
+	![](./pic/72.png)
+8. 单击测试触发器
+
+	![](./pic/73.png)
+9. 选择您的消息，然后单击“继续”以选择记录
+
+	![](./pic/74.png)
+
+#### 17.1.4 过滤掉 Zapier 机器人的消息
+1. 单击或搜索过滤器
+
+	![](./pic/75.png)
+2. 将过滤器配置为如果收到来自 Zapier Bot 的消息则不继续，然后单击继续
+
+	![](./pic/76.png)
+
+#### 17.1.5 FlowiseAI 生成结果消息
+1. 点击 + ，点击或搜索 FlowiseAI
+
+	![](./pic/77.png)
+2. 选择将预测(Make Prediction)作为事件，然后单击继续
+
+	![](./pic/78.png)
+3. 单击“登录”并插入您的详细信息，然后单击 `Yes, Continue to FlowiseAI`
+
+	![](./pic/79.png)
+	![](./pic/80.png)
+4. 选择 Discord 中的内容和您的 Flow ID，然后单击继续
+
+	![](./pic/81.png)
+5. 单击“测试操作”并等待结果
+
+	![](./pic/82.png)
+
+#### 17.1.6 发送结果消息
+1. 单击+ ，单击或搜索 Discord
+
+	![](./pic/83.png)
+2. 选择将频道消息( Send Channel Message)作为事件发送，然后单击继续
+
+	![](./pic/84.png)
+3. 选择您登录的 Discord 帐户，然后单击“继续”
+
+	![](./pic/85.png)
+4. 为通道选择您喜欢的通道并从 FlowiseAI 中为消息文本选择文本和字符串源（如果可用），然后单击继续
+
+	![](./pic/86.png)
+5. 单击测试操作
+
+	![](./pic/87.png)
+6. 瞧你应该会看到消息到达你的 Discord 频道
+
+	![](./pic/88.png)
+7. 最后，重命名您的 Zap 并发布它
+
+	![](./pic/89.png)
+
+## 18 迁移手册
+### 18.1 v1.3.0 迁移指南
+在 v1.3.0 中，我们引入了凭证(Credentials)。
+
+凭证允许用户将所有第 3 方 API 密钥存储到数据库中，并且可以轻松地在各个节点上重复使用，而不必每次都复制粘贴。
+
+凭证通过使用密码创建的加密密钥进行加密。只有有权访问密钥的用户才能加密/解密凭证。此外，解密的凭据永远不会发送回客户端，以避免网络欺骗。
+
+以下是帮助您迁移到 v1.3.0 的一些重要指南：
+
+1. 设置 `PASSPHRASE` 环境变量。这用于生成用于加密/解密您的凭据的加密密钥
+2.  设置 `SECRETKEY_PATH` 环境变量。要保留加密密钥，请指定保存加密密钥的位置。
+
+	典型的 `.env` 文件应如下所示：
+	
+		PORT=3000
+		PASSPHRASE=MYPASSPHRASE
+		DATABASE_PATH=/root/.flowise
+		APIKEY_PATH=/root/.flowise
+		SECRETKEY_PATH=/root/.flowise
+		LOG_PATH=/root/.flowise/logs
+3. 节点版本。如果版本过时，节点右上角会显示警告消息。这意味着节点上有新的更改，您应该从菜单列表中删除并重新添加它。
+
+	![](./pic/90.png)
+
+就是这样！如果您遇到任何问题，请告诉我们。升级愉快！
+
+## 19 用例
+有关如何使用 Flowise 的一些一般用例。
+### 19.1 网页抓取 QnA
+假设您有一个网站（可以是商店、电子商务网站、博客），并且您希望废弃该网站的所有相关链接，并让 GPT 回答您网站上的任何问题。在本教程中，我们将介绍如何实现这一目标。
+
+#### 19.1.1 更新插入流程
+此流程用于将网站中的所有信息更新插入矢量数据库，然后让 LLM 通过从矢量数据库查找来回答用户的问题。
+
+您可以从市场模板中找到名为 -对话检索 QA 链(Conversational Retrieval QA Chain)的示例流程。
+
+在这里，我们将使用 `Cheerio Web Scraper` 节点从给定的 URL 中抓取链接。还将 `RecursiveTextSplitter` 替换为 `HtmlToMarkdown` 以进行更清晰的数据准备。
+
+![](./pic/91.png)
+
+如果您不指定任何内容，默认情况下只会抓取给定的 URL 页面。如果要爬网其余相关链接，请单击“其他参数(Additional Parameters)”。
+
+- 获取相对链接方法(Get Relative Links Method )- 如何抓取所有相对链接、网页抓取(Web Crawl)或站点地图(Sitemap)
+- 获取相对链接限制(Get Relative Links Limit) - 抓取多少个链接，设置 0 抓取全部
+
+![](./pic/92.png)
+
+当您打开聊天并开始提问时，所有链接都将被抓取并插入到矢量数据库（在本例中为 Pinecone）。
+
+从控制台/终端，您可以看到所有正在抓取的链接：
+
+![](./pic/93.png)
+
+导航到 Pinecone 仪表板，您将能够看到在流程中指定的命名空间下添加新向量。
+
+![](./pic/94.png)
+
+- 需要记住的几件事
+	- 设置流程后，当用户开始从 UI 或 API 或嵌入式聊天询问第一个问题时，文档只会更新插入一次。
+	- 文件将 `不是` 每当用户提出另一个问题时再次插入。
+	- 这 `仅有` 的文档再次更新插入的条件是当流配置（例如不同的文件、不同的模型、不同的向量数据库索引等）发生更改时，您必须再次保存聊天流。
+	- 换句话说，我们存储流状态，如果完成了新的保存，我们检查是否 `existing state == new state`，如果不是，则执行更新插入，如果是，则忽略。
+	- 但是，有时您可能想要更改某些设置（例如元数据），但不希望再次执行另一个更新插入。
+	- 因此，通常建议创建另一个流程来从向量存储加载现有索引。
+
+#### 19.1.2 加载现有索引流 Load Existing Index Flow
+此流程用于从向量存储加载现有索引/集合，通常是在将文档更新插入到该特定索引/集合之后。
+
+![](./pic/95.png)
+
+如果您已从 upsert 流程中指定了命名空间或元数据，请记住在 Pinecone 节点中的“附加参数 (Additional Parameters)”下也在此指定。
+
+![](./pic/96.png)
+
+建议为会话检索 QA 链(Conversational Retrieval QA Chain)指定系统消息。例如，您可以指定 AI 的名称、回答的语言、未找到答案时的响应（以防止产生幻觉）。
+
+	I want you to act as a document that I am having a conversation with. Your name is "AI Assistant". You will provide me with answers from the given info. If the answer is not included, say exactly "Hmm, I am not sure." and stop after that. Refuse to answer any question not about the info. Only answer in English. Never break character.
+
+	我想让你作为一个文件，我正在与之对话。你的名字是“AI助手”。你会为我提供答案从给定的信息。如果答案不包括在内，确切地说“嗯，我不确定”，然后停止。拒绝回答任何与信息无关的问题。只能用英语回答。永远不要破坏角色。
+	
+就是这样！你可以开始提问🤔
+
+![](./pic/97.png)
+
+您还可以打开“返回源文档”选项以返回 AI 响应来源的文档块列表。
+
+![](./pic/98.png)
+
+相同的逻辑可以应用于任何文档用例，而不仅限于网络抓取。
+
+如果您对如何提高性能有任何建议，我们非常乐意提供您的贡献！
 
 
 ## 报错
