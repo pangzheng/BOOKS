@@ -377,6 +377,23 @@
 
 	![](./pic/zap-csbot5.png)
 
+### 4.2 服务和第三方应用问题
+官方给了一个整体服务的状态页面，可以通过这个页面查看自己流程中的应用是否正常
+
+[https://status.zapier.com/#app-status](https://status.zapier.com/#app-status)
+
+- 比如查询 zap 服务
+
+	![](./pic/zap-status.png)
+- 比如查询应用
+	
+	![](./pic/zap-status1.png)
+	
+## 5 特别提示
+- twitter 的订阅信息无法收到问题
+
+	在 twitter 的信息订阅后，模拟测试发现不一定什么信息都可以收到，后来发现可能是因为 twitter api 过滤了历史信息，只会提供新信息，所以测试的时候需要提供新信息给 twitter 	
+	
 ## 参考
 - [zapier](https://zapier.com/)
 		
