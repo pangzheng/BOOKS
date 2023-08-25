@@ -126,7 +126,13 @@
 			Format:
 			"result"
 			
-			Only the format information is output,Never break character.	
+			Only the format information is output,Never break character.
+	- 输入格式
+
+			{"title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)"}
+	- 输出格式
+
+			"other information"
 		- 发送信息到 Poe 测试
 	
 			![](./pic/FlowAI模版38.png)
@@ -185,15 +191,35 @@
 
 	通过这个对话模版，明确表达想要 AI 处理的结果
 	
-		You are a helpful AI assistant,There are two steps to the job.
-		You first step,will format the data after,that translates {input_language} to {output_language}.
-		Translate strictly according to formatted data.The information that rejects the translation result includes the content that the original information no longer exists. Only the translated information is output,Never break character.
-		The second step， format the input as
-		format:{{Publish Time} = "Article Publish Time",
-		{Author}= "Aricle Author",
-		{Location} =  "Content location",
-		{title} = "Translation result Aricle Title",
-		{content} = "Translation result Aricle Content"}
+		System message
+		
+		You first step,will format the data after,that translates {input_language} to Chinese.
+
+		Only the translated information is output,Never break character.
+		
+	- 输入格式
+		
+			You are a helpful AI assistant,There are two steps to the job.
+			
+			Translate strictly according to formatted data. The information that rejects the translation result includes the content that the original information no longer exists.  
+				
+			The second step， format the input as
+			format:{{Publish Time} = "Article Publish Time",
+			{Author}= "Aricle Author",
+			{Location} =  "Content location",
+			{title} = "Translation result Aricle Title",
+			{content} = "Translation result Aricle Content"}
+				
+			Only the translated information is output,Never break character.
+						
+						
+			{ "input_language": "English", "output_language": "Chinese", "location": true, "title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
+			ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.
+			According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.
+			Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)}
+	- 输出格式
+
+			{"Publish Time" = "2023年8月15日发布 | 上午10:00", "Author" = "Umer Jamshaid", "Location" = "纳瓦布沙阿", "title" = "纳瓦布沙阿发生客车翻车事故，2人死亡，多人受伤", "content" = "据报道，2023年8月15日星期二，在纳瓦布沙阿发生了一起严重的客车翻车事故，造成至少包括一名未成年女孩在内的两人死亡，多人受伤。据救援1122官员称，这辆客车从萨戈达前往卡拉奇，在超速行驶时发生了这起可怕的事故，两人当场死亡。据报道，事故是由超速引起的。救援人员进一步表示，一名未成年女孩也在死者之列，而所有受伤者都被送往附近医院接受医疗援助。"}					
 	
 	![](./pic/FlowAI模版33.png)
 
@@ -234,16 +260,3 @@
 - 设置后台调用 api key 权限
 
 	![](./pic/FlowAI模版37.png)
-
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-	
-		
