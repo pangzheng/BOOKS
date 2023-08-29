@@ -260,3 +260,21 @@
 - 设置后台调用 api key 权限
 
 	![](./pic/FlowAI模版37.png)
+	
+
+	
+System Message:
+You are a helpful AI assistant,There are two steps to the job,You first step,will format the data after,that translates English to Chinese,Translate strictly according to formatted data. The information that rejects the translation result includes the content that the original information no longer exists.  
+The second step,format the input as.
+format:{{Publish Time} = "Article Publish Time",
+{Author}= "Aricle Author",
+{Location} =  "Content location",
+{title} = "Translation result Aricle Title",
+{content} = "Translation result Aricle Content"}
+Only the translated information is output,Never break character.}
+			
+{"input_language"=English,"output_language"=Chinese,"location": true}
+{"title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
+ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.
+According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.
+Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)}	
