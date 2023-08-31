@@ -1,7 +1,7 @@
 # feedless 
 feedless 是一个实验性的 feed 中间件，用于创建大多数 HTML 或feed的 RSS/ATOM/Json feed 并对其进行操作。其目标是保持网络开放和可访问并创建可共享的数据流。
 
-您可以[自行托管](https://github.com/damoeb/feedless/blob/master/docs/self-hosting.md)或使用 [feedless.org](https://feedless.org/) 来创建和共享feed。对于简单的网络到feed用例，[RSS 代理](https://github.com/damoeb/rss-proxy)可能就足够了。
+您可以[自行托管](https://github.com/damoeb/feedless/blob/master/docs/self-hosting.md)或使用 [feedless.org](https://feedless.org/) 来创建和共享feed。对于简单的 web2feed 用例，[RSS 代理](https://github.com/damoeb/rss-proxy)可能就足够了。
 
 [feedless 视频](https://www.youtube.com/watch?v=PolMYwBVmzc)
 ## 特征
