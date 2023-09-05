@@ -119,8 +119,8 @@ Flowise 构建在 LangChainJS 之上，旨在让人们轻松可视化和构建 L
 			
 			$ sudo systemctl stop nginx
 			$ sudo systemctl start nginx
-			$ sudo systemctl status nginx		
-	
+			$ sudo systemctl status nginx	
+				
 ## 5 安装 FlowiseAI
 - 下载源码
 
