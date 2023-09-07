@@ -187,94 +187,105 @@
 		这里的这个温度，类似 sd 的幻想程度， 0 是没幻想 
 			
 	![](./pic/FlowAI模版31.png)
-- 对话模版设置
-
-	通过这个对话模版，明确表达想要 AI 处理的结果
-	
-		System message
+- 设置提示词模版
+	- 设置 System message:
 		
-		You first step,will format the data after,that translates {input_language} to Chinese.
-
-		Only the translated information is output,Never break character.
+		通过这个对话模版，明确表达想要 AI 处理的结果
 		
-	- 输入格式
+		![](./pic/RSS翻译器1.png)
 		
-			You are a helpful AI assistant,There are two steps to the job.
+			Hello assistant, I need your help to complete the translation task. Please follow these instructions carefully:
+			1. Replace all urls with Spaces
 			
-			Translate strictly according to formatted data. The information that rejects the translation result includes the content that the original information no longer exists.  
-				
-			The second step， format the input as
-			format:{{Publish Time} = "Article Publish Time",
-			{Author}= "Aricle Author",
-			{Location} =  "Content location",
-			{title} = "Translation result Aricle Title",
-			{content} = "Translation result Aricle Content"}
-				
-			Only the translated information is output,Never break character.
-						
-						
-			{ "input_language": "English", "output_language": "Chinese", "location": true, "title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
+			2. Translate the title and content of the text from {input_language} to {output_language}. Do not translate any other information, including the information to the left of the equal sign.
+			
+			3. Extract publication time, author and location information from the text.
+			
+			4. Format the output as follows:
+			
+			"publishTime": YYYY-MM-DD HH: MM: SS,
+			"author":"Author of this article",
+			"location": "Content Location",
+			"title": "Article Title",
+			"content": "Content of this article"
+			
+			Please note the following:
+			
+			1. Translate the text strictly in the format provided.
+			2. Do not include any information that is not part of the translated text.
+			3. Provide translation information only in continuous format.
+			4. The publication time of the article should be in the format YYYY-MM-DD HH: MM: SS.
+			
+			Thank you for your help!
+	- 设置 Format Prompt Values 变量，这里设置翻译成中文		
+		![](./pic/RSS翻译器.png)
+		![](./pic/RSS翻译器2.png)
+	- 点击保存，并输入 FLow 实例名字
+
+		![](./pic/FlowAI模版34.png)	
+	- 输入格式
+			
+			{"title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
 			ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.
 			According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.
 			Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)}
 	- 输出格式
 
-			{"Publish Time" = "2023年8月15日发布 | 上午10:00", "Author" = "Umer Jamshaid", "Location" = "纳瓦布沙阿", "title" = "纳瓦布沙阿发生客车翻车事故，2人死亡，多人受伤", "content" = "据报道，2023年8月15日星期二，在纳瓦布沙阿发生了一起严重的客车翻车事故，造成至少包括一名未成年女孩在内的两人死亡，多人受伤。据救援1122官员称，这辆客车从萨戈达前往卡拉奇，在超速行驶时发生了这起可怕的事故，两人当场死亡。据报道，事故是由超速引起的。救援人员进一步表示，一名未成年女孩也在死者之列，而所有受伤者都被送往附近医院接受医疗援助。"}					
-	
-	![](./pic/FlowAI模版33.png)
-
+			"publishTime": "2023-08-15 10:00:00", "author": "Umer Jamshaid", "location": "ISLAMABAD", "title": "2人死亡，数人受伤，客车在纳瓦布沙赫翻车", "content": "据报道，2023年8月15日，星期二，在纳瓦布沙赫，一辆客车因超速翻车，造成至少包括一名女童在内的两人死亡，多人受伤。据救援1122官员称，这辆客车从萨戈达前往卡拉奇，在一起可怕的事故中发生了翻车事故，两人当场死亡。据报道，事故是由于超速导致的。救援人员进一步表示，一名女童也是死者之一，而所有受伤者都被送往附近医院接受医疗援助。"
 	- 发送信息到 Poe 测试
 	
 		![](./pic/FlowAI模版32.png)
 
-		```			
-		System message:
-		
-		You are a helpful AI assistant,There are two steps to the job.
-		
-		You first step,will format the data after,that translates {input_language} to {output_language}.
-		Translate strictly according to formatted data. The information that rejects the translation result includes the content that the original information no longer exists.  
-		
-		The second step， format the input as
-		format:{{Publish Time} = "Article Publish Time",
-		{Author}= "Aricle Author",
-		{Location} =  "Content location",
-		{title} = "Translation result Aricle Title",
-		{content} = "Translation result Aricle Content"}
-		
-		Only the translated information is output,Never break character.
-		
-		Human Message：
-		{input_language} = English,
-		{output_language} = Chinese,
-		{location} = true,
-		{title}=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)
-		{content}=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
-		ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.
-		According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.
-		Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)
-	```
-- 点击保存，并输入 FLow 实例名字
+```			
+System message:
+Hello assistant, I need your help to complete the translation task. Please follow these instructions carefully:
+1. Replace all urls with Spaces
+2. Translate the title and content of the text from {input_language} to {output_language}. Do not translate any other information, including the information to the left of the equal sign.
+3. Extract publication time, author and location information from the text.
+4. Format the output as follows:
+	
+"publishTime": YYYY-MM-DD HH: MM: SS,
+"author":"Author of this article",
+"location": "Content Location",
+"title": "Article Title",
+"content": "Content of this article"
+	
+Please note the following:
+1. Translate the text strictly in the format provided.
+2. Do not include any information that is not part of the translated text.
+3. Provide translation information only in continuous format.
+4. The publication time of the article should be in the format YYYY-MM-DD HH: MM: SS.
+	
+Human Message：
+{input_language:"English",output_language:"Chinese","title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)}
+```
 
-	![](./pic/FlowAI模版34.png)
 - 设置后台调用 api key 权限
 
 	![](./pic/FlowAI模版37.png)
-	
+- 点击保存，并输入 FLow 实例名字
 
+	![](./pic/FlowAI模版34.png)	
 	
-System Message:
-You are a helpful AI assistant,There are two steps to the job,You first step,will format the data after,that translates English to Chinese,Translate strictly according to formatted data. The information that rejects the translation result includes the content that the original information no longer exists.  
-The second step,format the input as.
-format:{{Publish Time} = "Article Publish Time",
-{Author}= "Aricle Author",
-{Location} =  "Content location",
-{title} = "Translation result Aricle Title",
-{content} = "Translation result Aricle Content"}
-Only the translated information is output,Never break character.}
-			
-{"input_language"=English,"output_language"=Chinese,"location": true}
-{"title": "(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah)" ,"content"=(2 Killed, Several Injured As Passenger Coach Overturns In Nawabshah Umer Jamshaid  Published August 15, 2023 | 10:00 AM 2 killed, several injured as passenger coach overturns in Nawabshah
-ISLAMABAD, (UrduPoint / Pakistan Point News - 15th Aug, 2023 ) :At least two people including a minor girl were killed and several others injured when a passenger bus turned turtle due to over-speeding in Nawabshah on Tuesday.
-According to the details, Rescue 1122 officials said that the passenger coach was going from Sargodha to Karachi when a terrible incident took place and two people died on the spot, private news channels reported.
-Reportedly, the accident occurred due to over-speeding.  Rescue sources further said that a minor girl was also among the deceased persons, whereas all the injured were shifted to a nearby hospital for medical aid.)}	
+## 遇到问题
+### 问题1
+- 问题
+	
+	在 system 设置 {} 内容属于变量，所以这里无法传输以 {} 为标识的参数
+- 解决方案
+
+	将大括号删除
+	
+### 问题2
+- 问题
+
+	在给定的内容中包含大量取消格式的 http url 地址，导致翻译失败
+- 解决方案
+	- 临时解决
+	
+		增加1条强规则, 1. Replace all urls with Spaces.
+	- 完美解决(待处理)
+	
+		需要变更传输翻译的格式，去除 https url 或者带上 html 格式	
+		
+	

@@ -277,7 +277,6 @@ Flowise 有 2 个授权：
 
 	FLOWISE_USERNAME=user
 	FLOWISE_PASSWORD=1234
-	
 
 ## 8 如何使用
 现在您已经使用 Flowise 上的聊天界面测试了Chatflow ，您希望将其 “export” 以便能够与其他应用程序一起使用。
@@ -401,7 +400,7 @@ Flowise 提供了 2 种方法来实现此目的：
 
 		socket.disconnect();
 		
-### 8.3 嵌入
+### 8.3 嵌入式
 您还可以将聊天小部件嵌入到您的网站中。
 
 只需将提供的嵌入代码复制粘贴到 `<body>` html 文件标记中的任意位置即可。

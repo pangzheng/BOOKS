@@ -219,7 +219,7 @@ Feeds 代表您的 RSS.app 帐户中的新闻feed。使用 RSS.app API，您可�
 		
 		func main() {
 		
-		  url := "api.https://rss.app/v1/feeds"
+		  url := "https://api.rss.app/v1/feeds"
 		  method := "POST"
 		
 		  payload := strings.NewReader(`{
@@ -317,7 +317,7 @@ feed ID 可以从“创建 feed”请求或“feed 列表”请求中找到。
 	      
 	      func main() {
 	      
-	        url := "api.https://rss.app/v1/feeds/:id"
+	        url := "https://api.rss.app/v1/feeds/:id"
 	        method := "GET"
 	      
 	        client := &http.Client {
@@ -411,7 +411,7 @@ feed ID 可以从“创建 feed”请求或“feed 列表”请求中找到。
 		
 		func main() {
 		
-		  url := "api.https://rss.app/v1/feeds?limit=10"
+		  url := "https://api.rss.app/v1/feeds?limit=10"
 		  method := "GET"
 		
 		  client := &http.Client {
@@ -494,7 +494,7 @@ feed ID 可以从“创建 feed”请求或“feed 列表”请求中找到。
 		
 		func main() {
 		
-		  url := "api.https://rss.app/v1/feeds/%7B%7BfeedId%7D%7D"
+		  url := "https://api.rss.app/v1/feeds/%7B%7BfeedId%7D%7D"
 		  method := "DELETE"
 		
 		  client := &http.Client {
