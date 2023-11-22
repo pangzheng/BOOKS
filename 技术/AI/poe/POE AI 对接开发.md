@@ -163,7 +163,24 @@
 			  File "/home/pangzheng/fastapi_poe/poe/lib/python3.8/site-packages/fastapi_poe/client.py", line 209, in perform_query_request
 			    raise BotError(event.data)
 			fastapi_poe.client.BotError: {"allow_retry": true, "text": "Internal server error"}
-	- 更换 apikey 测试		
+	- 更换 apikey 测试
+
+- 响应报错
+- 错误
+
+		$ python poe-demo.py
+			text='' raw_response={'type': 'text', 'text': '{"text": ""}'} full_prompt="QueryRequest(version='1.0', type='query', query=[ProtocolMessage(role='user', content='Hello world', content_type='text/markdown', timestamp=0, message_id='', feedback=[], attachments=[])], user_id='', conversation_id='', message_id='', metadata='', api_key='<missing>', access_key='<missing>', temperature=0.7, skip_system_prompt=False, logit_bias={}, stop_sequences=[])" request_id=None is_suggested_reply=False is_replace_response=False
+			...
+			执行了11次
+
+- 解决
+	- 提了 issue 
+
+		[https://github.com/poe-platform/fastapi_poe/issues/36](https://github.com/poe-platform/fastapi_poe/issues/36) 			
+		
+## 参考
+- [Access the bot query API using "get\_bot\_response"](https://developer.poe.com/server-bots/accessing-other-bots-on-poe)
+- [github fastapi_poe](https://github.com/poe-platform/fastapi_poe)		
 
 						
 		
