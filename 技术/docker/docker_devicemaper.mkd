@@ -1,0 +1,25 @@
+# docker devicemaper测试
+##测试: 当新建10G磁盘并指定datadev和basesize容量设置为3G的情况下, 跑docker超过2G的结果如何?
+###步骤1: 新建10G磁盘并挂载.
+
+ 1. df -h  查看当前磁盘情况.
+ ![df -h](../技术文档/docker/docker_devicemaper/1.png "df -h")
+ 2. umount /dev/vdb  取消当前磁盘的挂载, 并用df -h查看是否取消挂载
+ 3. fdisk -l  查看当前磁盘信息, 可以看到除了第一块硬盘外还有一块vdb的第二块硬盘.
+ 4. fdisk /dev/vdb  对/dev/vdb进行分区, 在命令行中选择n进行分区
+ 5. 输入e即分为逻辑分区, 按p即分为主分区, 我们将这块盘分为主分区输入p
+ 6. 到这里输入该分区为第几个分区, 由于是新盘我们输入1来分第一个主分区
+ 7. First sector是选择该分区的起始磁盘数量, 这里是4096, 接下来是分出10G的大小, 
+ 8. 输入w写入分区
+ 9. mkfs -t ext4 -c /dev/vdb1 进行格式化
+ 10. mount /dev/vdb1 /data  对磁盘进行挂载. 
+
+
+###步骤2: 对 /etc/sysconfig/docker 进行配置如下
+ `DOCKER_OPTS="--storage-driver=devicemapper --storage-opt dm.basesize=3G --storage-opt dm.datadev=/dev/vdb1 --storage-opt dm.metadev=/dev/vda1"`
+ 
+ 
+###步骤3: 启动一个大小为2G的centos容器, 通过-v参数的挂载, 将本地的大小超过2G的文件复制在docker中, 查看docker是否正常运行.
+ 
+ 
+ 
